@@ -1,0 +1,17 @@
+{>"layouts/main"/}
+
+{<container}
+
+<div class="panel panel-default">
+   <div class="panel-heading clearfix"> 
+      <h2 class="pull-left">Find Your Cherry Pow-Pow</h2>
+   </div>
+   <div class="panel-body">
+      <div class="col-xs-9">
+          <input type="text" class="form-control" id="basic_search_input" name="basic_search_input" value="{basic_search_input}">
+      </div>
+      <a class="pull-right btn btn-primary">Search</a>
+   </div>
+</div>
+
+{/container}

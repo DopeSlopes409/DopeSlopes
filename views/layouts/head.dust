@@ -1,0 +1,10 @@
+<head>
+    <meta charset="utf-8">
+    <title>{title}</title>
+
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/navbar.css" rel="stylesheet">
+    {#cssFiles}
+		<link href="/stylesheets/{css}" rel="stylesheet">
+	{/cssFiles}
+</head>
