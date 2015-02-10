@@ -1,0 +1,15 @@
+th {
+	font-size:22px;
+}
+
+td {
+	font-size:18px;
+}
+
+.create_auction_btn {
+	margin-top: 10px;
+}
+
+.panel {
+	margin: 40px 0;
+}

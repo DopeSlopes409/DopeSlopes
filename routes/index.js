@@ -3,7 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'DopeSlopes' });
+
+
+	var dustVars = {
+    	title: 'DopeSlopes',
+    	cssFiles: [{css: 'index.css'}],
+    	javascriptFiles: [{javascript: 'index.js'}],
+    }
+  	res.render('index', dustVars);
 });
 
 /* GET Sign in */
