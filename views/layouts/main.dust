@@ -10,11 +10,10 @@
 		</div>
 	</body>
 
-	<script src="/javascripts/jquery.min.js"></script>
-	<script src="/javascripts/bootstrap.min.js"></script>
 	{#javascriptFiles}
 		<script src="/javascripts/{javascript}"></script>
 	{/javascriptFiles}
 	
-
+	<script src="jquery/dist/jquery.min.js"></script>
+	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 </html>

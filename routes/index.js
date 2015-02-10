@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'DopeSlopes' });
 });
 
+/* GET Sign in */
+
+/* GET Sign up */
+
+
+/* GET trip itinerary */
+
 module.exports = router;
