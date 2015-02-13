@@ -20,7 +20,7 @@
           <input type="text" class="form-control" id="basic_search_input" name="basic_search_input" value="{basic_search_input}" placeholder="Search Address, City, or Zip Code">
       </div>
       <a id="" class="pull-right btn btn-primary">Search</a>
-      <a class="pull-right btn btn-primary" href="somewhere.html">Use My Location</a>
+      <a id="use-my-loc" class="pull-right btn btn-primary" href="somewhere.html">Use My Location</a>
    </div>
 </div>
 
