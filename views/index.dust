@@ -5,9 +5,9 @@
 
 <div id="background_cycler" class="hide">
 
-   <div class="active" style="background-image: /images/resort0.jpg"></div>
-   <div style="background-image: /images/resort1.jpg"></div>
-   <div style="background-image: /images/resort2.jpg"></div>
+   <div id="bg_image_0" class="active" style="background-image: url(./images/resort0.jpg)"></div>
+   <div id="bg_image_1" style="background-image: url(./images/resort1.jpg)"></div>
+   <div id="bg_image_2" style="background-image: url(./images/resort2.jpg)"></div>
 
 </div>
 
