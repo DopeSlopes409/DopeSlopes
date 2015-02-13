@@ -6,7 +6,7 @@ $(document).ready(function() {
 });
 
 // make run on use-my-loc.click()
-function getLocation() {
+$("#use-my-loc").click(function() {
    console.log("Get Location clicked");
    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( 
@@ -25,7 +25,7 @@ function getLocation() {
     } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
     };
-}
+});
 
 function initializeClickListeners() {
 	$(".clickableRow").click(function() {
