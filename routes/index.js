@@ -19,7 +19,7 @@ router.get('/location_search/:query', function (req, res, next) {
    
    // Get location results of search query from gmaps api
    
-   
+
 
    //  Figure out how to get GMaps to render location on client-side
    // with geolocation as a dust variable.
@@ -36,5 +36,7 @@ router.get('/location_search/:query', function (req, res, next) {
    };
    res.render('resort_search', dustVars);
 });
+
+
 
 module.exports = router;
