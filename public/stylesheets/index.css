@@ -29,7 +29,7 @@ body {
    overflow: auto;
 }
 
-#background_cycler img {
+#background_cycler div {
    position:absolute;
    left:0;
    top:50px;
@@ -43,7 +43,7 @@ body {
    background-position:center center;
 }
 
-#background_cycler img.active {
+#background_cycler div.active {
    z-index:3;
 }
 
