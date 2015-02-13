@@ -91,3 +91,7 @@ a:visited {
 .hide {
    display: none;
 }
+
+.btn-primary {
+   margin: 0 5px;
+}
