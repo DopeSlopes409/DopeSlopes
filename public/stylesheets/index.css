@@ -5,11 +5,52 @@ body {
    background-color:#000020;
 }
 
-.navbar-brand {
-   padding-top: 0px;
-   padding-left:  75px;
+a {
+   color: #0000EE;
 }
 
+a:link { 
+   color: #0000EE; 
+}
+
+a:visited { 
+   color: #551A8B; 
+}
+
+.navbar-header {
+   padding-left: 75px;
+   padding-right: 75px;
+   height: 50px;
+}
+
+.navbar-brand {
+   padding: 0 0 0 0;
+}
+
+.navbar {
+   height: 50px;
+   min-height: 50px;
+   background-color: white;
+   border-bottom: 2px solid #C9C9C9;
+   border-radius: 0;
+   margin: 0;
+}
+
+.navbar-collapse {
+   padding-left: 0;
+   padding-right: 0;
+}
+
+.navbar-default .navbar-nav>li>a {
+   color: #0000EE;
+}
+
+#login {
+   float: right;
+   padding-top: 15px;
+   margin-right: 75px; 
+   font-size: 0.95em;
+}
 
 .centered {
    margin-top: 250px;
