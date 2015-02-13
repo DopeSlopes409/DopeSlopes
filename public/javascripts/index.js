@@ -5,6 +5,28 @@ $(document).ready(function() {
    //initializeAutoComplete();
 });
 
+// make run on use-my-loc.click()
+function getLocation() {
+   console.log("Get Location clicked");
+   if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition( 
+         function (position) {
+            console.log('latitude' + position.coords.latitude + ', longitude: ' +  position.coords.longitude);
+            
+            // navigate to...
+            var query_uri = '/resort_search/' + '?latitude=' +  position.coords.latitude + '&longitude=' + position.coords.longitude; 
+          
+            //navigate to the url + uri
+         },
+         //make serperate error funct. 
+         function (error) {
+            alert('Location Error');
+         });
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    };
+}
+
 function initializeClickListeners() {
 	$(".clickableRow").click(function() {
 		console.log("Row clicked");
