@@ -3,6 +3,7 @@ html, body {height: 100%;}
 body {
    font-family:Arial,Helmet,sans-serif;
    background-color:#000020;
+   color: black;
 }
 
 a {
@@ -59,7 +60,104 @@ a:visited {
 
 #content {
    position: relative;
-   background-color: purple;
    width: 100%;
+}
+
+#map-canvas {
+   float: left;
+   height: 100%;
+}
+
+#search-collumn {
+   float: right;
+   width:400px;
+   height:100%;
+   background-color: white;
+   border-left: 2px solid #C9C9C9;
+   border-radius: 0;
+   background-color: white;
+}
+
+.search-collumn-padding {
+   padding-left: 30px;
+   padding-right: 30px;
+   padding-top: 15px;
+   padding-bottom: 15px;
+}
+
+#search-collumn h1 {
+
+   text-align: center;
+   color: rgb(0,84,166);
+   margin: 0.33em 0;
+}
+
+.results-bottom-border {
+   border-bottom: 1px solid #C9C9C9;
+   border-radius: 0px;
+}
+
+#basic_search_input {
+   display: block;
+   border: 2px solid #C9C9C9;
+   border-radius: 30px;
+   line-height: 1.0;
+   height: 30px;
+   padding-top: 10px;
+}
+
+#advanced-search {
+   display: block;
+   margin-top: 5px;
+   border: none;
+   border-radius: 0;
+   background-color: rgba(0, 0, 0, 0.0);
+   color: rgb(0,84,166);
+   border-color: rgb(0,84,166);
+   text-decoration: underline;
+}
+
+#search-box {
+   border-bottom: 1px solid #C9C9C9;
+   border-radius: 0px;
+}
+
+#filter-box {
+   border-bottom: 2px solid #C9C9C9;
+   border-radius: 0px;
+}
+
+#filter-box-container {
+   width: 200px;
+}
+
+#range {
+   padding-top: 4px;
+}
+
+#range select {
+   float: right;
+   margin-top: 2px;
+}
+
+#search-by {
+   padding-top: 4px;
+}
+
+#search-by select {
+   float: right;
+   margin-top: 2px;
+}
+
+#open-resorts {
+   padding-top: 4px;
+}
+
+#open-resorts-checkbox {
+   margin-right: 5px;
+}
+
+.block-elements {
+   display: block;
 }
 
