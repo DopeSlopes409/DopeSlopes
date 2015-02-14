@@ -9,7 +9,7 @@
       <div id = "search-box" class="search-collumn-padding bottom-border">
          <h1>Find a Resort</h1>
          <input type="text" class="form-control" id="basic_search_input" name="basic_search_input" value="{basic_search_input}" placeholder="Search Address, City, or Zip Code">
-         <a id="advanced-search" class="">Advanced Search</a>
+         <a id="advanced-search" class="btn">Advanced Search</a>
       </div>
       <div id="filter-box" class="search-collumn-padding bottom-border">
          <div id="filter-box-container">
@@ -35,6 +35,67 @@
             </div>
          </div>
       </div>
+      
+      <div class="search-results search-collumn-padding">
+         <div class="resort-title-line">
+            <h2>Resort #1</h2>
+            <div id="star-1" class="star"><a href="#"></a></div>
+         </div>
+         <div id="runs-open-container-1" class="runs-open-container">
+            <span>Runs Open: </span>
+            <span id="runs-open-1" class="runs-open">61/80</span>
+         </div>
+         <div id="snowfall-container-1" class="snowfall-container">
+            <span>Snowfall in last 24hrs: </span>
+            <span id="snowfall-1" class="snowfall">2"</span>
+         </div>
+      </div>
+
+      <div class="search-results search-collumn-padding">
+         <div class="resort-title-line">
+            <h2>Resort #1</h2>
+            <div id="star-1" class="star"><a href="#"></a></div>
+         </div>
+         <div id="runs-open-container-1" class="runs-open-container">
+            <span>Runs Open: </span>
+            <span id="runs-open-1" class="runs-open">61/80</span>
+         </div>
+         <div id="snowfall-container-1" class="snowfall-container">
+            <span>Snowfall in last 24hrs: </span>
+            <span id="snowfall-1" class="snowfall">2"</span>
+         </div>
+      </div>
+
+      <div class="search-results search-collumn-padding">
+         <div class="resort-title-line">
+            <h2>Resort #1</h2>
+            <div id="star-1" class="star"><a href="#"></a></div>
+         </div>
+         <div id="runs-open-container-1" class="runs-open-container">
+            <span>Runs Open: </span>
+            <span id="runs-open-1" class="runs-open">61/80</span>
+         </div>
+         <div id="snowfall-container-1" class="snowfall-container">
+            <span>Snowfall in last 24hrs: </span>
+            <span id="snowfall-1" class="snowfall">2"</span>
+         </div>
+      </div>
+
+      <div class="search-results search-collumn-padding">
+         <div class="resort-title-line">
+            <h2>Resort #1</h2>
+            <div id="star-1" class="star"><a href="#"></a></div>
+         </div>
+         <div id="runs-open-container-1" class="runs-open-container">
+            <span>Runs Open: </span>
+            <span id="runs-open-1" class="runs-open">61/80</span>
+         </div>
+         <div id="snowfall-container-1" class="snowfall-container">
+            <span>Snowfall in last 24hrs: </span>
+            <span id="snowfall-1" class="snowfall">2"</span>
+         </div>
+      </div>
+   
    </div>
 </div>
 

@@ -72,6 +72,7 @@ a:visited {
    float: right;
    width:400px;
    height:100%;
+   overflow-y: scroll;
    background-color: white;
    border-left: 2px solid #C9C9C9;
    border-radius: 0;
@@ -92,11 +93,6 @@ a:visited {
    margin: 0.33em 0;
 }
 
-.results-bottom-border {
-   border-bottom: 1px solid #C9C9C9;
-   border-radius: 0px;
-}
-
 #basic_search_input {
    display: block;
    border: 2px solid #C9C9C9;
@@ -108,7 +104,10 @@ a:visited {
 
 #advanced-search {
    display: block;
-   margin-top: 5px;
+   text-align: left;
+   margin-top: 0;
+   margin-left: 0;
+   padding-left: 0;
    border: none;
    border-radius: 0;
    background-color: rgba(0, 0, 0, 0.0);
@@ -153,6 +152,10 @@ a:visited {
    padding-top: 4px;
 }
 
+.span-float-right {
+   float: right;
+}
+
 #open-resorts-checkbox {
    margin-right: 5px;
 }
@@ -161,3 +164,73 @@ a:visited {
    display: block;
 }
 
+.search-results {
+   border-bottom: 1px solid #C9C9C9;
+   border-radius: 0px;
+}
+
+.search-results h2 {
+   font-size: 1.5em;
+   color: rgb(0,84,166);
+   margin: 0.33em 0;
+   max-width: 300px;
+}
+
+.search-results span {
+   font-size: 0.85em;
+}
+
+.resort-title-line {
+   width: 100%;
+   padding-bottom: 5px;
+}
+
+.resort-title-line h2 {
+   display: inline;
+}
+
+.star {
+   width: 20px;
+   height: 20px;
+   float: right;
+}
+
+#star-1 {
+   background: url(../images/StarRollover.png) no-repeat 0 0;
+}
+
+#star-1:hover {
+   background-position: -19px 0px;
+}
+
+.runs-open-container {
+   width: 100%;
+   padding-left: 2px;
+   padding-right: 2px;
+}
+
+#runs-open-container-1 {
+   background-color: #9FF7F8;
+}
+
+.runs-open {
+   float: right;
+   padding-top: 3px;
+   padding-right: 2px;
+}
+
+.snowfall-container {
+   width: 100%;
+   padding-left: 2px;
+   padding-right: 2px;
+}
+
+.snowfall {
+   float: right;
+   padding-top: 3px;
+   padding-right: 2px;
+}
+
+#snowfall-container-1 {
+   background-color: #CFA20E;
+}
