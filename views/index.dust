@@ -11,17 +11,24 @@
 
 </div>
 
-<div class="panel panel-default centered">
-   <div class="panel-heading clearfix"> 
-      <h2 class="pull-left">Find Your Cherry Pow-Pow</h2>
-   </div>
-   <div class="panel-body">
-      <div class="col-xs-9">
-          <input type="text" class="form-control" id="basic_search_input" name="basic_search_input" value="{basic_search_input}" placeholder="Search Address, City, or Zip Code">
+<div id="content">
+
+   <div class="panel panel-default">
+      <div class="panel-heading clearfix"> 
+         <h2 class="pull-left">Find Your Cherry Pow-Pow</h2>
       </div>
-      <a id="loc-search-btn" class="pull-right btn btn-primary">Search</a>
-      <a id="use-my-loc" class="pull-right btn btn-primary">Use My Location</a>
+      <div class="panel-body">
+         <div class="one-line">
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="basic_search_input" name="basic_search_input" value="{basic_search_input}" placeholder="Search Address, City, or Zip Code">
+            </div>
+            <a id="loc-search-btn" class="pull-right btn btn-primary">Search</a>
+         </div>
+         <a id="use-my-loc" class="pull-left btn btn-primary">Use My Location</a>
+      </div>
    </div>
+
+
 </div>
 
 {/container}

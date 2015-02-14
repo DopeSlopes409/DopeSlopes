@@ -88,6 +88,70 @@ a:visited {
    z-index:3;
 }
 
+#content {
+   position: relative
+   background-color: purple;
+}
+
+.panel {
+   margin: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+
+   border: 2px solid #C9C9C9;
+   border-radius: 1000px;
+   min-width: 700px;
+   max-width: 1000px;
+   max-height: 350px;
+}
+
+.panel-heading {
+   border-top-right-radius: 1000px;
+   border-top-left-radius: 1000px;
+   padding-left: 70px;
+   padding-right: 70px;
+}
+
+.panel-heading h2 {
+   color: rgb(0,84,166);
+}
+
+.panel-body {
+   padding-left: 70px;
+   padding-right: 70px;
+}
+
+.col-xs-9 {
+   padding: 0;
+   width: 85%;
+}
+
+#loc-search-btn {
+   width:13%;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 7px;
+   padding-right: 7px;
+   background-color: rgb(0,84,166);
+}
+
+#use-my-loc {
+   margin: 0;
+   padding: 0;
+   border: none;
+   border-radius: 0;
+   background-color: rgba(0, 0, 0, 0.0);
+   color: rgb(0,84,166);
+   border-color: rgb(0,84,166);
+   text-decoration: underline;
+}
+
+
 .hide {
    display: none;
 }
