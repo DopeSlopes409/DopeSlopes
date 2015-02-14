@@ -1,0 +1,9 @@
+{>"layouts/main"/}
+
+{<container}
+
+<div id="content">
+   
+</div>
+
+{/container}

@@ -37,6 +37,21 @@ router.get('/location_search/:query', function (req, res, next) {
    res.render('resort_search', dustVars);
 });
 
+/** 
+ * GET search page. 
+ * This is just temporary so I (Brent) can work on getting a front-end up.
+ */
+router.get('/search', function(req, res, next) {
+
+
+   var dustVars = {
+      title: 'Search',
+      cssFiles: [{css: 'search.css'}],
+      javascriptFiles: [{javascript: 'search.js'}],
+    };
+   res.render('search', dustVars);
+});
+
 
 
 module.exports = router;
