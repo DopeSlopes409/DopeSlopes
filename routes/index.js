@@ -52,6 +52,19 @@ router.get('/search', function(req, res, next) {
    res.render('search', dustVars);
 });
 
+/** 
+ * GET search2 page. 
+ * This is just temporary so I (Brent) can work on a second version of the front end.
+ */
+router.get('/search2', function(req, res, next) {
 
+
+   var dustVars = {
+      title: 'Search2',
+      cssFiles: [{css: 'search2.css'}],
+      javascriptFiles: [{javascript: 'search2.js'}],
+    };
+   res.render('search2', dustVars);
+});
 
 module.exports = router;
