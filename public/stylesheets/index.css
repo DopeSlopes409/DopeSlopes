@@ -5,11 +5,52 @@ body {
    background-color:#000020;
 }
 
-.navbar-brand {
-   padding-top: 0px;
-   padding-left:  75px;
+a {
+   color: #0000EE;
 }
 
+a:link { 
+   color: #0000EE; 
+}
+
+a:visited { 
+   color: #551A8B; 
+}
+
+.navbar-header {
+   padding-left: 75px;
+   padding-right: 75px;
+   height: 50px;
+}
+
+.navbar-brand {
+   padding: 0 0 0 0;
+}
+
+.navbar {
+   height: 50px;
+   min-height: 50px;
+   background-color: white;
+   border-bottom: 2px solid #C9C9C9;
+   border-radius: 0;
+   margin: 0;
+}
+
+.navbar-collapse {
+   padding-left: 0;
+   padding-right: 0;
+}
+
+.navbar-default .navbar-nav>li>a {
+   color: #0000EE;
+}
+
+#login {
+   float: right;
+   padding-top: 15px;
+   margin-right: 75px; 
+   font-size: 0.95em;
+}
 
 .centered {
    margin-top: 250px;
@@ -23,7 +64,7 @@ body {
    width:100%;
    height:100%;
    position:absolute;
-   top:50;
+   top:0;
    left:0;
    z-index:-1;
    overflow: auto;
@@ -47,6 +88,74 @@ body {
    z-index:3;
 }
 
+#content {
+   position: relative
+   background-color: purple;
+}
+
+.panel {
+   margin: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   -webkit-transform: translate(-50%, -50%);
+
+   border: 2px solid #C9C9C9;
+   border-radius: 1000px;
+   min-width: 700px;
+   max-width: 1000px;
+   max-height: 350px;
+}
+
+.panel-heading {
+   border-top-right-radius: 1000px;
+   border-top-left-radius: 1000px;
+   padding-left: 70px;
+   padding-right: 70px;
+}
+
+.panel-heading h2 {
+   color: rgb(0,84,166);
+}
+
+.panel-body {
+   padding-left: 70px;
+   padding-right: 70px;
+}
+
+.col-xs-9 {
+   padding: 0;
+   width: 85%;
+}
+
+#loc-search-btn {
+   width:13%;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 7px;
+   padding-right: 7px;
+   background-color: rgb(0,84,166);
+}
+
+#use-my-loc {
+   margin: 0;
+   padding: 0;
+   border: none;
+   border-radius: 0;
+   background-color: rgba(0, 0, 0, 0.0);
+   color: rgb(0,84,166);
+   border-color: rgb(0,84,166);
+   text-decoration: underline;
+}
+
+
 .hide {
    display: none;
+}
+
+.btn-primary {
+   margin: 0 5px;
 }

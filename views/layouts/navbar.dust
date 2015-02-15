@@ -12,8 +12,10 @@
       -->
         </div>        
       </form>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">Login</a></li>
-		</ul>
+		<div id="login">
+         <p> 
+            <a href="#">Login</a> or <a href="#">Sign Up </a>
+         </p>
+      </div>
 	</div>
 </nav>
