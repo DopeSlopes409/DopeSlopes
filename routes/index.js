@@ -24,9 +24,8 @@ router.get('/location_search/:query', function (req, res, next) {
    //  Figure out how to get GMaps to render location on client-side
    // with geolocation as a dust variable.
 
-   // Get Results of SnoCountry API for the given geolocation  
-
-
+   
+   //
 
    var dustVars = {
       title: 'DopeSlopes',
@@ -35,6 +34,34 @@ router.get('/location_search/:query', function (req, res, next) {
       javascriptFiles: [{javascript: 'search.js'}]
    };
    res.render('resort_search', dustVars);
+});
+
+
+/* GET request for searching resorts based on geolocation */
+router.get('/resort_search/:geolocation', function (req, res, next) 
+{
+  // Request Snocountry API for southwest region
+  // var reqResults; //repsonse from API  
+  var dustVars = {
+    title: 'DopeSlopes',
+    cssFiles: [{css: 'index.css'},
+     {css: 'search.css'}],
+    resorts : []
+  };
+
+  //for each result resort (elt)
+  /*
+  dustVars.resorts.push({
+    name: ,
+    geolocation: ,
+    open_runs: ,
+    total_runs: ,
+    recent_snowfall: 
+  });
+
+  //render results
+  res.render('resort_search', dustVars);
+  */
 });
 
 /** 
