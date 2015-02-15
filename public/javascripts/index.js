@@ -41,7 +41,8 @@ $("#use-my-loc").click(function() {
             
             // navigate to...
             var query_uri = '/resort_search/' + '?latitude=' +  position.coords.latitude + '&longitude=' + position.coords.longitude; 
-          
+            console.log(query_uri);
+            // javascript go to new link with our URL with resource as query_uri
             //navigate to the url + uri
          },
          //make serperate error funct. 
@@ -49,8 +50,13 @@ $("#use-my-loc").click(function() {
             alert('Location Error');
          });
     } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        alert("Geolocation is not supported by this browser.");
     };
+});
+
+$("#loc-search-btn").click(function() {
+    console.log("Search Button Clicked");
+    console.log($("#basic_search_input").val());
 });
 
 function initializeClickListeners() {
