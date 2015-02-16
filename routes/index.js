@@ -61,6 +61,33 @@ router.get('/resort_search/:geolocation', function (req, res, next)
 
   //render results
   res.render('resort_search', dustVars);
+
+  function apiCall() {
+    var REGION = "northwest";
+    var url = "http://feeds.snocountry.net/conditions.php?regions="+REGION+"&apiKey=api8932.test5643&output=json";
+    var id, name, latitude, longitude, open_runs, total_runs, recent_snowfall, numItems;
+
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function(response) {
+            //numItems = response.totalItems;
+            numItems = 5;
+            for(var i = 0; i < numItems; i++) {
+                id = response.items[i].id;
+                name = response.items[i].resortName;
+                latitude = response.items[i].latitude;
+                longitude = response.items[i].longitude;
+                open_runs = response.items[i].openDownHillTrails;
+                total_runs = response.items[i].maxOpenDownHillTrails;
+                recent_snowfall = (response.items[i].newSnowMax + response.items[i].newSnowMin) / 2;
+                window.alert ("resort: " + name + " lat: " + latitude + " lon: " + longitude + " open_runs: " + open_runs 
+                    + " total_runs: " + total_runs + " snow: " + recent_snowfall)
+            }        
+        },
+        error : function() { window.alert("error"); }
+   });
+}
   */
 });
 
