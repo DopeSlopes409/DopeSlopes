@@ -64,7 +64,7 @@ router.get('/resort_search', function (req, res, next)
             console.log(body.items[0]);
           
             //numItems = response.totalItems;
-            numItems = 5;   //  remove once testing finished
+            numItems = 10;   //  remove once testing finished
 
             var dustVars = {
               title: 'DopeSlopes',

@@ -35,7 +35,6 @@
       
       <!-- Each Resort entry in the list -->
       {#resortEntries}
-         <script src="/javascripts/{javascript}"></script>
          <div class="search-results search-collumn-padding">
             <div class="resort-title-line">
                <h2>{name}</h2>
