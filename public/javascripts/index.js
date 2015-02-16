@@ -33,15 +33,15 @@ function setPrompt() {
 
 // make run on use-my-loc.click()
 $("#use-my-loc").click(function() {
-   console.log("Get Location clicked");
    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( 
          function (position) {
-            console.log('latitude' + position.coords.latitude + ', longitude: ' +  position.coords.longitude);
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            console.log('lat/long: ' + lat + ', ' +  lng);
             
-            // navigate to...
-            var query_uri = '/resort_search/' + '?latitude=' +  position.coords.latitude + '&longitude=' + position.coords.longitude; 
-            console.log(query_uri);
+            var queryURI = '/resort_search/' + '?latitude=' +  lat + '&longitude=' + lng; 
+            locationRedirect(queryURI);
             // javascript go to new link with our URL with resource as query_uri
             //navigate to the url + uri
          },
@@ -68,9 +68,35 @@ $("#use-my-loc").click(function() {
 });
 
 $("#loc-search-btn").click(function() {
-    console.log("Search Button Clicked");
-    console.log($("#basic_search_input").val());
+    var address = $("#basic_search_input").val();
+
+    // Replace all instances of non alphanumeric characters with '+'
+    address = address.replace(/[\W_]+/g, "+");
+    console.log(address);
+
+    // Build JSON request url
+    var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+    var apiKey = "&key=AIzaSyC_qmwLkxl8sUK-c3NHT5VLVt3-DgfwHSk";
+    var apiURL = geoCodeURL + address + apiKey;
+
+    // Get JSON object from Google GeoCoding API
+    $.getJSON(apiURL, function(json){
+      var lat = json.results[0].geometry.location.lat;
+      var lng = json.results[0].geometry.location.lng;
+      console.log('lat/long: ' + lat + ', ' +  lng);
+      var queryURI = '/resort_search/' + '?latitude=' +  lat + '&longitude=' + lng;
+      locationRedirect(queryURI);
+    });
+
 });
+
+// Redirect to the user's location query
+function locationRedirect(queryURI){
+  var baseURL = "https://dopeslopes.herokuapp.com";
+  var fullURL = baseURL + queryURI;
+  console.log(fullURL);
+  window.location.href = fullURL;
+}
 
 function initializeClickListeners() {
 	$(".clickableRow").click(function() {
