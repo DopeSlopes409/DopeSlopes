@@ -40,7 +40,7 @@ $("#use-my-loc").click(function() {
             var lng = position.coords.longitude;
             console.log('lat/long: ' + lat + ', ' +  lng);
             
-            var queryURI = '/resort_search/' + '?latitude=' +  lat + '&longitude=' + lng; 
+            var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng; 
             locationRedirect(queryURI);
             // javascript go to new link with our URL with resource as query_uri
             //navigate to the url + uri
@@ -84,7 +84,7 @@ $("#loc-search-btn").click(function() {
       var lat = json.results[0].geometry.location.lat;
       var lng = json.results[0].geometry.location.lng;
       console.log('lat/long: ' + lat + ', ' +  lng);
-      var queryURI = '/resort_search/' + '?latitude=' +  lat + '&longitude=' + lng;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng;
       locationRedirect(queryURI);
     });
 
@@ -92,7 +92,7 @@ $("#loc-search-btn").click(function() {
 
 // Redirect to the user's location query
 function locationRedirect(queryURI){
-  var baseURL = "https://dopeslopes.herokuapp.com";
+  var baseURL = window.location.origin;
   var fullURL = baseURL + queryURI;
   console.log(fullURL);
   window.location.href = fullURL;
