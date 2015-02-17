@@ -1,7 +1,7 @@
 <nav role="navigation" class="navbar navbar-default">
 	<!-- Brand and toggle get grouped for better mobile display -->
 	<div class="navbar-header">
-		<a href="/" class="navbar-brand">DopeSlopes</a>
+		<a href="/" class="navbar-brand"><img src="/images/Logo.jpg" id="logo"></a>
 	</div>
 	<!-- Collection of nav links and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse">
@@ -12,8 +12,10 @@
       -->
         </div>        
       </form>
-		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#">Login</a></li>
-		</ul>
+		<div id="login">
+         <p> 
+            <a href="#">Login</a> or <a href="#">Sign Up </a>
+         </p>
+      </div>
 	</div>
 </nav>

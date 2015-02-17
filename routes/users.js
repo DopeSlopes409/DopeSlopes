@@ -2,19 +2,24 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/users', function(req, res, next) {
   res.send('respond with a resource');
 });
 
 /* POST new user account */
-router.post('/', function(req, res, next) {
+router.post('/users', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-module.exports = router;
+
+/* GET trip itinerary */
+router.get('/users/:id/trips', function(req, res, next) {
+  res.send('respond with a resource');
+});
+
 
 /* GET the register account page */
-router.get('/', function(req, res) {
+router.get('/register', function(req, res) {
 	var dustVars = {
 		title: 'Register Acccount',
 		cssFiles: [
