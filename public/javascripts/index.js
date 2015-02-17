@@ -115,12 +115,7 @@ function locationRedirect(queryURI){
   var baseURL = window.location.origin;
   var fullURL = baseURL + queryURI;
 
-  console.log("Base: " + baseURL);
-  console.log("Query: " + queryURI);
-
-
-  console.log(fullURL);
-  // window.location.href = fullURL;
+  window.location.href = fullURL;
 }
 
 function initializeClickListeners() {
