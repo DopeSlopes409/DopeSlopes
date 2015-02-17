@@ -38,10 +38,24 @@ $("#use-my-loc").click(function() {
          function (position) {
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
-            console.log('lat/long: ' + lat + ', ' +  lng);
-            
-            var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng; 
-            locationRedirect(queryURI);
+            var latlng = lat + "," + lng;
+
+            var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=";
+            var apiKey = "&key=AIzaSyC_qmwLkxl8sUK-c3NHT5VLVt3-DgfwHSk";
+            var apiURL = geoCodeURL + latlng + apiKey;
+
+            $.getJSON(apiURL, function(json){
+              var state;
+
+              for(var i = 0; i < json.results[0].address_components.length; i++){
+                if (json.results[0].address_components[i].types[0] == "administrative_area_level_1"){
+                  state = json.results[0].address_components[i].short_name;
+                }
+              }
+              
+              var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state;
+              locationRedirect(queryURI);
+            });
             // javascript go to new link with our URL with resource as query_uri
             //navigate to the url + uri
          },
@@ -72,7 +86,6 @@ $("#loc-search-btn").click(function() {
 
     // Replace all instances of non alphanumeric characters with '+'
     address = address.replace(/[\W_]+/g, "+");
-    console.log(address);
 
     // Build JSON request url
     var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -83,8 +96,15 @@ $("#loc-search-btn").click(function() {
     $.getJSON(apiURL, function(json){
       var lat = json.results[0].geometry.location.lat;
       var lng = json.results[0].geometry.location.lng;
-      console.log('lat/long: ' + lat + ', ' +  lng);
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng;
+      var state;
+
+      for(var i = 0; i < json.results[0].address_components.length; i++){
+        if (json.results[0].address_components[i].types[0] == "administrative_area_level_1"){
+          state = json.results[0].address_components[i].short_name;
+        }
+      }
+      
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state;
       locationRedirect(queryURI);
     });
 
@@ -94,8 +114,13 @@ $("#loc-search-btn").click(function() {
 function locationRedirect(queryURI){
   var baseURL = window.location.origin;
   var fullURL = baseURL + queryURI;
+
+  console.log("Base: " + baseURL);
+  console.log("Query: " + queryURI);
+
+
   console.log(fullURL);
-  window.location.href = fullURL;
+  // window.location.href = fullURL;
 }
 
 function initializeClickListeners() {
