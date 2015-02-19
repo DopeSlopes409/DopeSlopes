@@ -159,3 +159,29 @@ a:visited {
 .btn-primary {
    margin: 0 5px;
 }
+
+#popup {
+   position:absolute;
+   top:45%;
+   left:0;
+   right:0;
+   margin-left:auto;
+   margin-right:auto;
+   width:250px;
+   z-index:1;
+   background-color:white;
+   border:1px solid #ccc;
+   border-radius:5px;
+   padding:20px;
+}
+#popup h2 {
+   width:100%;
+   text-align:left;
+   border-bottom:1px solid #ccc;
+}
+#popup .button {
+   margin:0px 5px;
+   padding: 5px 5px;
+   width: 100%;
+   font-size: .8em;
+}

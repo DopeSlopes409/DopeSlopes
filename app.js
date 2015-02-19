@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var dust = require('dustjs-linkedin');
 var cons = require('consolidate');
 var dustHelper = require('dustjs-helpers');
-
+var session = require('express-session');
 var template_engine = 'dust';
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,6 +26,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({secret: 'ssshhhhturnandburnssshhh'}));
 
 //serve public resources
 app.use(express.static(path.join(__dirname, 'public')));

@@ -1,4 +1,6 @@
 var express = require('express');
+var request = require('request');
+
 var router = express.Router();
 
 /* GET users listing. */
@@ -26,12 +28,12 @@ router.get('/register', function(req, res) {
 			/* no css for this page  yet */
 
 			//{css: 'register account.css'},
-			{css: 'formValidation.min.css'},
+			//{css: 'formValidation.min.css'},
 		],
 		javascriptFiles: [
-			{javascript: 'bootstrap-datetimepicker.min.js'},
-			{javascript: 'formValidation.min.js'},
-			{javascript: 'formValidation-bootstrap.min.js'},
+			//{javascript: 'bootstrap-datetimepicker.min.js'},
+			//{javascript: 'formValidation.min.js'},
+			//{javascript: 'formValidation-bootstrap.min.js'},
 			{javascript: 'register_account.js'}
 		]
 	};

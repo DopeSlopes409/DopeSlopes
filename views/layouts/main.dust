@@ -8,6 +8,24 @@
 				{+container/}
 			</div>
 		</div>
+		<!-- popop for login/register -->
+		<div id="popup" class="hide">
+	        <h2>Welcome to DopeSlopes</h2>
+	        <ul class="nav nav-tabs" role="tablist" id="myTab">
+				<li role="presentation" class="active"><a href="#signin" aria-controls="home" role="tab" data-toggle="tab">Sign In</a></li>
+				<li role="presentation"><a href="#register" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+			</ul>
+	        <div class="tab-content">
+				<div role="tabpanel" class="tab-pane" id="profile">...</div>
+				<div role="tabpanel" class="tab-pane" id="messages">...</div>
+				<div role="tabpanel" class="tab-pane" id="settings">...</div>
+			</div>
+	        <input type="text" id="alarmName" placeholder="Alarm Name" />      
+	        <div class="flexable">
+				<input id="hideAlarm" type="button" value="Cancel" class="button"/>
+				<input id="saveAlarm" type="button" value="Save Alarm" class="button"/>
+	        </div>
+	    </div>
 	</body>
 
 
