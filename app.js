@@ -26,7 +26,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: 'ssshhhhturnandburnssshhh'}));
+//app.use(session({secret: 'ssshhhhturnandburnssshhh'}));
 
 //serve public resources
 app.use(express.static(path.join(__dirname, 'public')));

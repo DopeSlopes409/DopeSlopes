@@ -12,10 +12,15 @@
       -->
         </div>        
       </form>
-		<div id="login">
+		  <div id="login" class="nav-user">
          <p> 
-            <a href="#">Login</a> or <a href="#">Sign Up </a>
+            <a id="login-link" >Login</a> or <a id="signin-link">Sign Up </a>
          </p>
+      </div>
+      <div id="session" class="nav-user hide">
+        <p>
+          <a id="username"></a>  <a id="logout-link">Logout</a>
+        </p>
       </div>
 	</div>
 </nav>

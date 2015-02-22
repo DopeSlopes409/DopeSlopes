@@ -9,22 +9,27 @@
 			</div>
 		</div>
 		<!-- popop for login/register -->
-		<div id="popup" class="hide">
+		<div id="popup">
 	        <h2>Welcome to DopeSlopes</h2>
-	        <ul class="nav nav-tabs" role="tablist" id="myTab">
-				<li role="presentation" class="active"><a href="#signin" aria-controls="home" role="tab" data-toggle="tab">Sign In</a></li>
-				<li role="presentation"><a href="#register" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
-			</ul>
+
+	        {! <ul class="nav nav-tabs" role="tablist" id="myTab">
+					<li role="presentation" class="active"><a href="#signin" aria-controls="home" role="tab" data-toggle="tab">Sign In</a></li>
+					<li role="presentation"><a href="#register" aria-controls="profile" role="tab" data-toggle="tab">Register</a></li>
+				</ul>
 	        <div class="tab-content">
 				<div role="tabpanel" class="tab-pane" id="profile">...</div>
 				<div role="tabpanel" class="tab-pane" id="messages">...</div>
-				<div role="tabpanel" class="tab-pane" id="settings">...</div>
-			</div>
-	        <input type="text" id="alarmName" placeholder="Alarm Name" />      
-	        <div class="flexable">
-				<input id="hideAlarm" type="button" value="Cancel" class="button"/>
-				<input id="saveAlarm" type="button" value="Save Alarm" class="button"/>
-	        </div>
+			</div> !}
+	        <!-- Container with the Sign-In button. -->
+	        <div id="gConnect" class="button">
+	          <button class="g-signin"
+	              data-scope="email"
+	              data-clientid="372516786880-mgkj8fh3arto5ife2ma57i6uil5npusr.apps.googleusercontent.com"
+	              data-callback="onSignInCallback"
+	              data-theme="dark"
+	              data-cookiepolicy="single_host_origin">
+	          </button>
+	       </div>
 	    </div>
 	</body>
 
