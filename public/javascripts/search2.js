@@ -5,9 +5,9 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    this.resortName = resortName;
    this.latitude = latitude;
    this.longitude = longitude;
-   this.openRuns = openRuns;
-   this.totalRuns = totalRuns;
-   this.recentSnowfall = recentSnowfall;
+   this.openRuns = isNaN(openRuns) ? "unknown" : openRuns;
+   this.totalRuns = isNaN(totalRuns) ? "unknown" : totalRuns;
+   this.recentSnowfall = isNaN(recentSnowfall) ? "unknown" : recentSnowfall;
 
    this.toString = function() {
       return this.resortName + " => (" + this.latitude + ", " + this.longitude + ")";
