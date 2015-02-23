@@ -1,6 +1,32 @@
+var map;
+var resorts = [];
+
+function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall) {
+   this.resortName = resortName;
+   this.latitude = latitude;
+   this.longitude = longitude;
+   this.openRuns = openRuns;
+   this.totalRuns = totalRuns;
+   this.recentSnowfall = recentSnowfall;
+
+   this.toString = function() {
+      return this.resortName + " => (" + this.latitude + ", " + this.longitude + ")";
+   };
+
+   this.getWindowHTML = function () {
+      return '<h3>' + this.resortName + '</h3>' +
+         '<ul>' +
+         '   <li>' + this.openRuns + '/' + this.totalRuns + ' runs </li>' + 
+         '   <li>' + recentSnowfall + '" snow in last 24 hours</li>'
+         '</ul>'
+   };
+}
+
 $(document).ready(function() {
    setContentSize();
+   getResortData();
    initializeMap();
+
 });
 
 function setContentSize () {
@@ -17,6 +43,21 @@ function resize (argument) {
    setContentSize();
 }
 
+function getResortData () {
+   $('div#resortData>div').each(function() { 
+      var resort = new Resort(
+         $(this).find(".resortName").text(),
+         parseFloat($(this).find(".latitude").text()),
+         parseFloat($(this).find(".longitude").text()),
+         parseInt($(this).find(".openRuns").text()),
+         parseInt($(this).find(".totalRuns").text()),
+         parseFloat($(this).find(".recentSnowfall").text())
+      );
+      
+      resorts[resorts.length] = resort;
+   });
+}
+
 function initializeMap () {
    var mapCanvas = document.getElementById('map-canvas');
    var mapOptions = {
@@ -24,7 +65,24 @@ function initializeMap () {
       zoom: 10,
       mapTypeId: google.maps.MapTypeId.ROADMAP
    }
-   var map = new google.maps.Map(mapCanvas, mapOptions);
+   map = new google.maps.Map(mapCanvas, mapOptions);
+   var infowindow = new google.maps.InfoWindow();
+
+   for (var i = resorts.length - 1; i >= 0; i--) {
+      var myLatlng = new google.maps.LatLng(resorts[i].latitude, resorts[i].longitude);
+      var marker = new google.maps.Marker({
+         position: myLatlng,
+         title: resorts[i].resortName,
+         content: resorts[i].getWindowHTML()
+      });
+      marker.setMap(map);
+
+      google.maps.event.addListener(marker, 'click', function() {
+         infowindow.setContent(this.content);
+         infowindow.open(map, this);
+      });
+
+   };
 }
 
 

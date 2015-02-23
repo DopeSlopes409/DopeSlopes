@@ -264,3 +264,7 @@ span {
 #snowfall-container-1 {
    background-color: #CFA20E;
 }
+
+.invisible {
+   display: none;
+}

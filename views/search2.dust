@@ -52,6 +52,19 @@
          </div>
       {/resortEntries}
 
+      <div id="resortData" class="invisible">
+         {#resortEntries}
+            <div class="resort">
+               <div class="resortName"> {name} </div>
+               <div class="latitude"> {latitude} </div>
+               <div class="longitude"> {longitude} </div>
+               <div class="openRuns"> {openRuns} </div>
+               <div class="totalRuns"> {totalRuns} </div>
+               <div class="recentSnowfall"> {recentSnowfall} </div>
+            </div>
+         {/resortEntries}
+      </div>
+
       
    
    </div>
