@@ -1,8 +1,9 @@
 var map;
 var resorts = [];
+var markers = [];
 
 function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall) {
-   this.resortName = resortName;
+   this.resortName = resortName.trim();
    this.latitude = latitude;
    this.longitude = longitude;
    this.openRuns = isNaN(openRuns) ? "unknown" : openRuns;
@@ -26,7 +27,7 @@ $(document).ready(function() {
    setContentSize();
    getResortData();
    initializeMap();
-
+   initializeMouseovers();
 });
 
 function setContentSize () {
@@ -58,6 +59,10 @@ function getResortData () {
    });
 }
 
+function getSearchResultDiv(resortName) {
+   return $( "h2:contains('" + resortName + "')" ).parent().parent();
+}
+
 function initializeMap () {
    var mapCanvas = document.getElementById('map-canvas');
    var mapOptions = {
@@ -77,6 +82,7 @@ function initializeMap () {
          content: resorts[i].getWindowHTML()
       });
       marker.setMap(map);
+      markers[markers.length] = marker;
       latlngbounds.extend( marker.getPosition() );
 
       google.maps.event.addListener(marker, 'click', function() {
@@ -85,6 +91,34 @@ function initializeMap () {
       });
    };
    map.fitBounds( latlngbounds );
+}
+
+function getMarker(resortName) {
+   for (var i = 0; i < markers.length; i++) {
+      if (markers[i].title == resortName)
+         return markers[i];
+   }
+}
+
+function initializeMouseovers () {
+   for (var i = 0; i < resorts.length; i++) {
+      var resortName = resorts[i].resortName;
+      var resortDiv = getSearchResultDiv(resortName);
+      var infowindow = new google.maps.InfoWindow();
+      
+      resortDiv.mouseover(function() {
+         $(this).css("background-color", "#ecf0f1");
+         var resortName = $(this).find("h2").text();
+         //alert(resortName);
+         var marker = getMarker(resortName);
+         infowindow.setContent(marker.content);
+         infowindow.open(map, marker);
+      });
+      resortDiv.mouseleave(function() {
+         $(this).css("background-color", "transparent");
+         infowindow.close();
+      });
+   };
 }
 
 
