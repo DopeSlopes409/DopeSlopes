@@ -38,6 +38,7 @@ function setContentSize () {
 
    $("#map-canvas").css("width", (width-400).toString() + "px");
    $("#search-bar").css("width", (width-300).toString() + "px");
+   $("#search-collumn").css("height", (height-100).toString() + "px");
 }
 
 function resize (argument) {
