@@ -68,6 +68,7 @@ function initializeMap () {
    map = new google.maps.Map(mapCanvas, mapOptions);
    var infowindow = new google.maps.InfoWindow();
 
+   var latlngbounds = new google.maps.LatLngBounds();
    for (var i = resorts.length - 1; i >= 0; i--) {
       var myLatlng = new google.maps.LatLng(resorts[i].latitude, resorts[i].longitude);
       var marker = new google.maps.Marker({
@@ -76,13 +77,14 @@ function initializeMap () {
          content: resorts[i].getWindowHTML()
       });
       marker.setMap(map);
+      latlngbounds.extend( marker.getPosition() );
 
       google.maps.event.addListener(marker, 'click', function() {
          infowindow.setContent(this.content);
          infowindow.open(map, this);
       });
-
    };
+   map.fitBounds( latlngbounds );
 }
 
 
