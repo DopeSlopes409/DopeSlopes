@@ -85,10 +85,20 @@ function initializeMap () {
       markers[markers.length] = marker;
       latlngbounds.extend( marker.getPosition() );
 
+      // On click of marker show infobox and set search result background color
       google.maps.event.addListener(marker, 'click', function() {
          infowindow.setContent(this.content);
          infowindow.open(map, this);
+         var resortName = this.title;
+         var resortDiv = getSearchResultDiv(resortName);
+         resortDiv.css("background-color", "#ecf0f1");
       });
+
+      // On close of marker, clear search result background colors
+      google.maps.event.addListener(infowindow,'closeclick', function() {
+         $(".search-results").css("background-color", "transparent");
+      });
+
    };
    map.fitBounds( latlngbounds );
 }
