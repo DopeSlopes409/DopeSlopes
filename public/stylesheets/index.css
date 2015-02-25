@@ -20,36 +20,6 @@ a:visited {
 .navbar-header {
    padding-left: 75px;
    padding-right: 75px;
-   height: 50px;
-}
-
-.navbar-brand {
-   padding: 0 0 0 0;
-}
-
-.navbar {
-   height: 50px;
-   min-height: 50px;
-   background-color: white;
-   border-bottom: 2px solid #C9C9C9;
-   border-radius: 0;
-   margin: 0;
-}
-
-.navbar-collapse {
-   padding-left: 0;
-   padding-right: 0;
-}
-
-.navbar-default .navbar-nav>li>a {
-   color: #0000EE;
-}
-
-.nav-user {
-   float: right;
-   padding-top: 15px;
-   margin-right: 75px; 
-   font-size: 0.95em;
 }
 
 .centered {
@@ -158,30 +128,4 @@ a:visited {
 
 .btn-primary {
    margin: 0 5px;
-}
-
-#popup {
-   position:absolute;
-   top:45%;
-   left:0;
-   right:0;
-   margin-left:auto;
-   margin-right:auto;
-   width:250px;
-   z-index:1;
-   background-color:white;
-   border:1px solid #ccc;
-   border-radius:5px;
-   padding:20px;
-}
-#popup h2 {
-   width:100%;
-   text-align:left;
-   border-bottom:1px solid #ccc;
-}
-#popup .button {
-   margin:0px 5px;
-   padding: 5px 5px;
-   width: 100%;
-   font-size: .8em;
 }

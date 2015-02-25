@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	initializeClickListeners();
-  $('#popup').hide();
   //hide something about the background
 
   $('#background_cycler').removeClass('hide');
@@ -11,10 +10,6 @@ $(document).ready(function() {
    // some geolaction function for defining region
 
    //initializeAutoComplete();
-   //init login/logout links
-   $('#login-link').click(function() {
-    $("#popup").show();
-   });
 
 //   
    //$('#no-alarms').hide();
@@ -37,7 +32,7 @@ function cycleImages() {
 
 
 // Hide the login prompt
-function showLoginPopup() {
+function hideLoginPopup() {
   $("#popup").hide();
 }
 
@@ -147,47 +142,6 @@ function initializeAutoComplete() {
    $('#basic_search_input').autocomplete(
       //fields
       );   
-}
-
-/**
-* Handler for the signin callback triggered after the user selects an account.
-*/
-function onSignInCallback(resp) {
-   gapi.client.load('plus', 'v1', apiClientLoaded);
-}
-
-/**
-* Sets up an API call after the Google API client loads.
-*/
-function apiClientLoaded() {
-   gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
-}
-
-/**
-* Response callback for when the API client receives a response.
-*
-* @param resp The API response object with the user email and profile information.
-*/
-function handleEmailResponse(resp) {
-   var primaryEmail;
-
-   if (resp.code === 403) {
-      return;
-   }
-   console.log('email response: ' + JSON.stringify(resp));
-   $('#gConnect').hide();
-   for (var i=0; i < resp.emails.length; i++) {
-     if (resp.emails[i].type === 'account') primaryEmail = resp.emails[i].value;
-   }
-
-   //hide login links
-   $('#login').hide();
-   $('#session').toggleClass('hide');
-   $('#session #username').text('user: ' + primaryEmail);
-        // + '\n\nFull Response:\n' + JSON.stringify(resp);
-    //hide popup
-    $('#popup').hide();
-   //load session data for logged-in user
 }
 
 
