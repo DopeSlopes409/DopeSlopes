@@ -47,12 +47,14 @@ router.get('/resort_search', function (req, res, next)
   var state = req.query.state;
   
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state);
-  // Request Snocountry API for southwest region
-  // var reqResults; //repsonse from API  
- 
-  // TODO: get region for supplied state arg
-  
-  var region = "northwest";
+
+  // var reqResults; //repsonse from API
+
+  // get region for supplied state arg
+  var region = stateToRegion(state);
+  console.log("region by geolocation: " + region);
+
+  // url for API request
   var url = "http://feeds.snocountry.net/conditions.php?regions="+ region +"&apiKey=api8932.test5643&output=json";
   var numItems;
 
@@ -116,6 +118,69 @@ router.get('/resort_search', function (req, res, next)
   //res.render('resort_search', dustVars);
 
 });
+
+
+function stateToRegion(state) {
+  console.log("stateToRegion");
+  var region;
+    var sw = state.toUpperCase();
+    switch(sw) {
+        case "AK":
+        case "ID":
+        case "OR":
+        case "WA":
+            region = "northwest"; 
+            break;
+        case "AZ":
+        case "CA":
+        case "NV":
+            region = "southwest"; 
+            break;
+        case "CO":
+        case "MT":
+        case "NM": 
+        case "UT":
+        case "WY":
+            region = "rockies"; 
+            break;
+        case "IA": 
+        case "IL":
+        case "IN":
+        case "MI":
+        case "MN":
+        case "MO": 
+        case "ND":
+        case "OH":
+        case "SD":
+        case "WI":
+            region = "midwest"; 
+            break;
+        case "CT":
+        case "MA":
+        case "ME":
+        case "NH":
+        case "NJ":
+        case "NY":
+        case "PA":
+        case "RI":
+        case "VT":
+            region = "northeast"; 
+            break;
+        case "AL":
+        case "GA":
+        case "MD":
+        case "NC":
+        case "TN":
+        case "VA":
+        case "WV":
+            region = "southeast"; 
+            break;    
+                           
+        default:
+            region = "southwest";
+    }
+    return region;
+}
 
 /** 
  * GET search page. 
