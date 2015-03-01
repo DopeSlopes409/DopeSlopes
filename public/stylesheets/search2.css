@@ -128,8 +128,24 @@ span {
    height: 100%;
 }
 
-#search-collumn {
+#search-info {
+   position: absolute;
+   left: 400px;
+   top: 0;
+   overflow: hidden;
+   background-color: green;
+}
+
+#result-extended-info {
    float: right;
+   background-color: orange;
+   border-left: 2px solid #C9C9C9;
+   border-right: 2px solid #C9C9C9;
+   border-bottom: 2px solid #C9C9C9;
+}
+
+#search-collumn {
+   float: left;
    width:400px;
    height:100%;
    overflow-y: scroll;
@@ -137,6 +153,7 @@ span {
    border-left: 2px solid #C9C9C9;
    border-radius: 0;
    background-color: white;
+   margin: 0;
 }
 
 .search-collumn-padding {
@@ -241,7 +258,3 @@ span {
 .invisible {
    display: none;
 }
-
-/*#search-info {
-   overflow: hidden;
-}*/

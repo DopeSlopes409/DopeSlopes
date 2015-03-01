@@ -39,6 +39,25 @@ function setContentSize () {
    $("#map-canvas").css("width", (width-400).toString() + "px");
    $("#search-bar").css("width", (width-300).toString() + "px");
    $("#search-collumn").css("height", (height-100).toString() + "px");
+   
+   $("#search-info").css("height", (height-100).toString() + "px");
+   $("#search-info").css("width", (width-400).toString() + "px");
+   $("#search-info").css("left", (width-400).toString() + "px");
+
+   $("#result-extended-info").css("height", (height-100).toString() + "px");
+   $("#result-extended-info").css("width", (width-800).toString() + "px");
+}
+
+function toggleResultsSlider() {
+   var searchInfo = $('#search-info');
+
+   if (searchInfo.hasClass('visible')) {
+      var width = $(window).width();
+      searchInfo.animate({"left":(width-400).toString()+"px"}, "slow").removeClass('visible');
+    } 
+    else {
+      searchInfo.animate({"left":"400px"}, "slow").addClass('visible');
+    }
 }
 
 function resize (argument) {
