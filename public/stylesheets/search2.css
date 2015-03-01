@@ -24,6 +24,10 @@ span {
     display: inline-block; 
  }
 
+ h1, h2, h3, h4 {
+   color: rgb(0,84,166);
+ }
+
 
 #login {
    float: right;
@@ -133,12 +137,15 @@ span {
    left: 400px;
    top: 0;
    overflow: hidden;
-   background-color: green;
+   background-color: white;
 }
 
 #result-extended-info {
    float: right;
-   background-color: orange;
+   padding-left: 30px;
+   padding-right: 30px;
+   padding-top: 15px;
+   padding-bottom: 15px;
    border-left: 2px solid #C9C9C9;
    border-right: 2px solid #C9C9C9;
    border-bottom: 2px solid #C9C9C9;

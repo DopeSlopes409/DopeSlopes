@@ -1,6 +1,7 @@
 var map;
 var resorts = [];
 var markers = [];
+var currentResortName = "";
 
 function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall) {
    this.resortName = resortName.trim();
@@ -48,16 +49,42 @@ function setContentSize () {
    $("#result-extended-info").css("width", (width-800).toString() + "px");
 }
 
-function toggleResultsSlider() {
+function toggleResultsSlider(resortName) {
+   var searchInfo = $('#search-info');
+
+   if (searchInfo.hasClass('visible')) {
+      // If the current resort is clicked, close the extended info
+      if (currentResortName === resortName) {
+         var width = $(window).width();
+         searchInfo.animate({"left":(width-400).toString()+"px"}, "slow").removeClass('visible');
+         currentResortName = "";
+      }
+      // Otherwise switch the data of the extended info
+      else {
+         fillResortExtendedInfo(resortName);
+         currentResortName = resortName;
+      }
+    } 
+    else {
+      searchInfo.animate({"left":"400px"}, "slow").addClass('visible');
+      fillResortExtendedInfo(resortName);
+      currentResortName = resortName;
+    }
+}
+
+function closeResultsSlider() {
    var searchInfo = $('#search-info');
 
    if (searchInfo.hasClass('visible')) {
       var width = $(window).width();
       searchInfo.animate({"left":(width-400).toString()+"px"}, "slow").removeClass('visible');
-    } 
-    else {
-      searchInfo.animate({"left":"400px"}, "slow").addClass('visible');
-    }
+      currentResortName = "";
+   }
+}
+
+function fillResortExtendedInfo(resortName) {
+   var resort = getResort(resortName);
+   $("#sr-resort-title").text(resort.resortName);
 }
 
 function resize (argument) {
@@ -121,6 +148,10 @@ function initializeMap () {
 
    };
    map.fitBounds( latlngbounds );
+
+   google.maps.event.addListener(map, 'click', function() {
+      closeResultsSlider();
+  });
 }
 
 function getMarker(resortName) {
@@ -128,6 +159,11 @@ function getMarker(resortName) {
       if (markers[i].title == resortName)
          return markers[i];
    }
+}
+
+function getResort(resortName) {
+   var result = $.grep(resorts, function(r){ return r.resortName === resortName; });
+   return result[0];
 }
 
 function initializeMouseovers () {

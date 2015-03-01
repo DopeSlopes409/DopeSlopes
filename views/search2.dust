@@ -36,7 +36,7 @@
          
          <!-- Each Resort entry in the list -->
          {#resortEntries}
-            <div class="search-results search-collumn-padding" onclick="toggleResultsSlider()">
+            <div class="search-results search-collumn-padding" onclick='toggleResultsSlider("{name}")'>
                <div class="resort-title-line">
                   <h2>{name}</h2>
                   <!-- TODO: Link star to js method addFavoriteResort -->
@@ -67,7 +67,9 @@
          </div>
 
       </div>
-      <div id="result-extended-info"></div>
+      <div id="result-extended-info">
+         <h1 id="sr-resort-title"></h1>
+      </div>
    </div>
 </div>
 
