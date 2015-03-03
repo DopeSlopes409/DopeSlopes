@@ -72,6 +72,8 @@ router.get('/resort_search', function (req, res, next)
               title: 'DopeSlopes',
               cssFiles: [{css: 'search2.css'}],
               javascriptFiles: [{javascript: 'search2.js'}],
+              originLat: latitude,
+              originLong: longitude,
               resortEntries : []
             };
 
