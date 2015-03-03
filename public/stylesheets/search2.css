@@ -149,6 +149,7 @@ span {
    border-left: 2px solid #C9C9C9;
    border-right: 2px solid #C9C9C9;
    border-bottom: 2px solid #C9C9C9;
+   text-align: center;
 }
 
 #search-collumn {
