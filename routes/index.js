@@ -63,10 +63,11 @@ router.get('/resort_search', function (req, res, next)
       json: true},
       function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            console.log(body.items[0]);
+            console.log("body items: ", body.items[0]);
           
-            //numItems = response.totalItems;
-            numItems = 10;   //  remove once testing finished
+            numItems = body.totalItems;
+            //numItems = 10;   //  remove once testing finished
+            console.log("num resorts found: ", numItems)
 
             var dustVars = {
               title: 'DopeSlopes',
@@ -79,7 +80,8 @@ router.get('/resort_search', function (req, res, next)
 
 
             dustVars.resortEntries = body.items.map(function (entry) {
-              return {id: entry.id,
+              return {
+                id: entry.id,
                 name: entry.resortName,
                 latitude: entry.latitude,
                 longitude: entry.longitude,
@@ -127,59 +129,14 @@ function stateToRegion(state) {
   var region;
     var sw = state.toUpperCase();
     switch(sw) {
-        case "AK":
-        case "ID":
-        case "OR":
-        case "WA":
-            region = "northwest"; 
-            break;
-        case "AZ":
-        case "CA":
-        case "NV":
-            region = "southwest"; 
-            break;
-        case "CO":
-        case "MT":
-        case "NM": 
-        case "UT":
-        case "WY":
-            region = "rockies"; 
-            break;
-        case "IA": 
-        case "IL":
-        case "IN":
-        case "MI":
-        case "MN":
-        case "MO": 
-        case "ND":
-        case "OH":
-        case "SD":
-        case "WI":
-            region = "midwest"; 
-            break;
-        case "CT":
-        case "MA":
-        case "ME":
-        case "NH":
-        case "NJ":
-        case "NY":
-        case "PA":
-        case "RI":
-        case "VT":
-            region = "northeast"; 
-            break;
-        case "AL":
-        case "GA":
-        case "MD":
-        case "NC":
-        case "TN":
-        case "VA":
-        case "WV":
-            region = "southeast"; 
-            break;    
-                           
-        default:
-            region = "southwest";
+        case "AK": case "ID": case "OR": case "WA": region = "northwest"; break;
+        case "AZ": case "CA": case "NV": region = "southwest"; break;
+        case "CO": case "MT": case "NM": case "UT": case "WY": region = "rockies"; break;
+        case "IA": case "IL": case "IN": case "MI": case "MN": case "MO": case "ND":
+        case "OH": case "SD": case "WI": region = "midwest"; break;
+        case "CT": case "MA": case "ME": case "NH": case "NJ": case "NY": case "PA": case "RI": case "VT": region = "northeast"; break;
+        case "AL": case "GA": case "MD": case "NC": case "TN": case "VA": case "WV": region = "southeast"; break;    
+        default: region = "southwest";
     }
     return region;
 }
