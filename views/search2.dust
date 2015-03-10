@@ -53,6 +53,12 @@
             </div>
          {/resortEntries}
 
+         <div id="originLatLng" class="invisible">
+            <div class="origin">
+             <div class="originLat"> {originLat} </div>
+             <div class="originLong"> {originLong} </div>
+         </div>
+
          <div id="resortData" class="invisible">
             {#resortEntries}
                <div class="resort">

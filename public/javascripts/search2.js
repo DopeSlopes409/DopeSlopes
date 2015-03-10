@@ -1,4 +1,5 @@
 var map;
+var origin = {};
 var resorts = [];
 var markers = [];
 var currentResortName = "";
@@ -10,6 +11,7 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    this.openRuns = isNaN(openRuns) ? "unknown" : openRuns;
    this.totalRuns = isNaN(totalRuns) ? "unknown" : totalRuns;
    this.recentSnowfall = isNaN(recentSnowfall) ? "unknown" : recentSnowfall;
+   this.duration = "";
 
    this.toString = function() {
       return this.resortName + " => (" + this.latitude + ", " + this.longitude + ")";
@@ -24,9 +26,56 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    };
 }
 
+function Origin (latitude, longitude) {
+   this.latitude = latitude;
+   this.longitude = longitude;
+}
+
+
+function getRouteTime(element, index, array){
+
+   var directionsService = new google.maps.DirectionsService();
+ 
+   var resortLat = resorts[index].latitude.toString();
+   var resortLong = resorts[index].longitude.toString();
+
+   var request = {
+      origin: origin.latitude + "," + origin.longitude,
+      destination: resortLat + "," + resortLong,
+      travelMode: google.maps.TravelMode.DRIVING
+   };
+
+   directionsService.route(request, function(result, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+         resorts[index].duration = parseTime(result.routes[0].legs[0].duration.text);
+      }
+   });
+
+}
+
+function parseTime(time){
+   var totalMins = 0;
+   var tokens = time.split(" ");
+   for(var i = 0; i < tokens.length - 1; i += 2){
+      if(tokens[i+1] == "hours"){
+         totalMins += (parseFloat(tokens[i]) * 60);
+      }
+      else if(tokens[i+1] == "mins"){
+         totalMins += parseFloat(tokens[i]);
+      }
+   }
+   return totalMins;
+}
+
+function getRouteTimes(){
+   resorts.forEach(getRouteTime);
+}
+
 $(document).ready(function() {
    setContentSize();
    getResortData();
+   getOrigin();
+   getRouteTimes();
    initializeMap();
    initializeMouseovers();
 });
@@ -105,6 +154,13 @@ function getResortData () {
       resorts[resorts.length] = resort;
    });
 }
+
+ function getOrigin () {
+   origin = new Origin(
+         $(".originLat").text(),
+         $(".originLong").text()
+   );
+ }
 
 function getSearchResultDiv(resortName) {
    return $( "h2:contains('" + resortName + "')" ).parent().parent();
@@ -186,6 +242,5 @@ function initializeMouseovers () {
       });
    };
 }
-
 
 $(window).resize(resize);
