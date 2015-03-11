@@ -9,8 +9,12 @@ var cons = require('consolidate');
 var dustHelper = require('dustjs-helpers');
 var session = require('express-session');
 var template_engine = 'dust';
+var passport = require('passport');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var oauth = require('./routes/oauth');
+
 var app = express();
 
 /*Set Dustjs as view engine*/
@@ -32,8 +36,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
+//setup passport stuff
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+app.use(session({ secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 //define routes
 app.use('/', routes);
+app.use('/oauth', oauth);
 
 //app.use('/users', users);
 
