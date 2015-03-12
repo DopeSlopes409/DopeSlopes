@@ -130,12 +130,14 @@ function stateToRegion(state) {
     var sw = state.toUpperCase();
     switch(sw) {
         case "AK": case "ID": case "OR": case "WA": region = "northwest"; break;
-        case "AZ": case "CA": case "NV": region = "southwest"; break;
+        case "AZ": case "CA": case "HI": case "NV": region = "southwest"; break;
         case "CO": case "MT": case "NM": case "UT": case "WY": region = "rockies"; break;
-        case "IA": case "IL": case "IN": case "MI": case "MN": case "MO": case "ND":
-        case "OH": case "SD": case "WI": region = "midwest"; break;
-        case "CT": case "MA": case "ME": case "NH": case "NJ": case "NY": case "PA": case "RI": case "VT": region = "northeast"; break;
-        case "AL": case "GA": case "MD": case "NC": case "TN": case "VA": case "WV": region = "southeast"; break;    
+        case "AR": case "IA": case "IL": case "IN": case "MI": case "MN": case "MO": case "ND":
+        case "OH": case "SD": case "WI": case "TX": case "KS": case "NE": region = "midwest"; break;
+        case "CT": case "MA": case "ME": case "NH": case "NJ": case "NY": case "PA":
+        case "DE": case "RI": case "VT": region = "northeast"; break;
+        case "AL": case "FL": case "GA": case "MD": case "NC": case "TN": case "OK": case "SC":
+        case "VA": case "WV": case "KY": case "LA": case "MS": region = "southeast"; break;    
         default: region = "southwest";
     }
     return region;
