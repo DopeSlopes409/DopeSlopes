@@ -45,8 +45,11 @@ router.get('/resort_search', function (req, res, next)
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var state = req.query.state;
+  var range = req.query.range;
+
+  range = (range == "undefined") ? 500 : range;   // if no range selected, use value big enough to include all region results
   
-  console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state);
+  console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
   // var reqResults; //repsonse from API
 
@@ -100,6 +103,11 @@ router.get('/resort_search', function (req, res, next)
                     + " total_runs: " + elt.total_runs + " snow: " + elt.recent_snowfall);
             }); 
 
+            /*
+                PROBLEM HERE - can't access to latitude, longitude, and range variables from lines 45, 46, 48. need this information to 
+                filter out resorts that are out of range
+            */    
+
             res.render('search2', dustVars);        
           }
           else {
@@ -123,6 +131,24 @@ router.get('/resort_search', function (req, res, next)
 
 });
 
+// credit to http://rosettacode.org/wiki/Haversine_formula for haversine function
+function haversine(lat1,lon1,lat2,lon2) {
+   console.log("haversine");
+   console.log("lat1: ", lat1, "lon1: ", lon1, "lat2: ", lat2, "lon2: ", lon2);
+   lat1 = deg(lat1);
+   lon1 = deg(lon1);
+   lat2 = deg(lat2);
+   lon2 = deg(lon2);
+   var R = 6372.8; // km
+   var kmToMiles = 0.621371;
+   var dLat = lat2 - lat1;
+   var dLon = lon2 - lon1;
+   var a = Math.sin(dLat / 2) * Math.sin(dLat /2) + Math.sin(dLon / 2) * Math.sin(dLon /2) * Math.cos(lat1) * Math.cos(lat2);
+   var c = 2 * Math.asin(Math.sqrt(a));
+   return R * c * kmToMiles;
+}
+
+function deg(deg) { return deg/180.0 * Math.PI; }
 
 function stateToRegion(state) {
   console.log("stateToRegion");
