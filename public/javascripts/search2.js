@@ -243,4 +243,61 @@ function initializeMouseovers () {
    };
 }
 
+var newAddress;
+var newRange;
+
+$('#basic_search_input').change(function() {
+      newAddress = $("#basic_search_input").val();
+      console.log("new address: ", newAddress);
+});
+
+$('#range').change(function() {
+      textRange = $( "#range option:selected" ).text();
+
+      if (textRange == "50 mi") {
+         newRange = 50;
+      } else if (textRange == "100 mi") {
+         newRange = 100;
+      } else if (textRange == "200 mi") {
+         newRange = 200;
+      } else {
+         newRange = 50;
+      }
+
+      console.log("range selected: ", newRange);
+});
+
+$('#advanced-search').click(function() {
+   console.log("advanced search");
+   advancedResortSearch();
+});
+
+function advancedResortSearch() {
+   console.log("advancedResortSearch()");
+
+   // Replace all instances of non alphanumeric characters with '+'
+   address = newAddress.replace(/[\W_]+/g, "+");
+
+   // Build JSON request url
+   var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+   var apiKey = "&key=AIzaSyC_qmwLkxl8sUK-c3NHT5VLVt3-DgfwHSk";
+   var apiURL = geoCodeURL + address + apiKey;
+
+   // Get JSON object from Google GeoCoding API
+   $.getJSON(apiURL, function(json){
+      var lat = json.results[0].geometry.location.lat;
+      var lng = json.results[0].geometry.location.lng;
+      var state;
+
+      for(var i = 0; i < json.results[0].address_components.length; i++){
+        if (json.results[0].address_components[i].types[0] == "administrative_area_level_1"){
+          state = json.results[0].address_components[i].short_name;
+        }
+      }
+
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange;
+      locationRedirect(queryURI);
+   }); 
+}
+
 $(window).resize(resize);
