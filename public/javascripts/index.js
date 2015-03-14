@@ -11,8 +11,6 @@ $(document).ready(function() {
 
    //initializeAutoComplete();
 
-//   
-   //$('#no-alarms').hide();
    setPrompt();
 });
 

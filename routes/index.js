@@ -5,14 +5,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
-
+  var seshUser = req.session.passport.user;
 	var dustVars = {
     	title: 'DopeSlopes',
     	cssFiles: [{css: 'index.css'}],
     	javascriptFiles: [{javascript: 'index.js'}],
     };
-  	res.render('index', dustVars);
+  if (seshUser) {
+    dustVars.displayName = seshUser.profile.displayName;
+  }
+	res.render('index', dustVars);
 });
 
 /* GET search page */

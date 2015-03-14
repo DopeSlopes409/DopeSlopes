@@ -8,6 +8,8 @@ var cId = process.env.CLIENT_ID || '372516786880-mgkj8fh3arto5ife2ma57i6uil5npus
 var cSecret = process.env.CLIENT_SECRET || 'GyKAsiUbkgDFiBk9gtfjKuhF';
 var rUri = process.env.REDIRECT_URI || 'http://localhost:3000/oauth/callback';
 
+var rUriGoogle = 'http://localhost:3000/oauth/google/callback';
+
 
 
 //
@@ -16,20 +18,21 @@ var rUri = process.env.REDIRECT_URI || 'http://localhost:3000/oauth/callback';
 var oauth2 = new googleStrat.Strategy({
   clientID : cId,
   clientSecret : cSecret,
-  returnURL : rUri},
-  function(accessToken, refreshToken, profile, done) {
+  realm: 'http://localhost:3000/',
+  returnURL : rUriGoogle},
+  function(identifier, profile, done) {
     console.log("callback, profile: ", util.inspect(profile, false, null));
     var user = {};
     var err = "oauth callback error";
-    if (profile.url) {
+    if (profile && profile.displayName) {
         err = null;
-        user.id = profile.url;
+        user.openId = identifier;
+        user.profile = profile;
     }
-    done (err, user);
-    
-});
+    done(err, user);
+  });
 
-passport.use('google', oauth2);
+passport.use(oauth2);
 
 
 
@@ -37,8 +40,8 @@ passport.use('google', oauth2);
 router.get('/google', passport.authenticate('google'));
  
 
-router.get('/callback', passport.authenticate('google', { successRedirect: '/',
-                                      failureRedirect: '/login' }))
+router.get('/google/callback', passport.authenticate('google', { successRedirect: '/',
+                                      failureRedirect: '/' }))
 
 // This gets run upon successful authentication to Salesforce.
 // Save the users accessToken and instanceURL for usage across
