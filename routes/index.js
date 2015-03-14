@@ -49,7 +49,7 @@ router.get('/resort_search', function (req, res, next)
   var state = req.query.state;
   var range = req.query.range;
 
-  range = (range == "undefined") ? 500 : range;   // if no range selected, use value big enough to include all region results
+  range = !range ? 500 : range;   // if no range selected, use value big enough to include all region results
   
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
@@ -83,6 +83,7 @@ router.get('/resort_search', function (req, res, next)
               resortEntries : []
             };
 
+            console.log("range scope check: ", range);
 
             dustVars.resortEntries = body.items.map(function (entry) {
               return {
@@ -95,24 +96,28 @@ router.get('/resort_search', function (req, res, next)
                 recentSnowfall: (entry.newSnowMax + entry.newSnowMin) / 2};
             });
 
+            console.log("dustVars lat/long: ", dustVars.originLat, dustVars.originLong)
+
             //TODO: Sort resortEntries by travel time from current geolocation
 
             //truncate resortEntries length 
             dustVars.resortEntries.splice(numItems);
             
+            filteredResorts = [];
             dustVars.resortEntries.forEach(function (elt) {
               console.log("resort: " + elt.name + " lat: " + elt.latitude + " lon: " + elt.longitude + " open_runs: " + elt.open_runs 
                     + " total_runs: " + elt.total_runs + " snow: " + elt.recent_snowfall);
+
+              // add resort if within specified range
+              var distance = haversine(latitude, longitude, elt.latitude, elt.longitude);
+              if (distance <= range) {
+                filteredResorts.push(elt);
+              }
             }); 
-
-            /*
-                PROBLEM HERE - can't access to latitude, longitude, and range variables from lines 45, 46, 48. need this information to 
-                filter out resorts that are out of range
-            */    
-
-            res.render('search2', dustVars);        
-          }
-          else {
+         
+            dustVars.resortEntries = filteredResorts;
+            res.render('search2', dustVars); 
+          } else {
             console.log("Unable to access REST API.");
             console.log("Error: " + error);
 

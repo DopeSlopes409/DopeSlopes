@@ -300,4 +300,12 @@ function advancedResortSearch() {
    }); 
 }
 
+// Redirect to the user's location query
+function locationRedirect(queryURI){
+  var baseURL = window.location.origin;
+  var fullURL = baseURL + queryURI;
+
+  window.location.href = fullURL;
+}
+
 $(window).resize(resize);
