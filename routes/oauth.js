@@ -6,9 +6,11 @@ var router = express.Router();
 var util = require('util');
 var cId = process.env.CLIENT_ID || '372516786880-mgkj8fh3arto5ife2ma57i6uil5npusr.apps.googleusercontent.com';
 var cSecret = process.env.CLIENT_SECRET || 'GyKAsiUbkgDFiBk9gtfjKuhF';
+//needed?
+var sRealm = process.env.REALM || 'http://localhost:3000/';
 var rUri = process.env.REDIRECT_URI || 'http://localhost:3000/oauth/callback';
 
-var rUriGoogle = process.env.GOOGLE_REDIRECT_URI 'http://localhost:3000/oauth/google/callback';
+var rUriGoogle = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/oauth/google/callback';
 
 
 
@@ -18,7 +20,7 @@ var rUriGoogle = process.env.GOOGLE_REDIRECT_URI 'http://localhost:3000/oauth/go
 var oauth2 = new googleStrat.Strategy({
   clientID : cId,
   clientSecret : cSecret,
-  realm: 'http://localhost:3000/',
+  realm: sRealm,
   returnURL : rUriGoogle},
   function(identifier, profile, done) {
     console.log("callback, profile: ", util.inspect(profile, false, null));
