@@ -8,7 +8,7 @@ var cId = process.env.CLIENT_ID || '372516786880-mgkj8fh3arto5ife2ma57i6uil5npus
 var cSecret = process.env.CLIENT_SECRET || 'GyKAsiUbkgDFiBk9gtfjKuhF';
 var rUri = process.env.REDIRECT_URI || 'http://localhost:3000/oauth/callback';
 
-var rUriGoogle = 'http://localhost:3000/oauth/google/callback';
+var rUriGoogle = process.env.GOOGLE_REDIRECT_URI 'http://localhost:3000/oauth/google/callback';
 
 
 
