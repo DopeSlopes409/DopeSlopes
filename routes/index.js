@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var util = require('util');
 
 var router = express.Router();
 
@@ -11,7 +12,8 @@ router.get('/', function(req, res, next) {
     	cssFiles: [{css: 'index.css'}],
     	javascriptFiles: [{javascript: 'index.js'}],
     };
-  if (seshUser) {
+  if (seshUser && seshUser.profile) {
+    console.log('GET Index session: ', util.inspect(seshUser, false, null));
     dustVars.displayName = seshUser.profile.displayName;
   }
 	res.render('index', dustVars);
@@ -44,6 +46,7 @@ router.get('/location_search/:query', function (req, res, next) {
 /* GET request for searching resorts based on geolocation */
 router.get('/resort_search', function (req, res, next) 
 {
+  var seshUser = req.session.passport.user;
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var state = req.query.state;
@@ -82,6 +85,10 @@ router.get('/resort_search', function (req, res, next)
               originLong: longitude,
               resortEntries : []
             };
+            if (seshUser && seshUser.profile) {
+              console.log('GET Index session: ', util.inspect(seshUser, false, null));
+              dustVars.displayName = seshUser.profile.displayName;
+            }
 
             console.log("range scope check: ", range);
 
@@ -127,6 +134,11 @@ router.get('/resort_search', function (req, res, next)
               javascriptFiles: [{javascript: 'index.js'}],
               resortEntries : []
             };
+
+            if (seshUser && seshUser.profile) {
+              console.log('GET Index session: ', util.inspect(seshUser, false, null));
+              dustVars.displayName = seshUser.profile.displayName;
+            }
 
             res.render('index', dustVars);
           }

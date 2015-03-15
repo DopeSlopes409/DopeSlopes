@@ -35,13 +35,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'bower_components')));
 
-//setup passport stuff
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 app.use(session({ secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,}));

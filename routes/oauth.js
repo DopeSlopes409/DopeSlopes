@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var googleStrat = require('passport-google');
+var googleStrat = require('passport-google').Strategy;
 
 var router = express.Router();
 var util = require('util');
@@ -17,7 +17,7 @@ var rUriGoogle = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/oauth
 //
 // OAuth2 client information 
 //
-var oauth2 = new googleStrat.Strategy({
+var oauth2 = new googleStrat({
   clientID : cId,
   clientSecret : cSecret,
   realm: sRealm,
@@ -28,14 +28,20 @@ var oauth2 = new googleStrat.Strategy({
     var err = "oauth callback error";
     if (profile && profile.displayName) {
         err = null;
-        user.openId = identifier;
+        user.id = identifier;
         user.profile = profile;
     }
     done(err, user);
   });
 
 passport.use(oauth2);
-
+//setup passport stuff
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 
 /* GET login salesforce page. */
