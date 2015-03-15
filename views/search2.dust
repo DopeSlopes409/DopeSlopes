@@ -55,8 +55,9 @@
 
          <div id="originLatLng" class="invisible">
             <div class="origin">
-             <div class="originLat"> {originLat} </div>
-             <div class="originLong"> {originLong} </div>
+               <div class="originLat"> {originLat} </div>
+               <div class="originLong"> {originLong} </div>
+            </div>
          </div>
 
          <div id="resortData" class="invisible">
