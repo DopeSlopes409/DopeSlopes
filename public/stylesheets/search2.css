@@ -144,12 +144,13 @@ span {
    float: right;
    padding-left: 30px;
    padding-right: 30px;
-   padding-top: 15px;
+   padding-top: 0px;
    padding-bottom: 15px;
    border-left: 2px solid #C9C9C9;
    border-right: 2px solid #C9C9C9;
    border-bottom: 2px solid #C9C9C9;
-   text-align: center;
+   text-align: left;
+   overflow-y: scroll;
 }
 
 #search-collumn {
@@ -195,6 +196,7 @@ span {
 .search-results {
    border-bottom: 1px solid #C9C9C9;
    border-radius: 0px;
+   text-align: left;
 }
 
 .search-results h2 {
@@ -206,6 +208,101 @@ span {
 
 .search-results span {
    font-size: 0.85em;
+}
+
+.srei-margin {
+   margin-left: 20px;
+   margin-right: 20px;
+}
+
+#srei-resort-title {
+   text-align: center;
+}
+
+.srei-subtitle-box {
+   background-color: #ecf0f1;
+   width: 100%;
+   height: 30px;
+   text-align: left;
+   padding-left: 20px;
+   padding-top: 5px;
+   margin-top: 15px;
+   margin-bottom: 6px;
+}
+
+#srei-operatingStatus {
+   color: green;
+   width: 100%;
+   font-size: 1.20em;
+}
+
+#srei-conditions {
+   background-color: yellow;
+   width: 100%;
+   position: relative;
+}
+
+#srei-weather-icon {
+   width: 30%;
+   height: 140px;
+   background-image: url(../images/cloudy.png);
+   background-size: contain;
+   background-repeat:no-repeat;
+   float: left;
+   background-position: center center; 
+}
+
+#srei-mountain {
+   width: 40%;
+   height: 140px;
+   background-image: url(../images/MountainIcon.jpg);
+   background-size: contain;
+   background-repeat:no-repeat;
+   display: inline-block;
+}
+
+#srei-snowfall-box {
+   width: 30%;
+   height: 140px;
+   background-color: blue;
+   float: right;
+}
+
+#srei-trails {
+   background-color: orange;
+   width: 100%;
+   position: relative;
+}
+
+#srei-trails-left-collumn {
+   width: 50%;
+   height: 300px;
+   float: left;
+   background-color: red;
+}
+
+.srei-trails-right-collumn {
+   width: 50%;
+   height: 300px;
+   float: right;
+   /*background-color: purple;*/
+}
+
+.chart-color-box {
+   width: 10px;
+   height: 10px;
+   margin-right: 5px;
+   margin-left: 10px;
+}
+
+#srei-trail-breakdown-legend ul {
+   padding: 12px;
+   text-align: center;
+}
+
+#srei-trail-breakdown-legend ul li {
+   display: inline;
+   list-style-type: none;
 }
 
 .resort-title-line {

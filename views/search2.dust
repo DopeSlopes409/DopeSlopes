@@ -75,7 +75,24 @@
 
       </div>
       <div id="result-extended-info">
-         <h1 id="sr-resort-title"></h1>
+         <h1 id="srei-resort-title"></h1>
+         <div class="srei-subtitle-box">Operating Status</div>
+         <div id="srei-operatingStatus" class="srei-margin">Open</div>
+         
+         <div class="srei-subtitle-box">Conditions</div>
+         <div id="srei-conditions" class="">
+            <span id="srei-weather-icon"></span>
+            <span id="srei-mountain"></span>
+            <span id="srei-snowfall-box"></span>
+         </div>
+
+         <div class="srei-subtitle-box">Trails, Lifts, and Parks</div>
+         <div id="srei-trails">
+            <span id="srei-trails-left-collumn"></span>
+            <span class="srei-trails-right-collumn">
+               <canvas id="srei-trail-breakdown" width="288" height="300"></canvas>
+            </span>
+         </div>
       </div>
    </div>
 </div>

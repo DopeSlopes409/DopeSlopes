@@ -78,7 +78,48 @@ $(document).ready(function() {
    getRouteTimes();
    initializeMap();
    initializeMouseovers();
+   initializeCharts();
 });
+
+function initializeCharts () {
+   var doughnutData = [
+      {
+         value : 20,
+         color: "#339900",
+         title : "Easy Trails",
+      },
+      {
+         value : 40,
+         color: "#006699",
+         title : "Intermediate Trails",
+      },
+      {
+         value : 10,
+         color: "#000000",
+         title : "Advanced Trails",
+      },
+   ];
+
+   var options = {
+         animateRotate : true,
+         animateScale : false,
+         animationByData : false,
+         animationSteps : 50,
+         graphTitle : "Trail Breakdown",
+         legend : true,
+         legendBorders : false,
+         legendBlockSize : 12,
+         inGraphDataShow : true,
+         inGraphDataTmpl : "<%=v3%>",
+         inGraphDataFontColor : "#333333",
+         animationEasing: "linear",
+         annotateDisplay : false,
+         spaceBetweenBar : 5,
+         graphTitleFontSize: 18,
+   }
+   var trailBreakdown= document.getElementById("srei-trail-breakdown").getContext("2d");
+   var myDoughnut = new Chart(trailBreakdown).Doughnut(doughnutData,options);
+}
 
 function setContentSize () {
    var height = $(window).height();
@@ -133,7 +174,7 @@ function closeResultsSlider() {
 
 function fillResortExtendedInfo(resortName) {
    var resort = getResort(resortName);
-   $("#sr-resort-title").text(resort.resortName);
+   $("#srei-resort-title").text(resort.resortName);
 }
 
 function resize (argument) {
