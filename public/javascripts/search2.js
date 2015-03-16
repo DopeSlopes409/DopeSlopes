@@ -110,7 +110,7 @@ function initializeCharts () {
          legendBorders : false,
          legendBlockSize : 12,
          inGraphDataShow : true,
-         inGraphDataTmpl : "<%=v3%>",
+         inGraphDataTmpl : "<%=v2%>",
          inGraphDataFontColor : "#333333",
          animationEasing: "linear",
          annotateDisplay : false,

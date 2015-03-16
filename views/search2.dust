@@ -86,7 +86,13 @@
                <div id="srei-base-temp">40°F</div>
                <div id="srei-snow-quality">Frozen Granular</div>
             </span>
-            <span id="srei-snowfall-box"></span>
+            <span id="srei-snowfall-box">
+               <h1>Snowfall (past 24 hours</h1>
+               <span id="srei-snowfall-graph">
+                  <span id="srei-snowfall-graph-fill"></span>
+               </span>
+               <span id="srei-snowfall-data">8 IN</span>
+            </span>
          </div>
 
          <div class="srei-subtitle-box">Trails, Lifts, and Parks</div>
