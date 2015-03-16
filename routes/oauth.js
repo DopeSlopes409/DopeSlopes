@@ -20,7 +20,9 @@ var rUriGoogle = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/oauth
 var oauth2 = new googleStrat({
   clientID : cId,
   clientSecret : cSecret,
-  realm: sRealm,
+  openid : {
+    realm: sRealm
+  },
   returnURL : rUriGoogle},
   function(identifier, profile, done) {
     console.log("callback, profile: ", util.inspect(profile, false, null));
