@@ -82,7 +82,11 @@
          <div class="srei-subtitle-box">Conditions</div>
          <div id="srei-conditions" class="">
             <span id="srei-weather-icon"></span>
-            <span id="srei-mountain"></span>
+            <span id="srei-mountain">
+               <div id="srei-summit-temp">30°F</div>
+               <div id="srei-base-temp">40°F</div>
+               <div id="srei-snow-quality">Frozen Granular</div>
+            </span>
             <span id="srei-snowfall-box"></span>
          </div>
 
