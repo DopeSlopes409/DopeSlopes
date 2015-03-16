@@ -1,11 +1,11 @@
 var express = require('express');
 var passport = require('passport');
-var googleStrat = require('passport-google').Strategy;
+var googleStrat = require('passport-google-openidconnect').Strategy;
 
 var router = express.Router();
 var util = require('util');
-var cId = process.env.CLIENT_ID || '372516786880-mgkj8fh3arto5ife2ma57i6uil5npusr.apps.googleusercontent.com';
-var cSecret = process.env.CLIENT_SECRET || 'GyKAsiUbkgDFiBk9gtfjKuhF';
+var googleId = process.env.GOOGLE_CLIENT_ID || '372516786880-mgkj8fh3arto5ife2ma57i6uil5npusr.apps.googleusercontent.com';
+var googleSecret = process.env.GOOGLE_CLIENT_SECRET || 'GyKAsiUbkgDFiBk9gtfjKuhF';
 //needed?
 var sRealm = process.env.REALM || 'http://localhost:3000/';
 var rUri = process.env.REDIRECT_URI || 'http://localhost:3000/oauth/callback';
@@ -15,28 +15,28 @@ var rUriGoogle = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/oauth
 
 
 //
-// OAuth2 client information 
+// Gogole OpenID Connect client information 
 //
-var oauth2 = new googleStrat({
-  clientID : cId,
-  clientSecret : cSecret,
-  openid : {
-    realm: sRealm
+var gOpenID = new googleStrat({
+  clientID : googleId,
+  clientSecret : googleSecret,
+  callbackURL : rUriGoogle,
+  userInfoURL: "https://www.googleapis.com/plus/v1/people/me",
+  openid : {realm: sRealm}
   },
-  returnURL : rUriGoogle},
-  function(identifier, profile, done) {
+  function(iss, sub, profile, accessToken, refreshToken, done) {
     console.log("callback, profile: ", util.inspect(profile, false, null));
     var user = {};
     var err = "oauth callback error";
     if (profile && profile.displayName) {
         err = null;
-        user.id = identifier;
+        user.id = profile.id;
         user.profile = profile;
     }
     done(err, user);
   });
 
-passport.use(oauth2);
+passport.use(gOpenID);
 //setup passport stuff
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -47,11 +47,14 @@ passport.deserializeUser(function(user, done) {
 
 
 /* GET login salesforce page. */
-router.get('/google', passport.authenticate('google'));
+router.get('/google', passport.authenticate('google-openidconnect'));
  
 
-router.get('/google/callback', passport.authenticate('google', { successRedirect: '/',
-                                      failureRedirect: '/' }))
+router.get('/google/callback', passport.authenticate('google-openidconnect', {failureRedirect: '/' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 // This gets run upon successful authentication to Salesforce.
 // Save the users accessToken and instanceURL for usage across
