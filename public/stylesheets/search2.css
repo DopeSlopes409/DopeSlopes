@@ -234,6 +234,10 @@ span {
    color: green;
    width: 100%;
    font-size: 1.20em;
+   text-align: right;
+   display: inline;
+   float: right;
+   margin-top: -35px;
 }
 
 #srei-conditions {

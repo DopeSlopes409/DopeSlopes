@@ -76,8 +76,7 @@
       </div>
       <div id="result-extended-info">
          <h1 id="srei-resort-title"></h1>
-         <div class="srei-subtitle-box">Operating Status</div>
-         <div id="srei-operatingStatus" class="srei-margin">Open</div>
+         <h2 id="srei-operatingStatus">Open</h2>
          
          <div class="srei-subtitle-box">Conditions</div>
          <div id="srei-conditions" class="">
