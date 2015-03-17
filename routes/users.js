@@ -1,21 +1,37 @@
 var express = require('express');
+
 var request = require('request');
+var util = require('util');
+var parse = require('node-parse-api').Parse;
 
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/users', function(req, res, next) {
+var parseOptions = {
+    app_id: process.env.PARSE_APP_ID || '2ONRJ6uzD2442S4Dn6sxpIKNMG1CDppk4upAvmDP',
+    api_key: process.env.PARSE_API_KEY || 'sGOLcVBuvqL73CEQfTerjkoyY38n6HCPY4d5Qt4A'// api_key:'...' could be used too
+};
+
+
+/* GET favorite resorts */
+router.get('/users/:id/resorts', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-/* POST new user account */
-router.post('/users', function(req, res, next) {
-  res.send('respond with a resource');
+/* POST favorite resort */
+router.post('/users/:id/resorts', function(req, res, next) {
+	var userId = req.params.id;
+	var resId = req.body.resId;
+	var conn = new parse(parseOptions);
+
+	//update user resorts array
+
+  	res.send('respond with a resource');
 });
 
+/* DELETE favorite resort */
+router.get('/users/:id/resorts/:resortId', function(req, res, next) {
+  var userId = req.params.id;
 
-/* GET trip itinerary */
-router.get('/users/:id/trips', function(req, res, next) {
   res.send('respond with a resource');
 });
 
