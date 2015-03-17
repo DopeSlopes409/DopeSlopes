@@ -79,7 +79,33 @@ $(document).ready(function() {
    initializeMap();
    initializeMouseovers();
    initializeCharts();
+   initializeUserButtons();
 });
+
+function initializeUserButtons() {
+   $('.star').click(function() {
+      var star = $(this);
+      var resortId = star.data("resort-id");
+      var userId = star.parent().parent().data('userid');
+      var baseurl = window.location.href.split('/').slice(0, -1).join('/') + '/';
+
+      console.log('In star fav, userid: ' + userId + ', ' + resortId);
+
+      if (star.hasClass('favorite')) {
+         star.toggleClass('favorite');
+         //if logged in, delete from user favorites 
+      } else {
+         star.toggleClass('favorite');
+         // if loged in, Add this resort to user favorites Only partially implemented for now
+         
+         // $.post(baseurl + 'user/' + userId + '/resorts?resId=' + resortId, 
+         //    function(data) {
+         //       console.log('posted new favorite, data: ' + JSON.stringify(data));
+         //    });   
+
+      }
+   });
+}
 
 function initializeCharts () {
    var doughnutData = [

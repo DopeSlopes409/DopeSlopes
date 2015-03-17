@@ -24,8 +24,9 @@ router.post('/users/:id/resorts', function(req, res, next) {
 	var conn = new parse(parseOptions);
 
 	//update user resorts array
-
-  	res.send('respond with a resource');
+	conn.update('User', userId, {favoriteResorts: [resId]}, function(err, response) {
+		res.send(response);
+	});
 });
 
 /* DELETE favorite resort */
