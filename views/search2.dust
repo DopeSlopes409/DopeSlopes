@@ -76,15 +76,15 @@
       </div>
       <div id="result-extended-info">
          <h1 id="srei-resort-title"></h1>
-         <h2 id="srei-operatingStatus">Open</h2>
+         <h2 id="srei-operatingStatus"></h2>
          
          <div class="srei-subtitle-box" id="srei-conditions-subtitle-box">Conditions</div>
          <div id="srei-conditions" class="">
             <span id="srei-weather-icon"></span>
             <span id="srei-mountain">
-               <div id="srei-summit-temp">30°F</div>
-               <div id="srei-base-temp">40°F</div>
-               <div id="srei-snow-quality">Frozen Granular</div>
+               <div id="srei-summit-temp"></div>
+               <div id="srei-base-temp"></div>
+               <div id="srei-snow-quality"></div>
             </span>
             <span id="srei-snowfall-box">
                <h1>Snowfall (past 24 hours)</h1>
@@ -116,7 +116,7 @@
                </span>
                <span id="srei-trails-left-collumn-bottom">
                   <h1>Pipes and Parks</h1>
-                  <p id="srei-pipes-and-parks">Halfpipe open. Last cut 12/22/2014.</p>
+                  <p id="srei-pipes-and-parks"></p>
                </span>
             </span>
             <span class="srei-trails-right-collumn">

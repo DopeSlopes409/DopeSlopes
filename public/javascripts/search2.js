@@ -78,7 +78,6 @@ $(document).ready(function() {
    getRouteTimes();
    initializeMap();
    initializeMouseovers();
-   initializeCharts();
    initializeUserButtons();
 });
 
@@ -107,11 +106,123 @@ function initializeUserButtons() {
    });
 }
 
-function initializeCharts () {
+
+function setContentSize () {
+   var height = $(window).height();
+   var width = $(window).width();
+   $("#content").css("height", (height - 100).toString() + "px");
+   $("#content").css("width", width.toString() + "px");
+
+   $("#map-canvas").css("width", (width-400).toString() + "px");
+   $("#search-bar").css("width", (width-300).toString() + "px");
+   $("#search-collumn").css("height", (height-100).toString() + "px");
+   
+   $("#search-info").css("height", (height-100).toString() + "px");
+   $("#search-info").css("width", (400).toString() + "px");
+   $("#search-info").css("left", (width-400).toString() + "px");
+
+   $("#result-extended-info").css("height", (height-100).toString() + "px");
+   $("#result-extended-info").css("width", (width-800).toString() + "px");
+
+   $("#result-extended-info").css("display", "none");
+}
+
+function toggleResultsSlider(resortName) {
+   var searchInfo = $('#search-info');
+   var resultExtendedInfo = $("#result-extended-info");
+   var width = $(window).width();
+
+   if (searchInfo.hasClass('visible')) {
+      // If the current resort is clicked, close the extended info
+      if (currentResortName === resortName) {
+
+         searchInfo.animate({"left":(width-400).toString()+"px"}, "slow",hideResultExtendedInfo).removeClass('visible');
+         currentResortName = "";
+      }
+      // Otherwise switch the data of the extended info
+      else {
+         fillResortExtendedInfo(resortName);
+         currentResortName = resortName;
+      }
+    } // Open
+    else {
+      $("#search-info").css("width", (width-400).toString() + "px");
+      resultExtendedInfo.css("display", "block");
+      searchInfo.animate({"left":"400px"}, "slow").addClass('visible');
+      fillResortExtendedInfo(resortName);
+      currentResortName = resortName;
+    }
+}
+
+function hideResultExtendedInfo() {
+   var resultExtendedInfo = $("#result-extended-info");
+   resultExtendedInfo.css("display", "none");
+   $("#search-info").css("width", "400px");
+}
+
+function closeResultsSlider() {
+   var searchInfo = $('#search-info');
+
+   if (searchInfo.hasClass('visible')) {
+      var width = $(window).width();
+      searchInfo.animate({"left":(width-400).toString()+"px"}, "slow").removeClass('visible');
+      currentResortName = "";
+   }
+}
+
+function fillResortExtendedInfo(resortName) {
+   var resort = getResort(resortName);
+
+   // Fill with actual data!!!
+   setResortTitle(resort.resortName);
+   setOperatingStatus("");
+   setWeather("cloudy");
+   setSummitTemp(20);
+   setBaseTemp(30);
+   setSnowQuality("Variable Conditions");
    setSnowfallChart(2);
-   setLiftsChart(12);
    setTrailsChart(90);
+   setLiftsChart(12);
+   setPipesAndPark("Halfpipe open. Last cut 12/22/2014.");
    setTrailsBreakdownChart(8,12,3);
+
+}
+
+function setResortTitle(resortName) {
+   $("#srei-resort-title").text(resortName);  
+}
+
+function setOperatingStatus(status) {
+   var color;
+   if (status === "") {
+      status = "Open";
+      color = "green";
+   }
+   else if (status==="Closed for Snow Sports") {
+      color = "red";
+   }
+   else if (status.startsWith("Plan To Open")) {
+      color = "red";
+   }
+   else if (status.startsWith("Reopen")) {
+      color = "red";
+   }
+   else if (status==="No Recent Info") {
+      color = "red";
+   }
+   else if (status==="Operating No Details") {
+      color = "green";
+   }
+   else if (status==="Open for Summer Fun") {
+      color = "red";
+   }
+   else {
+      status = "Unknown";
+      color = "red";
+   }
+   
+   $("#srei-operatingStatus").html(status);
+   $("#srei-operatingStatus").css("color",color);
 }
 
 function setSnowfallChart(snowfall) {
@@ -160,6 +271,8 @@ function setTrailsChart(openTrails) {
 }
 
 function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails) {
+   // Reset the width and height so the graph does not zoom on subsequent calls of method
+   $("#srei-trail-breakdown").attr({width: "259px", height: "300px"});
    var doughnutData = [
       {
          value : easyTrails,
@@ -199,77 +312,28 @@ function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails)
    var myDoughnut = new Chart(trailBreakdown).Doughnut(doughnutData,options);
 }
 
-function setContentSize () {
-   var height = $(window).height();
-   var width = $(window).width();
-   $("#content").css("height", (height - 100).toString() + "px");
-   $("#content").css("width", width.toString() + "px");
-
-   $("#map-canvas").css("width", (width-400).toString() + "px");
-   $("#search-bar").css("width", (width-300).toString() + "px");
-   $("#search-collumn").css("height", (height-100).toString() + "px");
-   
-   $("#search-info").css("height", (height-100).toString() + "px");
-   $("#search-info").css("width", (400).toString() + "px");
-   $("#search-info").css("left", (width-400).toString() + "px");
-
-   $("#result-extended-info").css("height", (height-100).toString() + "px");
-   $("#result-extended-info").css("width", (width-800).toString() + "px");
-
-   $("#result-extended-info").css("display", "none");
-
+function setWeather(weather) {
+   //Change the image based on the weather
 }
 
-function toggleResultsSlider(resortName) {
-   var searchInfo = $('#search-info');
-   var resultExtendedInfo = $("#result-extended-info");
-   var width = $(window).width();
-
-   if (searchInfo.hasClass('visible')) {
-      // If the current resort is clicked, close the extended info
-      if (currentResortName === resortName) {
-
-         searchInfo.animate({"left":(width-400).toString()+"px"}, "slow",hideResultExtendedInfo).removeClass('visible');
-         currentResortName = "";
-      }
-      // Otherwise switch the data of the extended info
-      else {
-         fillResortExtendedInfo(resortName);
-         currentResortName = resortName;
-      }
-    } // Open
-    else {
-      $("#search-info").css("width", (width-400).toString() + "px");
-      resultExtendedInfo.css("display", "block");
-      searchInfo.animate({"left":"400px"}, "slow").addClass('visible');
-      fillResortExtendedInfo(resortName);
-      currentResortName = resortName;
-    }
+function setSummitTemp(temp) {
+   $("#srei-summit-temp").html(temp.toString() + "°F");
 }
 
-function hideResultExtendedInfo() {
-   var resultExtendedInfo = $("#result-extended-info");
-   resultExtendedInfo.css("display", "none");
-   $("#search-info").css("width", "400px");
+function setBaseTemp(temp) {
+   $("#srei-base-temp").html(temp.toString() + "°F");
 }
 
-function closeResultsSlider() {
-   var searchInfo = $('#search-info');
-
-   if (searchInfo.hasClass('visible')) {
-      var width = $(window).width();
-      searchInfo.animate({"left":(width-400).toString()+"px"}, "slow").removeClass('visible');
-      currentResortName = "";
-   }
-}
-
-function fillResortExtendedInfo(resortName) {
-   var resort = getResort(resortName);
-   $("#srei-resort-title").text(resort.resortName);
+function setSnowQuality(snowQuality) {
+   $("#srei-snow-quality").html(snowQuality);
 }
 
 function resize (argument) {
    setContentSize();
+}
+
+function setPipesAndPark(text) {
+   $("#srei-pipes-and-parks").html(text);
 }
 
 function getResortData () {

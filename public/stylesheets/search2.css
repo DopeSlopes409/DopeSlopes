@@ -232,7 +232,7 @@ span {
 }
 
 #srei-operatingStatus {
-   color: green;
+   color: red;
    font-size: 1.20em;
    text-align: right;
    margin-top: -10px;
@@ -279,8 +279,10 @@ span {
 
 #srei-snow-quality {
    margin-top: 12px;
-   font-size: 1em;
+   font-size: 0.95em;
    color: #333333;
+   text-align: left;
+   margin-left: 90px;
 }
 
 #srei-snowfall-box {
