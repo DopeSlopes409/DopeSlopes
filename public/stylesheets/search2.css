@@ -467,13 +467,10 @@ span {
    width: 20px;
    height: 20px;
    float: right;
-}
-
-#star-1 {
    background: url(../images/StarRollover.png) no-repeat 0 0;
 }
 
-#star-1:hover {
+.star:hover, .star.favorite{
    background-position: -19px 0px;
 }
 
@@ -567,7 +564,9 @@ table td {
 }
 
 
-
+.invisible {
+   display: none;
+}
 
 
 

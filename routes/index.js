@@ -15,6 +15,7 @@ router.get('/', function(req, res, next) {
   if (seshUser && seshUser.profile) {
     console.log('GET Index session: ', JSON.stringify(seshUser, false, null));
     dustVars.displayName = seshUser.profile['_json'].displayName;
+    dustVars.userId = req.session.objectId;
   }
 	res.render('index', dustVars);
 });
@@ -87,14 +88,16 @@ router.get('/resort_search', function (req, res, next)
             };
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
-              dustVars.displayName = seshUser.profile['_json'].displayName;;
+              dustVars.displayName = seshUser.profile['_json'].displayName;
+              dustVars.userId = req.session.objectId;
             }
 
             console.log("range scope check: ", range);
 
             dustVars.resortEntries = body.items.map(function (entry) {
+              console.log('traversign resort: ' + JSON.stringify(entry));
               return {
-                id: entry.id,
+                id: entry["id"],
                 name: entry.resortName,
                 latitude: entry.latitude,
                 longitude: entry.longitude,
@@ -112,8 +115,8 @@ router.get('/resort_search', function (req, res, next)
             
             filteredResorts = [];
             dustVars.resortEntries.forEach(function (elt) {
-              console.log("resort: " + elt.name + " lat: " + elt.latitude + " lon: " + elt.longitude + " open_runs: " + elt.open_runs 
-                    + " total_runs: " + elt.total_runs + " snow: " + elt.recent_snowfall);
+              // console.log("resort: " + elt.name + " lat: " + elt.latitude + " lon: " + elt.longitude + " open_runs: " + elt.open_runs 
+              //       + " total_runs: " + elt.total_runs + " snow: " + elt.recent_snowfall);
 
               // add resort if within specified range
               var distance = haversine(latitude, longitude, elt.latitude, elt.longitude);

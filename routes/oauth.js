@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var googleStrat = require('passport-google-openidconnect').Strategy;
+var parse = require('node-parse-api').Parse;
 
 var router = express.Router();
 var util = require('util');
@@ -12,6 +13,10 @@ var rUri = process.env.REDIRECT_URI || 'http://localhost:3000/oauth/callback';
 
 var rUriGoogle = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/oauth/google/callback';
 
+var parseOptions = {
+    app_id: process.env.PARSE_APP_ID || '2ONRJ6uzD2442S4Dn6sxpIKNMG1CDppk4upAvmDP',
+    api_key: process.env.PARSE_API_KEY || 'sGOLcVBuvqL73CEQfTerjkoyY38n6HCPY4d5Qt4A'// api_key:'...' could be used too
+};
 
 
 //
@@ -25,15 +30,32 @@ var gOpenID = new googleStrat({
   openid : {realm: sRealm}
   },
   function(iss, sub, profile, accessToken, refreshToken, done) {
+    var conn = new parse(parseOptions);
+    var userCreds = {authProvider: 'Google', providerId: profile['_json'].id};
+
     console.log("callback, profile: ", util.inspect(profile, false, null));
-    var user = {};
-    var err = "oauth callback error";
-    if (profile && profile.displayName) {
-        err = null;
-        user.id = profile.id;
-        user.profile = profile;
-    }
-    done(err, user);
+    //if user exists, get data and render 
+    conn.find('User', userCreds, function (err, response) {
+      if (err) {console.log('error: ' + err);
+        done(err, response);
+      }
+      else if (response.results.length < 1){
+        //insert new user
+        conn.insert('User', userCreds, function (insertErr, insRes) {
+          console.log('parse insert response: ' + JSON.stringify(insRes));
+          insRes.profile = profile;
+          done(err, insRes);
+        });
+      } else {
+        console.log('parse user get response: ' + JSON.stringify(response));
+          
+        response.results[0].profile = profile;
+        done(err, response.results[0]);
+      }
+      
+    });
+    //if user doesn't exist, insert then render
+
   });
 
 passport.use(gOpenID);
