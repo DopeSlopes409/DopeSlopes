@@ -87,7 +87,7 @@
                <div id="srei-snow-quality">Frozen Granular</div>
             </span>
             <span id="srei-snowfall-box">
-               <h1>Snowfall (past 24 hours</h1>
+               <h1>Snowfall (past 24 hours)</h1>
                <span id="srei-snowfall-graph">
                   <span id="srei-snowfall-graph-fill"></span>
                </span>
@@ -97,9 +97,30 @@
 
          <div class="srei-subtitle-box">Trails, Lifts, and Parks</div>
          <div id="srei-trails">
-            <span id="srei-trails-left-collumn"></span>
+            <span id="srei-trails-left-collumn">
+               <span id="srei-trails-left-collumn-top">
+                  <span id="srei-open-trails">
+                     <h1>Trails Open</h1>
+                     <div id="srei-trails-graph">
+                        <div id="srei-trails-graph-fill"></div>
+                     </div>
+                     <div id="srei-trails-data">72</div>
+                  </span>
+                  <span id="srei-open-lifts">
+                     <h1>Lifts Open</h1>
+                     <span id="srei-lifts-graph">
+                        <span id="srei-lifts-graph-fill"></span>
+                     </span>
+                     <span id="srei-lifts-data">10</span>
+                  </span>
+               </span>
+               <span id="srei-trails-left-collumn-bottom">
+                  <h1>Pipes and Parks</h1>
+                  <p id="srei-pipes-and-parks">Halfpipe open. Last cut 12/22/2014.</p>
+               </span>
+            </span>
             <span class="srei-trails-right-collumn">
-               <canvas id="srei-trail-breakdown" width="288" height="300"></canvas>
+               <canvas id="srei-trail-breakdown" width="259" height="300"></canvas>
             </span>
          </div>
       </div>
