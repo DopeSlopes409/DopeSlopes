@@ -85,7 +85,7 @@ function initializeCharts () {
    var doughnutData = [
       {
          value : 20,
-         color: "#339900",
+         color: "#669933",
          title : "Easy Trails",
       },
       {

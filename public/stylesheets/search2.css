@@ -235,6 +235,7 @@ span {
    font-size: 1.20em;
    text-align: right;
    margin-top: -10px;
+   margin-right: 2px;
 }
 
 #srei-conditions {
@@ -327,16 +328,18 @@ span {
 }
 
 #srei-trails-left-collumn {
-   width: 50%;
+   width: 55%;
    height: 300px;
    float: left;
-   background-color: red;
+   padding-top: 30px;
 }
 
 .srei-trails-right-collumn {
-   width: 50%;
+   width: 45%;
    height: 300px;
    float: right;
+/*   padding-left: 10px;
+   padding-right: 10px;*/
 }
 
 .chart-color-box {
@@ -346,14 +349,108 @@ span {
    margin-left: 10px;
 }
 
-#srei-trail-breakdown-legend ul {
-   padding: 12px;
-   text-align: center;
+#srei-trails-left-collumn-top {
+   width: 100%;
+   height: 50%;
 }
 
-#srei-trail-breakdown-legend ul li {
-   display: inline;
-   list-style-type: none;
+#srei-open-trails {
+   height:100%;
+   width:50%;
+   float left;
+}
+
+#srei-open-trails h1 {
+   color: #333333;
+   font-size: 1.0em;
+   font-weight: bold;
+   text-align: center;
+   margin-top: 5px;
+   margin-left: 5px;
+   margin-right: 5px;
+   margin-bottom: 25px;
+}
+
+#srei-trails-graph {
+   background-color: #669933;
+   width: 72px;
+   height: 72px;
+   margin-left: 45px;
+}
+
+#srei-trails-graph-fill {
+   width: 100%;
+   height: 30%;
+   background-color: #ecf0f1;
+}
+
+#srei-trails-data {
+   margin-top: -45px;
+   color: #333333;
+   font-size: 1.0em;
+   margin-left: 72px;
+}
+
+#srei-open-lifts {
+   height:100%;
+   width:50%;
+   float right;
+}
+
+#srei-open-lifts h1 {
+   color: #333333;
+   font-size: 1.0em;
+   font-weight: bold;
+   text-align: center;
+   margin-top: 5px;
+   margin-left: 5px;
+   margin-right: 5px;
+   margin-bottom: 25px;
+}
+
+#srei-lifts-graph {
+   background-color: #333333;
+   width: 20px;
+   height: 72px;
+   margin-left: 45px;
+   float: left;
+}
+
+#srei-lifts-graph-fill {
+   width: 100%;
+   height: 60%;
+   background-color: #ecf0f1;
+}
+
+#srei-lifts-data {
+   margin-right: 45px;
+   margin-top: 25px;
+   color: #333333;
+   font-size: 1.0em;
+   float: right;
+}
+
+#srei-trails-left-collumn-bottom {
+   width: 100%;
+   height: 50%;
+   padding-top: 30px;
+   padding-left: 20px;
+   padding-right: 20px;
+}
+
+#srei-trails-left-collumn-bottom h1 {
+   color: #333333;
+   font-size: 1em;
+   font-weight: bold;
+   margin-top: 10px;
+   margin-bottom: 5px;
+}
+
+#srei-pipes-and-parks {
+   padding-top: 0px;
+   margin-left: 20px;
+   color: #333333;
+   font-size: 0.95em;
 }
 
 .resort-title-line {
