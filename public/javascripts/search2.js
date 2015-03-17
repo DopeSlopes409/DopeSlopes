@@ -79,6 +79,9 @@ $(document).ready(function() {
    initializeMap();
    initializeMouseovers();
    initializeCharts();
+   
+   var resultExtendedInfo = $("#result-extended-info");
+   resultExtendedInfo.css("display", "none");
 });
 
 function initializeCharts () {
@@ -132,7 +135,7 @@ function setContentSize () {
    $("#search-collumn").css("height", (height-100).toString() + "px");
    
    $("#search-info").css("height", (height-100).toString() + "px");
-   $("#search-info").css("width", (width-400).toString() + "px");
+   $("#search-info").css("width", (400).toString() + "px");
    $("#search-info").css("left", (width-400).toString() + "px");
 
    $("#result-extended-info").css("height", (height-100).toString() + "px");
@@ -141,12 +144,14 @@ function setContentSize () {
 
 function toggleResultsSlider(resortName) {
    var searchInfo = $('#search-info');
+   var resultExtendedInfo = $("#result-extended-info");
+   var width = $(window).width();
 
    if (searchInfo.hasClass('visible')) {
       // If the current resort is clicked, close the extended info
       if (currentResortName === resortName) {
-         var width = $(window).width();
-         searchInfo.animate({"left":(width-400).toString()+"px"}, "slow").removeClass('visible');
+
+         searchInfo.animate({"left":(width-400).toString()+"px"}, "slow",hideResultExtendedInfo).removeClass('visible');
          currentResortName = "";
       }
       // Otherwise switch the data of the extended info
@@ -154,12 +159,20 @@ function toggleResultsSlider(resortName) {
          fillResortExtendedInfo(resortName);
          currentResortName = resortName;
       }
-    } 
+    } // Open
     else {
+      $("#search-info").css("width", (width-400).toString() + "px");
+      resultExtendedInfo.css("display", "block");
       searchInfo.animate({"left":"400px"}, "slow").addClass('visible');
       fillResortExtendedInfo(resortName);
       currentResortName = resortName;
     }
+}
+
+function hideResultExtendedInfo() {
+   var resultExtendedInfo = $("#result-extended-info");
+   resultExtendedInfo.css("display", "none");
+   $("#search-info").css("width", "400px");
 }
 
 function closeResultsSlider() {

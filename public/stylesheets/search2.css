@@ -136,7 +136,7 @@ span {
    position: absolute;
    left: 400px;
    top: 0;
-   overflow: hidden;
+   overflow-x: hidden;
    background-color: white;
 }
 
@@ -151,6 +151,7 @@ span {
    border-bottom: 2px solid #C9C9C9;
    text-align: left;
    overflow-y: scroll;
+   overflow-x: hidden; 
 }
 
 #search-collumn {
@@ -226,7 +227,7 @@ span {
    text-align: left;
    padding-left: 20px;
    padding-top: 5px;
-   margin-top: 15px;
+   margin-top: 25px;
    margin-bottom: 6px;
 }
 
