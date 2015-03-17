@@ -173,6 +173,21 @@ function closeResultsSlider() {
 function fillResortExtendedInfo(resortName) {
    var resort = getResort(resortName);
 
+   var address = "4545 Blackcomb Way\nWhistler, British Columbia V0N 1B4\nCanada";
+   var website = "whistlerblackcomb.com";
+   var phoneNumber = "1 (800) 766-0449";
+   var snowPhoneNumber = "1 (604) 687-7507";
+   var email = "wbres@whistlerblackcomb.com";
+   var trailMap = "http://www.whistlerblackcomb.com/mountain/maps/index.htm";
+
+   var mon = "8:00am - 3:00pm";
+   var tues = "8:00am - 3:00pm";
+   var wed = "8:00am - 3:00pm";
+   var thur = "8:00am - 3:00pm";
+   var fri = "8:00am - 3:00pm";
+   var sat = "8:00am - 3:00pm";
+   var sun = "8:00am - 3:00pm";
+
    // Fill with actual data!!!
    setResortTitle(resort.resortName);
    setOperatingStatus("");
@@ -185,6 +200,8 @@ function fillResortExtendedInfo(resortName) {
    setLiftsChart(12);
    setPipesAndPark("Halfpipe open. Last cut 12/22/2014.");
    setTrailsBreakdownChart(8,12,3);
+   setContactInfo(address, website, phoneNumber, snowPhoneNumber, email, trailMap);
+   setHours(mon,tues,wed,thur,fri,sat,sun);
 
 }
 
@@ -328,13 +345,40 @@ function setSnowQuality(snowQuality) {
    $("#srei-snow-quality").html(snowQuality);
 }
 
+function setPipesAndPark(text) {
+   $("#srei-pipes-and-parks").html(text);
+}
+
+function setContactInfo(address, website, phoneNumber, snowPhoneNumber, email, trailMap) {
+   var addressHtml = "";
+   var addressLines = address.split("\n");
+   for (var i = 0; i < addressLines.length; i++) {
+      addressHtml += "<p>" + addressLines[i] + "</p>";
+   };
+   $("#srei-address").html(addressHtml);
+
+   $("#srei-website").html("<a href=\"" + website + "\">" + website + "</a>");
+   $("#srei-phone-number").html(phoneNumber);
+   $("#srei-snow-phone-number").html(snowPhoneNumber);
+   $("#srei-email").html("<a href=\"mailto:" + website + "\">" + website + "</a>");
+   $("#srei-website").html("<a href=\"" + website + "\">" + website + "</a>");
+   $("#srei-trail-map").html("<a href=\"" + trailMap + "\">Resort Trail Map</a>");
+}
+
+function setHours(mon,tues,wed,thur,fri,sat,sun) {
+   $("#srei-hours-mon").html(mon);
+   $("#srei-hours-tues").html(tues);
+   $("#srei-hours-wed").html(wed);
+   $("#srei-hours-thur").html(thur);
+   $("#srei-hours-fri").html(fri);
+   $("#srei-hours-sat").html(sat);
+   $("#srei-hours-sun").html(sun);
+}
+
 function resize (argument) {
    setContentSize();
 }
 
-function setPipesAndPark(text) {
-   $("#srei-pipes-and-parks").html(text);
-}
 
 function getResortData () {
    $('div#resortData>div').each(function() { 

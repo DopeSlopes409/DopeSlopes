@@ -129,31 +129,28 @@
             <table>
                <tr class="row-border-bottom">
                   <td><h1 class="row-title">Address</h1></td>
-                  <td>
-                        <p>4545 Blackcomb Way </p>
-                        <p>Whistler, British Columbia V0N 1B4</p>
-                        <p>Canada</p> 
+                  <td id="srei-address">
                   </td> 
                </tr>
                <tr class="row-border-bottom">
                   <td><h1 class="row-title">Website</h1></td>
-                  <td><a href="whistlerblackcomb.com">whistlerblackcomb.com</a></td> 
+                  <td id="srei-website"></td> 
                </tr>
                <tr class="row-border-bottom">
                   <td><h1 class="row-title">Phone Number</h1></td>
-                  <td>1 (800) 766-0449</td> 
+                  <td id="srei-phone-number"></td> 
                </tr>
                <tr class="row-border-bottom">
                   <td><h1 class="row-title">Snow Phone Number</h1></td>
-                  <td>1 (604) 687-7507</td> 
+                  <td id="srei-snow-phone-number"></td> 
                </tr>
                <tr class="row-border-bottom">
                   <td><h1 class="row-title">Email Address</h1></td>
-                  <td><a href="mailto:wbres@whistlerblackcomb.com">wbres@whistlerblackcomb.com</a></td> 
+                  <td id="srei-email"></td> 
                </tr>
                <tr>
                   <td><h1 class="row-title">Trail Map</h1></td>
-                  <td><a href="http://www.whistlerblackcomb.com/mountain/maps/index.htm">Resort Trail Map</a></td> 
+                  <td id="srei-trail-map"></td> 
                </tr>
             </table>
          </span>
@@ -165,31 +162,31 @@
                      <h1 class="row-title">Lift Hours</h1> 
                   </td>
                   <td><h1 class="row-title">Mon</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-mon"></td>
                </tr>
                <tr>
                   <td><h1 class="row-title">Tues</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-tues"></td>
                </tr>
                <tr>
                   <td><h1 class="row-title">Wed</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-wed"> </td>
                </tr>
                <tr>
                   <td><h1 class="row-title">Thur</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-thur"> </td>
                </tr>
                <tr>
                   <td><h1 class="row-title">Fri</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-fri"> </td>
                </tr>
                <tr>
                   <td><h1 class="row-title">Sat</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-sat"> </td>
                </tr>
                <tr>
                   <td><h1 class="row-title">Sun</h1> </td>
-                  <td>8:30am - 3:00pm</td>
+                  <td id="srei-hours-sun"> </td>
                </tr>
             </table>
          </span>
