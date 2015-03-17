@@ -80,7 +80,6 @@ $(document).ready(function() {
    initializeMouseovers();
    initializeCharts();
    initializeUserButtons();
-
 });
 
 function initializeUserButtons() {
@@ -109,19 +108,71 @@ function initializeUserButtons() {
 }
 
 function initializeCharts () {
+   setSnowfallChart(2);
+   setLiftsChart(12);
+   setTrailsChart(90);
+   setTrailsBreakdownChart(8,12,3);
+}
+
+function setSnowfallChart(snowfall) {
+   var maxSnowfall = 24.0;
+   var percentage = (snowfall/maxSnowfall);
+
+   if (percentage > 1.0) 
+   {
+      percentage = 1.0;
+   };
+
+   var inversePercentage = (1.0 - percentage) * 100.0;
+   $("#srei-snowfall-graph-fill").css("height", inversePercentage.toString() + "%")
+
+   $("#srei-snowfall-data").html(snowfall.toString() + " IN");
+}
+
+function setLiftsChart(openLifts) {
+   var totalLifts = 36; // ******************** REPLACE LATER WITH RESORT DATA ********************
+   var percentage = (openLifts/totalLifts);
+
+   if (percentage > 1.0) 
+   {
+      percentage = 1.0;
+   };
+
+   var inversePercentage = (1.0 - percentage) * 100.0;
+   $("#srei-lifts-graph-fill").css("height", inversePercentage.toString() + "%")
+
+   $("#srei-lifts-data").html(openLifts.toString());
+}
+
+function setTrailsChart(openTrails) {
+   var totalTrails = 120; // ******************** REPLACE LATER WITH RESORT DATA ********************
+   var percentage = (openTrails/totalTrails);
+
+   if (percentage > 1.0) 
+   {
+      percentage = 1.0;
+   };
+
+   var inversePercentage = (1.0 - percentage) * 100.0;
+   $("#srei-trails-graph-fill").css("height", inversePercentage.toString() + "%")
+
+   $("#srei-trails-data").html(openTrails.toString());
+}
+
+function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails) {
    var doughnutData = [
       {
-         value : 20,
+         value : easyTrails,
          color: "#669933",
          title : "Easy Trails",
       },
       {
-         value : 40,
+         value : intermediateTrails,
          color: "#006699",
          title : "Intermediate Trails",
       },
       {
-         value : 10,
+         value : advancedTrails,
          color: "#000000",
          title : "Advanced Trails",
       },

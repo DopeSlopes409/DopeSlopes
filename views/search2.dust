@@ -78,7 +78,7 @@
          <h1 id="srei-resort-title"></h1>
          <h2 id="srei-operatingStatus">Open</h2>
          
-         <div class="srei-subtitle-box">Conditions</div>
+         <div class="srei-subtitle-box" id="srei-conditions-subtitle-box">Conditions</div>
          <div id="srei-conditions" class="">
             <span id="srei-weather-icon"></span>
             <span id="srei-mountain">
@@ -91,7 +91,7 @@
                <span id="srei-snowfall-graph">
                   <span id="srei-snowfall-graph-fill"></span>
                </span>
-               <span id="srei-snowfall-data">8 IN</span>
+               <span id="srei-snowfall-data"></span>
             </span>
          </div>
 
@@ -104,14 +104,14 @@
                      <div id="srei-trails-graph">
                         <div id="srei-trails-graph-fill"></div>
                      </div>
-                     <div id="srei-trails-data">72</div>
+                     <div id="srei-trails-data"></div>
                   </span>
                   <span id="srei-open-lifts">
                      <h1>Lifts Open</h1>
                      <span id="srei-lifts-graph">
                         <span id="srei-lifts-graph-fill"></span>
                      </span>
-                     <span id="srei-lifts-data">10</span>
+                     <span id="srei-lifts-data"></span>
                   </span>
                </span>
                <span id="srei-trails-left-collumn-bottom">
