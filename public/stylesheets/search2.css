@@ -505,6 +505,87 @@ span {
    background-color: #CFA20E;
 }
 
-.invisible {
-   display: none;
+#srei-contact-info {
+   width: 48%;
+   height: 350px;
+   float:; left;
 }
+
+#srei-contact-info table {
+   width: 100%;
+   font-size: 0.85em;
+   text-align: left;
+}
+
+#srei-contact-info p {
+   margin-bottom: 0;
+}
+
+#srei-hours {
+   width: 48%;
+   height: 300px;
+   float: right;
+}
+
+#srei-hours table {
+   width: 100%;
+   font-size: 0.85em;
+   text-align: left;
+}
+#srei-hours table td {
+   padding-left: 7px;
+   padding-right: 7px;
+   padding-top: 0px;
+   padding-bottom: 0px;
+}
+
+#srei-hours p {
+   margin-bottom: 0;
+}
+
+table td { 
+  display: table-cell;
+  vertical-align: top; 
+  padding: 7px;
+  border: 1px solid black;
+}
+
+
+.row-title {
+   font-size: 1em;
+   font-weight: bold;
+   color: #333333;
+   margin: 0;
+}
+
+.row-border-bottom {
+   border-bottom: 1px solid #ecf0f1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
