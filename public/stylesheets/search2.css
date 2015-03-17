@@ -469,7 +469,7 @@ span {
    background: url(../images/StarRollover.png) no-repeat 0 0;
 }
 
-.star:hover, .star .favorite{
+.star:hover, .star.favorite{
    background-position: -19px 0px;
 }
 
