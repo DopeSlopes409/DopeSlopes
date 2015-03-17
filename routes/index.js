@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
     	javascriptFiles: [{javascript: 'index.js'}],
     };
   if (seshUser && seshUser.profile) {
-    console.log('GET Index session: ', util.inspect(seshUser, false, null));
-    dustVars.displayName = seshUser.profile.displayName;
+    console.log('GET Index session: ', JSON.stringify(seshUser, false, null));
+    dustVars.displayName = seshUser.profile['_json'].displayName;
   }
 	res.render('index', dustVars);
 });
@@ -87,7 +87,7 @@ router.get('/resort_search', function (req, res, next)
             };
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
-              dustVars.displayName = seshUser.profile.displayName;
+              dustVars.displayName = seshUser.profile['_json'].displayName;;
             }
 
             console.log("range scope check: ", range);
@@ -137,7 +137,7 @@ router.get('/resort_search', function (req, res, next)
 
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
-              dustVars.displayName = seshUser.profile.displayName;
+              dustVars.displayName = seshUser.profile['_json'].displayName;;
             }
 
             res.render('index', dustVars);
