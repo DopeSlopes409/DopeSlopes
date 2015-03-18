@@ -220,6 +220,24 @@ span {
    text-align: center;
 }
 
+#srei-driving-time-title {
+   display: inline-block;
+   font-size: 1.0em;
+   color: #333333;
+   font-weight: bold;
+   margin-bottom: 0;
+   margin-top: 0;
+}
+
+#srei-driving-time {
+   display: inline-block;
+   margin-left: 10px;
+   font-size: 1.0em;
+   color: #333333;
+   margin-bottom: 0;
+   margin-top: 0;
+}
+
 .srei-subtitle-box {
    background-color: #ecf0f1;
    width: 100%;
@@ -227,7 +245,7 @@ span {
    text-align: left;
    padding-left: 20px;
    padding-top: 5px;
-   margin-top: 25px;
+   margin-top: 15px;
    margin-bottom: 6px;
 }
 
@@ -235,8 +253,9 @@ span {
    color: red;
    font-size: 1.20em;
    text-align: right;
-   margin-top: -10px;
+   margin-top: -25px;
    margin-right: 2px;
+   margin-bottom: 0;
 }
 
 #srei-conditions {

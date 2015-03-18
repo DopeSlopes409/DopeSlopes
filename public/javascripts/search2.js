@@ -11,7 +11,6 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    this.openRuns = isNaN(openRuns) ? "" : openRuns;
    this.totalRuns = isNaN(totalRuns) ? "" : totalRuns;
    this.recentSnowfall = isNaN(recentSnowfall) ? "" : recentSnowfall;
-   this.duration = "";
    this.operatingStatus = operatingStatus.trim();
    this.weather = weather;
    this.summitTemp = summitTemp;
@@ -66,6 +65,7 @@ function getRouteTime(element, index, array){
    directionsService.route(request, function(result, status) {
       if (status == google.maps.DirectionsStatus.OK) {
          resorts[index].duration = parseTime(result.routes[0].legs[0].duration.text);
+         resorts[index].durationText = result.routes[0].legs[0].duration.text;
       }
    });
 
@@ -201,6 +201,7 @@ function fillResortExtendedInfo(resortName) {
 
    // Fill with actual data!!!
    setResortTitle(resort.resortName);
+   setDrivingTime(resort.durationText);
    setOperatingStatus(resort.operatingStatus);
    setWeather(resort.weather);
    setSummitTemp(resort.summitTemp);
@@ -251,6 +252,10 @@ function setOperatingStatus(status) {
    
    $("#srei-operatingStatus").html(status);
    $("#srei-operatingStatus").css("color",color);
+}
+
+function setDrivingTime(drivingTime) {
+   $("#srei-driving-time").html(drivingTime);
 }
 
 function setSnowfallChart(snowfall) {

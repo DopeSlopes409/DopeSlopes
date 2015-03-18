@@ -78,6 +78,8 @@
       </div>
       <div id="result-extended-info">
          <h1 id="srei-resort-title"></h1>
+         <h2 id="srei-driving-time-title">Driving Time:</h2>
+         <h2 id="srei-driving-time"></h2>
          <h2 id="srei-operatingStatus"></h2>
          
          <div class="srei-subtitle-box" id="srei-conditions-subtitle-box">Conditions</div>
