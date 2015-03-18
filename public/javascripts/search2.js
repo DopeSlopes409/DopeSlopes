@@ -551,6 +551,22 @@ function initializeMap () {
       });
 
    };
+
+
+   // Show user location
+   var image = "../images/user-location.png";
+   var myLatlng = new google.maps.LatLng(origin.latitude, origin.longitude);
+   var marker = new google.maps.Marker({
+      position: myLatlng,
+      title: "My Location",
+      icon: image
+   });
+   marker.setMap(map);
+   markers[markers.length] = marker;
+   latlngbounds.extend( marker.getPosition() );
+
+
+
    map.fitBounds( latlngbounds );
 
    google.maps.event.addListener(map, 'click', function() {
