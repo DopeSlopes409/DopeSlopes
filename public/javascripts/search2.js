@@ -207,7 +207,7 @@ function fillResortExtendedInfo(resortName) {
    setBaseTemp(resort.baseTemp);
    setSnowQuality(resort.snowQuality);
    setSnowfallChart(resort.recentSnowfall);
-   setTrailsChart(resort.openRuns);
+   setTrailsChart(resort.openRuns, resort.totalRuns);
    setLiftsChart(resort.openLifts);
    setPipesAndPark(resort.pipesAndPark);
    setTrailsBreakdownChart(resort.easyTrails,resort.intermediateTrails,resort.advancedTrails);
@@ -263,7 +263,8 @@ function setSnowfallChart(snowfall) {
    };
 
    var inversePercentage = (1.0 - percentage) * 100.0;
-   $("#srei-snowfall-graph-fill").css("height", inversePercentage.toString() + "%")
+   $("#srei-snowfall-graph-fill").css("height", "100%")
+   $("#srei-snowfall-graph-fill").animate({"height":(inversePercentage.toString() + "%")}, "slow");
 
    $("#srei-snowfall-data").html(snowfall.toString() + " IN");
 }
@@ -278,13 +279,16 @@ function setLiftsChart(openLifts) {
    };
 
    var inversePercentage = (1.0 - percentage) * 100.0;
-   $("#srei-lifts-graph-fill").css("height", inversePercentage.toString() + "%")
+   $("#srei-lifts-graph-fill").css("height", "100%")
+   $("#srei-lifts-graph-fill").animate({"height":(inversePercentage.toString() + "%")}, "slow");
 
    $("#srei-lifts-data").html(openLifts.toString());
 }
 
-function setTrailsChart(openTrails) {
-   var totalTrails = 120; // ******************** REPLACE LATER WITH RESORT DATA ********************
+function setTrailsChart(openTrails, totalTrails) {
+   if (isNaN(totalTrails) || totalTrails === 0) {
+      totalTrails = 1;
+   };
    var percentage = (openTrails/totalTrails);
 
    if (percentage > 1.0) 
@@ -293,7 +297,8 @@ function setTrailsChart(openTrails) {
    };
 
    var inversePercentage = (1.0 - percentage) * 100.0;
-   $("#srei-trails-graph-fill").css("height", inversePercentage.toString() + "%")
+   $("#srei-trails-graph-fill").css("height", "100%")
+   $("#srei-trails-graph-fill").animate({"height":(inversePercentage.toString() + "%")}, "slow");
 
    $("#srei-trails-data").html(openTrails.toString());
 }
