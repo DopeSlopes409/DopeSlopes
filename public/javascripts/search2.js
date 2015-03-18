@@ -593,6 +593,7 @@ function initializeMouseovers () {
 
 var newAddress;
 var newRange;
+newAddress = $("#basic_search_input").val();
 
 $('#basic_search_input').change(function() {
       newAddress = $("#basic_search_input").val();
@@ -617,6 +618,9 @@ $('#range').change(function() {
 
 $('#advanced-search').click(function() {
    console.log("advanced search");
+   if (!newAddress) {
+      console.log("new address value not defined");
+   }
    advancedResortSearch();
 });
 
@@ -643,7 +647,7 @@ function advancedResortSearch() {
         }
       }
 
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + address;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + newAddress;
       locationRedirect(queryURI);
    }); 
 }
