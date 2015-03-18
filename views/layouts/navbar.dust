@@ -16,9 +16,10 @@
          <p>
           {?displayName}
             {displayName}
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
             {! <button id="logout-link" >Logout</button> !}
           {:else}
-            <button id="login-link" >Login</button> 
+            <button id="login-link" >Login</button>
             {! or <a id="signin-link">Sign Up </a> !}
           {/displayName}
          </p>
