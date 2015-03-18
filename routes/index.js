@@ -109,6 +109,22 @@ router.get('/resort_search', function (req, res, next)
                 totalRuns: entry.maxOpenDownHillTrails,
                 baseTemp: entry.forecastBaseTemp,
                 summitTemp: entry.forecastTopTemp,
+                operatingStatus: entry.operatingStatus,
+                weather: entry.weather,
+                snowQuality: entry.snowQuality,
+                openLifts: entry.openLifts,
+                pipesAndPark: entry.pipesAndPark,
+                easyTrails: entry.easyTrails,
+                intermediateTrails: entry.intermediateTrails,
+                advancedTrails: entry.advancedTrails,
+                address: entry.address,
+                website: entry.website,
+                phoneNumber: entry.phoneNumber,
+                snowPhoneNumber: entry.snowPhoneNumber,
+                email: entry.email,
+                trailMap: entry.trailMap,
+                weekdayHours: entry.weekdayHours,
+                weekendHours: entry.weekendHours,
                 recentSnowfall: (entry.newSnowMax + entry.newSnowMin) / 2};
             });
 

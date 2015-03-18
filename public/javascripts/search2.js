@@ -609,7 +609,7 @@ function initializeMouseovers () {
 
 var newAddress;
 var newRange;
-newAddress = $("#basic_search_input").val();
+
 
 $('#basic_search_input').change(function() {
       newAddress = $("#basic_search_input").val();
@@ -632,19 +632,30 @@ $('#range').change(function() {
       console.log("range selected: ", newRange);
 });
 
+
+$('#basic_search_input').keypress(function (e) {
+    var key = e.which;
+    if(key == 13) {
+      advancedResortSearch();
+    }    
+});
+
 $('#advanced-search').click(function() {
    console.log("advanced search");
-   if (!newAddress) {
-      console.log("new address value not defined");
-   }
    advancedResortSearch();
 });
 
+function getAddress() {
+   newAddress = $("#basic_search_input").val();
+}
+
 function advancedResortSearch() {
+   getAddress();
    console.log("advancedResortSearch()");
 
    // Replace all instances of non alphanumeric characters with '+'
    address = newAddress.replace(/[\W_]+/g, "+");
+   console.log('advancedResortSearch, using address: ', address);
 
    // Build JSON request url
    var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
