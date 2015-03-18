@@ -4,14 +4,32 @@ var resorts = [];
 var markers = [];
 var currentResortName = "";
 
-function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall) {
+function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall, operatingStatus, weather, summitTemp, baseTemp, snowQuality, openLifts, pipesAndPark, easyTrails, intermediateTrails, advancedTrails, address, website, phoneNumber, snowPhoneNumber, email, trailMap, weekdayHours, weekendHours) {
    this.resortName = resortName.trim();
    this.latitude = latitude;
    this.longitude = longitude;
-   this.openRuns = isNaN(openRuns) ? "unknown" : openRuns;
-   this.totalRuns = isNaN(totalRuns) ? "unknown" : totalRuns;
-   this.recentSnowfall = isNaN(recentSnowfall) ? "unknown" : recentSnowfall;
+   this.openRuns = isNaN(openRuns) ? "" : openRuns;
+   this.totalRuns = isNaN(totalRuns) ? "" : totalRuns;
+   this.recentSnowfall = isNaN(recentSnowfall) ? "" : recentSnowfall;
    this.duration = "";
+   this.operatingStatus = operatingStatus.trim();
+   this.weather = weather;
+   this.summitTemp = summitTemp;
+   this.baseTemp = baseTemp;
+   this.snowQuality = snowQuality;
+   this.openLifts = openLifts;
+   this.pipesAndPark = pipesAndPark;
+   this.easyTrails = easyTrails;
+   this.intermediateTrails = intermediateTrails;
+   this.advancedTrails = advancedTrails;
+   this.address = address;
+   this.website = website;
+   this.phoneNumber = phoneNumber;
+   this.snowPhoneNumber = snowPhoneNumber;
+   this.email = email;
+   this.trailMap = trailMap;
+   this.weekdayHours = weekdayHours;
+   this.weekendHours = weekendHours;
 
    this.toString = function() {
       return this.resortName + " => (" + this.latitude + ", " + this.longitude + ")";
@@ -173,34 +191,27 @@ function closeResultsSlider() {
 function fillResortExtendedInfo(resortName) {
    var resort = getResort(resortName);
 
-   var address = "4545 Blackcomb Way\nWhistler, British Columbia V0N 1B4\nCanada";
-   var website = "whistlerblackcomb.com";
-   var phoneNumber = "1 (800) 766-0449";
-   var snowPhoneNumber = "1 (604) 687-7507";
-   var email = "wbres@whistlerblackcomb.com";
-   var trailMap = "http://www.whistlerblackcomb.com/mountain/maps/index.htm";
-
-   var mon = "8:00am - 3:00pm";
-   var tues = "8:00am - 3:00pm";
-   var wed = "8:00am - 3:00pm";
-   var thur = "8:00am - 3:00pm";
-   var fri = "8:00am - 3:00pm";
-   var sat = "8:00am - 3:00pm";
-   var sun = "8:00am - 3:00pm";
+   var mon = resort.weekdayHours;
+   var tues = resort.weekdayHours;
+   var wed = resort.weekdayHours;
+   var thur = resort.weekdayHours;
+   var fri = resort.weekdayHours;
+   var sat = resort.weekendHours;
+   var sun = resort.weekendHours;
 
    // Fill with actual data!!!
    setResortTitle(resort.resortName);
-   setOperatingStatus("");
-   setWeather("cloudy");
-   setSummitTemp(20);
-   setBaseTemp(30);
-   setSnowQuality("Variable Conditions");
-   setSnowfallChart(2);
-   setTrailsChart(90);
-   setLiftsChart(12);
-   setPipesAndPark("Halfpipe open. Last cut 12/22/2014.");
-   setTrailsBreakdownChart(8,12,3);
-   setContactInfo(address, website, phoneNumber, snowPhoneNumber, email, trailMap);
+   setOperatingStatus(resort.operatingStatus);
+   setWeather(resort.weather);
+   setSummitTemp(resort.summitTemp);
+   setBaseTemp(resort.baseTemp);
+   setSnowQuality(resort.snowQuality);
+   setSnowfallChart(resort.recentSnowfall);
+   setTrailsChart(resort.openRuns);
+   setLiftsChart(resort.openLifts);
+   setPipesAndPark(resort.pipesAndPark);
+   setTrailsBreakdownChart(resort.easyTrails,resort.intermediateTrails,resort.advancedTrails);
+   setContactInfo(resort.address, resort.website, resort.phoneNumber, resort.snowPhoneNumber, resort.email, resort.trailMap);
    setHours(mon,tues,wed,thur,fri,sat,sun);
 
 }
@@ -382,13 +393,55 @@ function resize (argument) {
 
 function getResortData () {
    $('div#resortData>div').each(function() { 
+      var operatingStatus = "";
+      var weather = "cloudy";
+      var summitTemp = 20;
+      var baseTemp = 30;
+      var snowQuality = "Variable Conditions";
+      var snowfall = 10;
+      var openTrails = 90;
+      var openLifts = 12;
+      var pipesAndPark = "Halfpipe open. Last cut 12/22/2014.";
+      var easyTrails = 8;
+      var intermediateTrails = 12;
+      var advancedTrails = 3;
+
+
+      var address = "4545 Blackcomb Way\nWhistler, British Columbia V0N 1B4\nCanada";
+      var website = "whistlerblackcomb.com";
+      var phoneNumber = "1 (800) 766-0449";
+      var snowPhoneNumber = "1 (604) 687-7507";
+      var email = "wbres@whistlerblackcomb.com";
+      var trailMap = "http://www.whistlerblackcomb.com/mountain/maps/index.htm";
+
+      var weekdayHours = "8:00am - 3:00pm";
+      var weekendHours = "8:00am - 3:00pm";
+
       var resort = new Resort(
          $(this).find(".resortName").text(),
          parseFloat($(this).find(".latitude").text()),
          parseFloat($(this).find(".longitude").text()),
          parseInt($(this).find(".openRuns").text()),
          parseInt($(this).find(".totalRuns").text()),
-         parseFloat($(this).find(".recentSnowfall").text())
+         parseFloat($(this).find(".recentSnowfall").text()),
+         operatingStatus,
+         weather,
+         summitTemp,
+         baseTemp,
+         snowQuality,
+         openLifts,
+         pipesAndPark,
+         easyTrails,
+         intermediateTrails,
+         advancedTrails,
+         address,
+         website,
+         phoneNumber,
+         snowPhoneNumber,
+         email,
+         trailMap,
+         weekdayHours,
+         weekendHours
       );
       
       resorts[resorts.length] = resort;
