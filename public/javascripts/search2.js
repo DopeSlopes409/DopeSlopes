@@ -659,7 +659,7 @@ function advancedResortSearch() {
         }
       }
 
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + address;
       locationRedirect(queryURI);
    }); 
 }
