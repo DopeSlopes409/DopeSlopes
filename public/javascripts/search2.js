@@ -342,6 +342,56 @@ function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails)
 
 function setWeather(weather) {
    //Change the image based on the weather
+   var weatherImage = "";
+   switch (weather) {
+      case 'Sunny':
+      case 'Clear':
+      case 'Fair':
+         weatherImage = "../images/sunny.png";
+         break;
+
+      case 'Cloudy':
+      case 'Increasing Clouds':
+      case 'Overcast':
+      case 'Fog':
+         weatherImage = "../images/cloudy.png";
+         break;
+
+      case 'Partly Cloudy':
+      case 'Mostly Cloudy':
+      case 'Clearing':
+      case 'Mostly Clear':
+      case 'Mixed Cloud/Sun':
+      case 'Mostly Sunny':
+      case 'Partly Sunny':
+         weatherImage = "../images/partly-cloudy.png";
+         break;
+
+      case 'Rain':
+      case 'Drizzle':
+      case 'Freezing Rain':
+      case 'Light Rain':
+      case 'Rain Showers':
+      case 'Mixed Precip':
+         weatherImage = "../images/rain.png";
+         break;
+
+      case 'Snow':
+      case 'Flurries':
+      case 'Heavy Snow':
+      case 'Light Snow':
+      case 'Snow Showers':
+      case 'Snow Squalls':
+         weatherImage = "../images/snow.png";
+         break;
+
+      case 'Sleet':
+         weatherImage = "../images/sleet.png";
+         break;
+   }
+
+   $("#srei-weather-icon").css("background-image", "url(" + weatherImage + ")");
+   $("#srei-weather-text").html(weather);                 
 }
 
 function setSummitTemp(temp) {
@@ -394,7 +444,7 @@ function resize (argument) {
 function getResortData () {
    $('div#resortData>div').each(function() { 
       var operatingStatus = "";
-      var weather = "cloudy";
+      var weather = "Cloudy";
       var summitTemp = 20;
       var baseTemp = 30;
       var snowQuality = "Variable Conditions";

@@ -80,7 +80,9 @@
          
          <div class="srei-subtitle-box" id="srei-conditions-subtitle-box">Conditions</div>
          <div id="srei-conditions" class="">
-            <span id="srei-weather-icon"></span>
+            <span id="srei-weather-icon">
+               <div id="srei-weather-text"></div>
+            </span>
             <span id="srei-mountain">
                <div id="srei-summit-temp"></div>
                <div id="srei-base-temp"></div>
