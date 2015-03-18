@@ -69,6 +69,8 @@
                   <div class="openRuns"> {openRuns} </div>
                   <div class="totalRuns"> {totalRuns} </div>
                   <div class="recentSnowfall"> {recentSnowfall} </div>
+                  <div class="baseTemp"> {baseTemp} </div>
+                  <div class="summitTemp"> {summitTemp} </div>
                </div>
             {/resortEntries}
          </div>
