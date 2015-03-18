@@ -124,8 +124,11 @@ router.get('/resort_search', function (req, res, next)
                 filteredResorts.push(elt);
               }
             }); 
+
+            if (filteredResorts.length > 0) {
+               dustVars.resortEntries = filteredResorts;
+            }
          
-            dustVars.resortEntries = filteredResorts;
             res.render('search2', dustVars); 
           } else {
             console.log("Unable to access REST API.");
