@@ -55,7 +55,7 @@ router.get('/resort_search', function (req, res, next)
   var address = req.query.address;
 
   range = !range ? 500 : range;   // if no range selected, use value big enough to include all region results
-  addess = !address ? "" : address;
+  address = !address ? "Search Address, City, or Zip Code" : address;
   
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
@@ -86,8 +86,10 @@ router.get('/resort_search', function (req, res, next)
               javascriptFiles: [{javascript: 'search2.js'}],
               originLat: latitude,
               originLong: longitude,
+              basic_search_input: address,
               resortEntries : []
             };
+
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
               dustVars.displayName = seshUser.profile['_json'].displayName;
