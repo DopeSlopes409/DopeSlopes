@@ -143,14 +143,14 @@ router.get('/resort_search', function (req, res, next)
               // add resort if within specified range
               var distance = haversine(latitude, longitude, elt.latitude, elt.longitude);
               if (distance <= range) {
-                filteredResorts.push(elt);
+                filteredResorts.push(elt); 
               }
             }); 
 
             if (filteredResorts.length > 0) {
                dustVars.resortEntries = filteredResorts;
             } else {
-              // update dustVars to reflect this, then handle in dust
+              dustVars.resortEntries = [];
             }
          
             res.render('search2', dustVars); 

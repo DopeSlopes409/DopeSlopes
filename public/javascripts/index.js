@@ -90,6 +90,17 @@ $("#use-my-loc").click(function() {
 });
 
 $("#loc-search-btn").click(function() {
+  locateResorts();
+});
+
+$('#basic_search_input').keypress(function (e) {
+    var key = e.which;
+    if(key == 13) {
+      locateResorts();
+    }    
+});
+
+function locateResorts() {
     var address = $("#basic_search_input").val();
 
     // Replace all instances of non alphanumeric characters with '+'
@@ -115,8 +126,7 @@ $("#loc-search-btn").click(function() {
       var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state;
       locationRedirect(queryURI);
     });
-
-});
+}
 
 // Redirect to the user's location query
 function locationRedirect(queryURI){
@@ -141,6 +151,8 @@ function initializeAutoComplete() {
       //fields
       );   
 }
+
+
 
 
 // function cycleImages() {

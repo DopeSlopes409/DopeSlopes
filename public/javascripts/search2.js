@@ -620,7 +620,7 @@ $('#range').change(function() {
       textRange = $( "#range option:selected" ).text();
 
       if (textRange == "50 mi") {
-         newRange = 50;
+         newRange = 50; 
       } else if (textRange == "100 mi") {
          newRange = 100;
       } else if (textRange == "200 mi") {
