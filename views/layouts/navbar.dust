@@ -15,8 +15,14 @@
 		  <div id="login" class="nav-user">
          <p>
           {?displayName}
+            <div class="dropdown">
+
             {displayName}
-            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            <i class="fa fa-chevron-down dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true"></i>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="/oauth/logout">Logout</a></li>
+            </ul>
+          </div>
             {! <button id="logout-link" >Logout</button> !}
           {:else}
             <button id="login-link" >Login</button>

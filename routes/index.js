@@ -55,7 +55,7 @@ router.get('/resort_search', function (req, res, next)
   var address = req.query.address;
 
   range = !range ? 500 : range;   // if no range selected, use value big enough to include all region results
-  addess = !address ? "" : address;
+  address = !address ? "" : address;
   
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
@@ -86,8 +86,10 @@ router.get('/resort_search', function (req, res, next)
               javascriptFiles: [{javascript: 'search2.js'}],
               originLat: latitude,
               originLong: longitude,
+              basic_search_input: address,
               resortEntries : []
             };
+
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
               dustVars.displayName = seshUser.profile['_json'].displayName;
@@ -107,6 +109,22 @@ router.get('/resort_search', function (req, res, next)
                 totalRuns: entry.maxOpenDownHillTrails,
                 baseTemp: entry.forecastBaseTemp,
                 summitTemp: entry.forecastTopTemp,
+                operatingStatus: entry.operatingStatus,
+                weather: entry.weather,
+                snowQuality: entry.snowQuality,
+                openLifts: entry.openLifts,
+                pipesAndPark: entry.pipesAndPark,
+                easyTrails: entry.easyTrails,
+                intermediateTrails: entry.intermediateTrails,
+                advancedTrails: entry.advancedTrails,
+                address: entry.address,
+                website: entry.website,
+                phoneNumber: entry.phoneNumber,
+                snowPhoneNumber: entry.snowPhoneNumber,
+                email: entry.email,
+                trailMap: entry.trailMap,
+                weekdayHours: entry.weekdayHours,
+                weekendHours: entry.weekendHours,
                 recentSnowfall: (entry.newSnowMax + entry.newSnowMin) / 2};
             });
 
@@ -125,12 +143,14 @@ router.get('/resort_search', function (req, res, next)
               // add resort if within specified range
               var distance = haversine(latitude, longitude, elt.latitude, elt.longitude);
               if (distance <= range) {
-                filteredResorts.push(elt);
+                filteredResorts.push(elt); 
               }
             }); 
 
             if (filteredResorts.length > 0) {
                dustVars.resortEntries = filteredResorts;
+            } else {
+              dustVars.resortEntries = [];
             }
          
             res.render('search2', dustVars); 

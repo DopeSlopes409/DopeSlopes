@@ -556,6 +556,22 @@ function initializeMap () {
       });
 
    };
+
+
+   // Show user location
+   var image = "../images/user-location.png";
+   var myLatlng = new google.maps.LatLng(origin.latitude, origin.longitude);
+   var marker = new google.maps.Marker({
+      position: myLatlng,
+      title: "My Location",
+      icon: image
+   });
+   marker.setMap(map);
+   markers[markers.length] = marker;
+   latlngbounds.extend( marker.getPosition() );
+
+
+
    map.fitBounds( latlngbounds );
 
    google.maps.event.addListener(map, 'click', function() {
@@ -599,6 +615,7 @@ function initializeMouseovers () {
 var newAddress;
 var newRange;
 
+
 $('#basic_search_input').change(function() {
       newAddress = $("#basic_search_input").val();
       console.log("new address: ", newAddress);
@@ -608,7 +625,7 @@ $('#range').change(function() {
       textRange = $( "#range option:selected" ).text();
 
       if (textRange == "50 mi") {
-         newRange = 50;
+         newRange = 50; 
       } else if (textRange == "100 mi") {
          newRange = 100;
       } else if (textRange == "200 mi") {
@@ -620,16 +637,30 @@ $('#range').change(function() {
       console.log("range selected: ", newRange);
 });
 
+
+$('#basic_search_input').keypress(function (e) {
+    var key = e.which;
+    if(key == 13) {
+      advancedResortSearch();
+    }    
+});
+
 $('#advanced-search').click(function() {
    console.log("advanced search");
    advancedResortSearch();
 });
 
+function getAddress() {
+   newAddress = $("#basic_search_input").val();
+}
+
 function advancedResortSearch() {
+   getAddress();
    console.log("advancedResortSearch()");
 
    // Replace all instances of non alphanumeric characters with '+'
    address = newAddress.replace(/[\W_]+/g, "+");
+   console.log('advancedResortSearch, using address: ', address);
 
    // Build JSON request url
    var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -648,7 +679,7 @@ function advancedResortSearch() {
         }
       }
 
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + newAddress;
       locationRedirect(queryURI);
    }); 
 }
