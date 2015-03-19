@@ -4,20 +4,20 @@ var resorts = [];
 var markers = [];
 var currentResortName = "";
 
-function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall, operatingStatus, weather, summitTemp, baseTemp, snowQuality, openLifts, pipesAndPark, easyTrails, intermediateTrails, advancedTrails, address, website, phoneNumber, snowPhoneNumber, email, trailMap, weekdayHours, weekendHours) {
+function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSnowfall, operatingStatus, weather, summitTemp, baseTemp, snowQuality, openLifts, pipesAndParks, easyTrails, intermediateTrails, advancedTrails, address, website, phoneNumber, snowPhoneNumber, email, trailMap, weekdayHours, weekendHours) {
    this.resortName = resortName.trim();
    this.latitude = latitude;
    this.longitude = longitude;
    this.openRuns = isNaN(openRuns) ? "" : openRuns;
    this.totalRuns = isNaN(totalRuns) ? "" : totalRuns;
    this.recentSnowfall = isNaN(recentSnowfall) ? "" : recentSnowfall;
-   this.operatingStatus = operatingStatus.trim();
+   this.operatingStatus = (operatingStatus.toString().trim() === "") ? "Open" : operatingStatus;
    this.weather = weather;
    this.summitTemp = summitTemp;
    this.baseTemp = baseTemp;
    this.snowQuality = snowQuality;
-   this.openLifts = openLifts;
-   this.pipesAndPark = pipesAndPark;
+   this.openLifts = isNaN(openLifts) ? "Unknown" : openLifts;
+   this.pipesAndParks = pipesAndParks;
    this.easyTrails = easyTrails;
    this.intermediateTrails = intermediateTrails;
    this.advancedTrails = advancedTrails;
@@ -25,10 +25,12 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    this.website = website;
    this.phoneNumber = phoneNumber;
    this.snowPhoneNumber = snowPhoneNumber;
-   this.email = email;
+   this.email = email.toString().trim();
    this.trailMap = trailMap;
    this.weekdayHours = weekdayHours;
    this.weekendHours = weekendHours;
+
+   console.log("email: \"" + this.email + "\"");
 
    this.toString = function() {
       return this.resortName + " => (" + this.latitude + ", " + this.longitude + ")";
@@ -97,7 +99,18 @@ $(document).ready(function() {
    initializeMap();
    initializeMouseovers();
    initializeUserButtons();
+   fixClosedResorts();
 });
+
+function fixClosedResorts () {
+   $('.runs-open').each(function() {
+
+    var contents = $(this).html().trim();
+    if(contents.startsWith("/")) {
+      $(this).html("0" + contents);
+    }
+ });
+}
 
 function initializeUserButtons() {
    $('.star').click(function() {
@@ -199,6 +212,8 @@ function fillResortExtendedInfo(resortName) {
    var sat = resort.weekendHours;
    var sun = resort.weekendHours;
 
+   console.log("\n" + resortName + ": " + resort.operatingStatus);
+
    // Fill with actual data!!!
    setResortTitle(resort.resortName);
    setDrivingTime(resort.durationText);
@@ -210,10 +225,11 @@ function fillResortExtendedInfo(resortName) {
    setSnowfallChart(resort.recentSnowfall);
    setTrailsChart(resort.openRuns, resort.totalRuns);
    setLiftsChart(resort.openLifts);
-   setPipesAndPark(resort.pipesAndPark);
+   setPipesAndParks(resort.pipesAndParks);
    setTrailsBreakdownChart(resort.easyTrails,resort.intermediateTrails,resort.advancedTrails);
    setContactInfo(resort.address, resort.website, resort.phoneNumber, resort.snowPhoneNumber, resort.email, resort.trailMap);
-   setHours(mon,tues,wed,thur,fri,sat,sun);
+   //setHours(mon,tues,wed,thur,fri,sat,sun);
+   setHours(resort.weekdayHours, resort.weekendHours);
 
 }
 
@@ -223,31 +239,34 @@ function setResortTitle(resortName) {
 
 function setOperatingStatus(status) {
    var color;
-   if (status === "") {
-      status = "Open";
+   status = status.trim();
+   console.log("\"" + status + "\"");
+   
+   if (status == "Open") {
       color = "green";
-   }
-   else if (status==="Closed for Snow Sports") {
+      //$("#open-resort-info").removeClass("invisible");
+   } else if (status=="Closed for Snow Sports") {
       color = "red";
-   }
-   else if (status.startsWith("Plan To Open")) {
+      //$("#open-resort-info").addClass("invisible");
+   } else if (status.startsWith("Plan To Open")) {
       color = "red";
-   }
-   else if (status.startsWith("Reopen")) {
+      //$("#open-resort-info").addClass("invisible");
+   } else if (status.startsWith("Reopen")) {
       color = "red";
-   }
-   else if (status==="No Recent Info") {
+      // $("#open-resort-info").addClass("invisible");
+   } else if (status.toLowerCase()=="No Recent Info".toLowerCase()) {
       color = "red";
-   }
-   else if (status==="Operating No Details") {
-      color = "green";
-   }
-   else if (status==="Open for Summer Fun") {
+      // $("#open-resort-info").addClass("invisible");
+   } else if (status.toLowerCase()=="Operating, No Details".toLowerCase()) {
+      color = "orange";
+      // $("#open-resort-info").addClass("invisible");
+   } else if (status.toLowerCase()=="Open for Summer Fun".toLowerCase()) {
       color = "red";
-   }
-   else {
+      // $("#open-resort-info").addClass("invisible");
+   } else {
       status = "Unknown";
       color = "red";
+      // $("#open-resort-info").addClass("invisible");
    }
    
    $("#srei-operatingStatus").html(status);
@@ -416,7 +435,7 @@ function setSnowQuality(snowQuality) {
    $("#srei-snow-quality").html(snowQuality);
 }
 
-function setPipesAndPark(text) {
+function setPipesAndParks(text) {
    $("#srei-pipes-and-parks").html(text);
 }
 
@@ -426,24 +445,28 @@ function setContactInfo(address, website, phoneNumber, snowPhoneNumber, email, t
    for (var i = 0; i < addressLines.length; i++) {
       addressHtml += "<p>" + addressLines[i] + "</p>";
    };
+   
    $("#srei-address").html(addressHtml);
-
    $("#srei-website").html("<a href=\"" + website + "\">" + website + "</a>");
    $("#srei-phone-number").html(phoneNumber);
    $("#srei-snow-phone-number").html(snowPhoneNumber);
-   $("#srei-email").html("<a href=\"mailto:" + website + "\">" + website + "</a>");
-   $("#srei-website").html("<a href=\"" + website + "\">" + website + "</a>");
+   $("#srei-email").html("<a href=\"mailto:" + email + "\">" + email + "</a>");
    $("#srei-trail-map").html("<a href=\"" + trailMap + "\">Resort Trail Map</a>");
 }
 
-function setHours(mon,tues,wed,thur,fri,sat,sun) {
-   $("#srei-hours-mon").html(mon);
-   $("#srei-hours-tues").html(tues);
-   $("#srei-hours-wed").html(wed);
-   $("#srei-hours-thur").html(thur);
-   $("#srei-hours-fri").html(fri);
-   $("#srei-hours-sat").html(sat);
-   $("#srei-hours-sun").html(sun);
+// function setHours(mon,tues,wed,thur,fri,sat,sun) {
+//    $("#srei-hours-mon").html(mon);
+//    $("#srei-hours-tues").html(tues);
+//    $("#srei-hours-wed").html(wed);
+//    $("#srei-hours-thur").html(thur);
+//    $("#srei-hours-fri").html(fri);
+//    $("#srei-hours-sat").html(sat);
+//    $("#srei-hours-sun").html(sun);
+// }
+
+function setHours(weekday, weekend) {
+   $("#srei-hours-weekday").html(weekday);
+   $("#srei-hours-weekend").html(weekend);
 }
 
 function resize (argument) {
@@ -461,7 +484,7 @@ function getResortData () {
       var snowfall = 10;
       var openTrails = 90;
       var openLifts = 12;
-      var pipesAndPark = "Halfpipe open. Last cut 12/22/2014.";
+      var pipesAndParks = "Halfpipe open. Last cut 12/22/2014.";
       var easyTrails = 8;
       var intermediateTrails = 12;
       var advancedTrails = 3;
@@ -484,25 +507,29 @@ function getResortData () {
          parseInt($(this).find(".openRuns").text()),
          parseInt($(this).find(".totalRuns").text()),
          parseFloat($(this).find(".recentSnowfall").text()),
-         operatingStatus,
-         weather,
+         $(this).find(".operatingStatus").text(),
+         $(this).find(".weather").text(),
          parseFloat($(this).find(".summitTemp").text()),
          parseFloat($(this).find(".baseTemp").text()),
-         snowQuality,
-         openLifts,
-         pipesAndPark,
-         easyTrails,
-         intermediateTrails,
-         advancedTrails,
-         address,
-         website,
-         phoneNumber,
-         snowPhoneNumber,
-         email,
-         trailMap,
-         weekdayHours,
-         weekendHours
+         $(this).find(".snowQuality").text(),
+         parseInt($(this).find(".openLifts").text()),
+         $(this).find(".pipesAndParks").text(),
+         parseInt($(this).find(".easyTrails").text()),
+         parseInt($(this).find(".intermediateTrails").text()),
+         parseInt($(this).find(".advancedTrails").text()),
+         $(this).find(".address").text(),
+         $(this).find(".website").text(),
+         $(this).find(".phoneNumber").text(),
+         $(this).find(".snowPhoneNumber").text(),
+         $(this).find(".email").text(),
+         $(this).find(".trailMap").text(),
+         $(this).find(".weekdayHours").text(),
+         $(this).find(".weekendHours").text() 
       );
+
+      //alert($(this).find(".weather").text());
+
+      console.log($(this).find(".resortName").text() + ": " + $(this).find(".email").text());
       
       resorts[resorts.length] = resort;
    });

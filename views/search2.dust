@@ -68,9 +68,25 @@
                   <div class="longitude"> {longitude} </div>
                   <div class="openRuns"> {openRuns} </div>
                   <div class="totalRuns"> {totalRuns} </div>
-                  <div class="recentSnowfall"> {recentSnowfall} </div>
                   <div class="baseTemp"> {baseTemp} </div>
                   <div class="summitTemp"> {summitTemp} </div>
+                  <div class="operatingStatus"> {operatingStatus} </div>
+                  <div class="weather"> {weather} </div>
+                  <div class="snowQuality"> {snowQuality} </div>
+                  <div class="openLifts"> {openLifts} </div>
+                  <div class="pipesAndParks"> {pipesAndParks} </div>
+                  <div class="easyTrails"> {easyTrails} </div>
+                  <div class="intermediateTrails"> {intermediateTrails} </div>
+                  <div class="advancedTrails"> {advancedTrails} </div>
+                  <div class="address"> {address} </div>
+                  <div class="website"> {website} </div>
+                  <div class="phoneNumber"> {phoneNumber} </div>
+                  <div class="snowPhoneNumber"> {snowPhoneNumber} </div>
+                  <div class="email"> {email} </div>
+                  <div class="trailMap"> {trailMap} </div>
+                  <div class="weekdayHours"> {weekdayHours} </div>
+                  <div class="weekendHours"> {weekendHours} </div>
+                  <div class="recentSnowfall"> {recentSnowfall} </div>
                </div>
             {/resortEntries}
          </div>
@@ -82,120 +98,136 @@
          <h2 id="srei-driving-time"></h2>
          <h2 id="srei-operatingStatus"></h2>
          
-         <div class="srei-subtitle-box" id="srei-conditions-subtitle-box">Conditions</div>
-         <div id="srei-conditions" class="">
-            <span id="srei-weather-icon">
-               <div id="srei-weather-text"></div>
-            </span>
-            <span id="srei-mountain">
-               <div id="srei-summit-temp"></div>
-               <div id="srei-base-temp"></div>
-               <div id="srei-snow-quality"></div>
-            </span>
-            <span id="srei-snowfall-box">
-               <h1>Snowfall (past 24 hours)</h1>
-               <span id="srei-snowfall-graph">
-                  <span id="srei-snowfall-graph-fill"></span>
-               </span>
-               <span id="srei-snowfall-data"></span>
-            </span>
-         </div>
+         <div id="open-resort-info">
 
-         <div class="srei-subtitle-box">Trails, Lifts, and Parks</div>
-         <div id="srei-trails">
-            <span id="srei-trails-left-collumn">
-               <span id="srei-trails-left-collumn-top">
-                  <span id="srei-open-trails">
-                     <h1>Trails Open</h1>
-                     <div id="srei-trails-graph">
-                        <div id="srei-trails-graph-fill"></div>
-                     </div>
-                     <div id="srei-trails-data"></div>
+            <div class="srei-subtitle-box" id="srei-conditions-subtitle-box">Conditions</div>
+            <div id="srei-conditions" class="">
+               <span id="srei-weather-icon">
+                  <div id="srei-weather-text"></div>
+               </span>
+               <span id="srei-mountain">
+                  <div id="srei-summit-temp"></div>
+                  <div id="srei-base-temp"></div>
+                  <div id="srei-snow-quality"></div>
+               </span>
+               <span id="srei-snowfall-box">
+                  <h1>Snowfall (past 24 hours)</h1>
+                  <span id="srei-snowfall-graph">
+                     <span id="srei-snowfall-graph-fill"></span>
                   </span>
-                  <span id="srei-open-lifts">
-                     <h1>Lifts Open</h1>
-                     <span id="srei-lifts-graph">
-                        <span id="srei-lifts-graph-fill"></span>
+                  <span id="srei-snowfall-data"></span>
+               </span>
+            </div>
+
+            <div class="srei-subtitle-box">Trails, Lifts, and Parks</div>
+            <div id="srei-trails">
+               <span id="srei-trails-left-collumn">
+                  <span id="srei-trails-left-collumn-top">
+                     <span id="srei-open-trails">
+                        <h1>Trails Open</h1>
+                        <div id="srei-trails-graph">
+                           <div id="srei-trails-graph-fill"></div>
+                        </div>
+                        <div id="srei-trails-data"></div>
                      </span>
-                     <span id="srei-lifts-data"></span>
+                     <span id="srei-open-lifts">
+                        <h1>Lifts Open</h1>
+                        <span id="srei-lifts-graph">
+                           <span id="srei-lifts-graph-fill"></span>
+                        </span>
+                        <span id="srei-lifts-data"></span>
+                     </span>
+                  </span>
+                  <span id="srei-trails-left-collumn-bottom">
+                     <h1>Pipes and Parks</h1>
+                     <p id="srei-pipes-and-parks"></p>
                   </span>
                </span>
-               <span id="srei-trails-left-collumn-bottom">
-                  <h1>Pipes and Parks</h1>
-                  <p id="srei-pipes-and-parks"></p>
+               <span class="srei-trails-right-collumn">
+                  <canvas id="srei-trail-breakdown" width="259" height="300"></canvas>
                </span>
+            </div>
+
+            <span id="srei-contact-info">
+               <div class="srei-subtitle-box">Contact Info</div>
+               <table>
+                  <tr class="row-border-bottom">
+                     <td><h1 class="row-title">Address</h1></td>
+                     <td id="srei-address">
+                     </td> 
+                  </tr>
+                  <tr class="row-border-bottom">
+                     <td><h1 class="row-title">Website</h1></td>
+                     <td id="srei-website"></td> 
+                  </tr>
+                  <tr class="row-border-bottom">
+                     <td><h1 class="row-title">Phone Number</h1></td>
+                     <td id="srei-phone-number"></td> 
+                  </tr>
+                  <tr class="row-border-bottom">
+                     <td><h1 class="row-title">Snow Phone Number</h1></td>
+                     <td id="srei-snow-phone-number"></td> 
+                  </tr>
+                  <tr class="row-border-bottom">
+                     <td><h1 class="row-title">Email Address</h1></td>
+                     <td id="srei-email"></td> 
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Trail Map</h1></td>
+                     <td id="srei-trail-map"></td> 
+                  </tr>
+               </table>
             </span>
-            <span class="srei-trails-right-collumn">
-               <canvas id="srei-trail-breakdown" width="259" height="300"></canvas>
+            <span id="srei-hours">
+               <div class="srei-subtitle-box">Hours</div>
+               <!-- <table style="width:100%">
+                  <tr>
+                     <td rowspan="7">
+                        <h1 class="row-title">Lift Hours</h1> 
+                     </td>
+                     <td><h1 class="row-title">Mon</h1> </td>
+                     <td id="srei-hours-mon"></td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Tues</h1> </td>
+                     <td id="srei-hours-tues"></td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Wed</h1> </td>
+                     <td id="srei-hours-wed"> </td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Thur</h1> </td>
+                     <td id="srei-hours-thur"> </td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Fri</h1> </td>
+                     <td id="srei-hours-fri"> </td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Sat</h1> </td>
+                     <td id="srei-hours-sat"> </td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Sun</h1> </td>
+                     <td id="srei-hours-sun"> </td>
+                  </tr>
+               </table> -->
+               <table style="width:100%">
+                  <tr>
+                     <td rowspan="2">
+                        <h1 class="row-title">Lift Hours</h1> 
+                     </td>
+                     <td><h1 class="row-title">Weekday</h1> </td>
+                     <td id="srei-hours-weekday"></td>
+                  </tr>
+                  <tr>
+                     <td><h1 class="row-title">Weekend</h1> </td>
+                     <td id="srei-hours-weekend"></td>
+                  </tr>
+               </table>
             </span>
          </div>
-
-         <span id="srei-contact-info">
-            <div class="srei-subtitle-box">Contact Info</div>
-            <table>
-               <tr class="row-border-bottom">
-                  <td><h1 class="row-title">Address</h1></td>
-                  <td id="srei-address">
-                  </td> 
-               </tr>
-               <tr class="row-border-bottom">
-                  <td><h1 class="row-title">Website</h1></td>
-                  <td id="srei-website"></td> 
-               </tr>
-               <tr class="row-border-bottom">
-                  <td><h1 class="row-title">Phone Number</h1></td>
-                  <td id="srei-phone-number"></td> 
-               </tr>
-               <tr class="row-border-bottom">
-                  <td><h1 class="row-title">Snow Phone Number</h1></td>
-                  <td id="srei-snow-phone-number"></td> 
-               </tr>
-               <tr class="row-border-bottom">
-                  <td><h1 class="row-title">Email Address</h1></td>
-                  <td id="srei-email"></td> 
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Trail Map</h1></td>
-                  <td id="srei-trail-map"></td> 
-               </tr>
-            </table>
-         </span>
-         <span id="srei-hours">
-            <div class="srei-subtitle-box">Hours</div>
-            <table style="width:100%">
-               <tr>
-                  <td rowspan="7">
-                     <h1 class="row-title">Lift Hours</h1> 
-                  </td>
-                  <td><h1 class="row-title">Mon</h1> </td>
-                  <td id="srei-hours-mon"></td>
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Tues</h1> </td>
-                  <td id="srei-hours-tues"></td>
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Wed</h1> </td>
-                  <td id="srei-hours-wed"> </td>
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Thur</h1> </td>
-                  <td id="srei-hours-thur"> </td>
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Fri</h1> </td>
-                  <td id="srei-hours-fri"> </td>
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Sat</h1> </td>
-                  <td id="srei-hours-sat"> </td>
-               </tr>
-               <tr>
-                  <td><h1 class="row-title">Sun</h1> </td>
-                  <td id="srei-hours-sun"> </td>
-               </tr>
-            </table>
-         </span>
       </div>
    </div>
 </div>

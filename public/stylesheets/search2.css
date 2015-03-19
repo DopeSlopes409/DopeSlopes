@@ -372,6 +372,24 @@ span {
    padding-right: 10px;*/
 }
 
+#srei-website {
+   word-wrap: break-word;
+   max-width: 182px;
+}
+
+#srei-website a {
+   word-wrap: break-word;
+}
+
+#srei-email {
+   word-wrap: break-word;
+   max-width: 182px;
+}
+
+#srei-email a {
+   word-wrap: break-word;
+}
+
 .chart-color-box {
    width: 10px;
    height: 10px;
@@ -481,6 +499,8 @@ span {
    margin-left: 20px;
    color: #333333;
    font-size: 0.95em;
+   max-height: 75px;
+   overflow: hidden;
 }
 
 .resort-title-line {
@@ -596,9 +616,6 @@ table td {
 .invisible {
    display: none;
 }
-
-
-
 
 
 

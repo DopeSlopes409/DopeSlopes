@@ -100,6 +100,14 @@ router.get('/resort_search', function (req, res, next)
 
             dustVars.resortEntries = body.items.map(function (entry) {
               console.log('traversign resort: ' + JSON.stringify(entry));
+              var advancedTrailsNum = 0;
+              if (!isNaN(parseInt(entry.numberAdvancedTrails.toString())) ) {
+                advancedTrailsNum += parseInt(entry.numberAdvancedTrails.toString());
+              };
+              if (!isNaN(parseInt(entry.numberExpertTrails.toString())) ) {
+                advancedTrailsNum += parseInt(entry.numberExpertTrails.toString());
+              };
+
               return {
                 id: entry["id"],
                 name: entry.resortName,
@@ -110,19 +118,19 @@ router.get('/resort_search', function (req, res, next)
                 baseTemp: entry.forecastBaseTemp,
                 summitTemp: entry.forecastTopTemp,
                 operatingStatus: entry.operatingStatus,
-                weather: entry.weather,
-                snowQuality: entry.snowQuality,
-                openLifts: entry.openLifts,
-                pipesAndPark: entry.pipesAndPark,
-                easyTrails: entry.easyTrails,
-                intermediateTrails: entry.intermediateTrails,
-                advancedTrails: entry.advancedTrails,
-                address: entry.address,
-                website: entry.website,
-                phoneNumber: entry.phoneNumber,
-                snowPhoneNumber: entry.snowPhoneNumber,
-                email: entry.email,
-                trailMap: entry.trailMap,
+                weather: entry.weatherToday_Condition,
+                snowQuality: entry.primarySurfaceCondition,
+                openLifts: entry.openDownHillLifts,
+                pipesAndParks: entry["Parks-n-Pipes"],
+                easyTrails: entry.numberBeginnerTrails,
+                intermediateTrails: entry.numberIntermediateTrails,
+                advancedTrails: advancedTrailsNum,
+                address: entry.resortAddress,
+                website: entry.webSiteLink,
+                phoneNumber: entry.reservationPhone,
+                snowPhoneNumber: entry.snowPhone,
+                email: entry.generalEmail,
+                trailMap: entry.lgTrailMapURL,
                 weekdayHours: entry.weekdayHours,
                 weekendHours: entry.weekendHours,
                 recentSnowfall: (entry.newSnowMax + entry.newSnowMin) / 2};
