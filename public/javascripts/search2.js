@@ -515,6 +515,7 @@ function getSearchResultDiv(resortName) {
 }
 
 function initializeMap () {
+   console.log("initializeMap()");
    var mapCanvas = document.getElementById('map-canvas');
    var mapOptions = {
       center: new google.maps.LatLng(35.282752, -120.659616),
@@ -525,6 +526,11 @@ function initializeMap () {
    var infowindow = new google.maps.InfoWindow();
 
    var latlngbounds = new google.maps.LatLngBounds();
+
+   console.log("InitMap: latlngbounds1: ", latlngbounds);
+   console.log("InitMap: resorts.length: ", resorts.length);
+   console.log("InitMap: markers.length: ", markers.length);
+   
    for (var i = resorts.length - 1; i >= 0; i--) {
       var myLatlng = new google.maps.LatLng(resorts[i].latitude, resorts[i].longitude);
       var marker = new google.maps.Marker({
@@ -535,6 +541,7 @@ function initializeMap () {
       marker.setMap(map);
       markers[markers.length] = marker;
       latlngbounds.extend( marker.getPosition() );
+ 
 
       // On click of marker show infobox and set search result background color
       google.maps.event.addListener(marker, 'click', function() {
@@ -552,7 +559,6 @@ function initializeMap () {
 
    };
 
-
    // Show user location
    var image = "../images/user-location.png";
    var myLatlng = new google.maps.LatLng(origin.latitude, origin.longitude);
@@ -565,9 +571,29 @@ function initializeMap () {
    markers[markers.length] = marker;
    latlngbounds.extend( marker.getPosition() );
 
+   if (resorts.length == 0 ){
+      console.log("No resorts found in filter, need to zoom out");
+      console.log("InitMap: latlngbounds center: ", latlngbounds.toUrlValue());
 
+      var tempStr = latlngbounds.toUrlValue();
+      var arrayLatLng = tempStr.split(",",2);
 
+      var noResortLat = parseFloat(arrayLatLng[0]);
+      var noResortLng = parseFloat(arrayLatLng[1]);
+
+      console.log("noResortLat: ", noResortLat);
+      console.log("noResortLng: ", noResortLng);
+
+      var nrSW = new google.maps.LatLng(noResortLat - 0.4, noResortLng - 0.7);
+      var nrNE = new google.maps.LatLng(noResortLat + 0.4, noResortLng + 0.7);
+      latlngbounds.extend( nrSW );
+      latlngbounds.extend( nrNE );
+   }   
+
+  
    map.fitBounds( latlngbounds );
+
+
 
    google.maps.event.addListener(map, 'click', function() {
       closeResultsSlider();

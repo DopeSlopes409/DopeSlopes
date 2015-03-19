@@ -77,7 +77,6 @@ router.get('/resort_search', function (req, res, next)
             console.log("body items: ", body.items[0]);
           
             numItems = body.totalItems;
-            //numItems = 10;   //  remove once testing finished
             console.log("num resorts found: ", numItems)
 
             var dustVars = {
@@ -95,8 +94,6 @@ router.get('/resort_search', function (req, res, next)
               dustVars.displayName = seshUser.profile['_json'].displayName;
               dustVars.userId = req.session.objectId;
             }
-
-            console.log("range scope check: ", range);
 
             dustVars.resortEntries = body.items.map(function (entry) {
               console.log('traversign resort: ' + JSON.stringify(entry));
@@ -137,10 +134,6 @@ router.get('/resort_search', function (req, res, next)
             
             filteredResorts = [];
             dustVars.resortEntries.forEach(function (elt) {
-              // console.log("resort: " + elt.name + " lat: " + elt.latitude + " lon: " + elt.longitude + " open_runs: " + elt.open_runs 
-              //       + " total_runs: " + elt.total_runs + " snow: " + elt.recent_snowfall);
-
-              // add resort if within specified range
               var distance = haversine(latitude, longitude, elt.latitude, elt.longitude);
               if (distance <= range) {
                 filteredResorts.push(elt); 
@@ -150,6 +143,7 @@ router.get('/resort_search', function (req, res, next)
             if (filteredResorts.length > 0) {
                dustVars.resortEntries = filteredResorts;
             } else {
+              console.log("no resorts in range: ", range);
               dustVars.resortEntries = [];
             }
          
@@ -175,8 +169,6 @@ router.get('/resort_search', function (req, res, next)
         });
 
   console.log('left ajax call');
-  //render results
-  //res.render('resort_search', dustVars);
 
 });
 
