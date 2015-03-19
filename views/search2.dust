@@ -23,7 +23,7 @@
       <input type="checkbox" id="open-resorts-checkbox" name="open-resorts-checkbox" value="yes">
       <span>Open resorts only</span>
    </div>
-   <button id="advanced-search" type="button">Advanced Search</button>
+   <button id="advanced-search" type="button">Search</button>
 </div>
 <div id="content">
    <div id="map-canvas">
