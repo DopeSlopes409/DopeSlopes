@@ -56,11 +56,11 @@ router.get('/resort_search', function (req, res, next)
   var sortCriteria = req.query.criteria;
   var isOpen = req.query.resStatus;
 
-  if (range === null || range === 'undefined') { range = 500; }  // if no range selected, use value big enough to include all region results
+  if (range === null || range === 'undefined' || !range) { range = 500; }  // if no range selected, use value big enough to include all region results
   if (address === null || address === 'undefined') {address = ""; }
   if (sortCriteria === null || sortCriteria === 'undefined') { sortCriteria = ""; }
   if (isOpen === null || isOpen === 'undefined') { isOpen = false; }
-  
+
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
   // var reqResults; //repsonse from API
