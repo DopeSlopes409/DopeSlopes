@@ -18,9 +18,9 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    this.snowQuality = snowQuality;
    this.openLifts = isNaN(openLifts) ? "Unknown" : openLifts;
    this.pipesAndParks = pipesAndParks;
-   this.easyTrails = easyTrails;
-   this.intermediateTrails = intermediateTrails;
-   this.advancedTrails = advancedTrails;
+   this.easyTrails = isNaN(easyTrails) ? 0 : easyTrails;
+   this.intermediateTrails = isNaN(intermediateTrails) ? 0 : intermediateTrails;
+   this.advancedTrails = isNaN(advancedTrails) ? 0 : advancedTrails;
    this.address = address;
    this.website = website;
    this.phoneNumber = phoneNumber;
@@ -30,7 +30,10 @@ function Resort (resortName, latitude, longitude, openRuns, totalRuns, recentSno
    this.weekdayHours = weekdayHours;
    this.weekendHours = weekendHours;
 
-   console.log("email: \"" + this.email + "\"");
+   // console.log("easyTrails: " + this.easyTrails);
+   // console.log("intermediateTrails: " + this.intermediateTrails);
+   // console.log("advancedTrails: " + this.advancedTrails);
+   console.log(this.resortName + ": (" + this.latitude + ", " + this.longitude + ")");
 
    this.toString = function() {
       return this.resortName + " => (" + this.latitude + ", " + this.longitude + ")";
@@ -212,13 +215,11 @@ function fillResortExtendedInfo(resortName) {
    var sat = resort.weekendHours;
    var sun = resort.weekendHours;
 
-   console.log("\n" + resortName + ": " + resort.operatingStatus);
-
    // Fill with actual data!!!
    setResortTitle(resort.resortName);
    setDrivingTime(resort.durationText);
    setOperatingStatus(resort.operatingStatus);
-   setWeather(resort.weather);
+   setWeather(resort.latitude, resort.longitude);
    setSummitTemp(resort.summitTemp);
    setBaseTemp(resort.baseTemp);
    setSnowQuality(resort.snowQuality);
@@ -240,7 +241,6 @@ function setResortTitle(resortName) {
 function setOperatingStatus(status) {
    var color;
    status = status.trim();
-   console.log("\"" + status + "\"");
    
    if (status == "Open") {
       color = "green";
@@ -330,23 +330,39 @@ function setTrailsChart(openTrails, totalTrails) {
 function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails) {
    // Reset the width and height so the graph does not zoom on subsequent calls of method
    $("#srei-trail-breakdown").attr({width: "259px", height: "300px"});
-   var doughnutData = [
-      {
-         value : easyTrails,
-         color: "#669933",
-         title : "Easy Trails",
-      },
-      {
-         value : intermediateTrails,
-         color: "#006699",
-         title : "Intermediate Trails",
-      },
-      {
-         value : advancedTrails,
-         color: "#000000",
-         title : "Advanced Trails",
-      },
-   ];
+   var doughnutData;
+   var dataTemplate;
+   if (easyTrails == 0 && intermediateTrails == 0 && advancedTrails == 0)
+   {
+      doughnutData = [
+         {
+            value : 1,
+            color: "#999999",
+            title : "Unknown",
+         },
+      ];
+      dataTemplate = "No Trail Data";
+   } else {
+
+      doughnutData = [
+         {
+            value : easyTrails,
+            color: "#669933",
+            title : "Easy Trails",
+         },
+         {
+            value : intermediateTrails,
+            color: "#006699",
+            title : "Intermediate Trails",
+         },
+         {
+            value : advancedTrails,
+            color: "#000000",
+            title : "Advanced Trails",
+         },
+      ];
+      dataTemplate = "<%=v2%>";
+   }
 
    var options = {
          animateRotate : true,
@@ -358,7 +374,7 @@ function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails)
          legendBorders : false,
          legendBlockSize : 12,
          inGraphDataShow : true,
-         inGraphDataTmpl : "<%=v2%>",
+         inGraphDataTmpl : dataTemplate,
          inGraphDataFontColor : "#333333",
          animationEasing: "linear",
          annotateDisplay : false,
@@ -369,59 +385,64 @@ function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails)
    var myDoughnut = new Chart(trailBreakdown).Doughnut(doughnutData,options);
 }
 
-function setWeather(weather) {
-   //Change the image based on the weather
+function setWeatherCallback (data) {
+   // var weatherIcon = "img/" + data["daily"]["icon"] + ".png";
+   // $("#forecastIcon").attr("src",  weatherIcon);
+
    var weatherImage = "";
+   var weather = data["daily"]["icon"];
+
    switch (weather) {
-      case 'Sunny':
-      case 'Clear':
-      case 'Fair':
+      case 'clear-day':
+      case 'clear-night':
+      case 'windy':
          weatherImage = "../images/sunny.png";
+         weather = "Sunny";
          break;
 
-      case 'Cloudy':
-      case 'Increasing Clouds':
-      case 'Overcast':
-      case 'Fog':
+      case 'cloudy':
+      case 'fog':
          weatherImage = "../images/cloudy.png";
+         weather = "Cloudy";
          break;
 
-      case 'Partly Cloudy':
-      case 'Mostly Cloudy':
-      case 'Clearing':
-      case 'Mostly Clear':
-      case 'Mixed Cloud/Sun':
-      case 'Mostly Sunny':
-      case 'Partly Sunny':
+      case 'partly-cloudy-day':
+      case 'partly-cloudy-night':
          weatherImage = "../images/partly-cloudy.png";
+         weather = "Partly Cloudy";
          break;
 
-      case 'Rain':
-      case 'Drizzle':
-      case 'Freezing Rain':
-      case 'Light Rain':
-      case 'Rain Showers':
-      case 'Mixed Precip':
+      case 'rain':
          weatherImage = "../images/rain.png";
+         weather = "Rain";
          break;
 
-      case 'Snow':
-      case 'Flurries':
-      case 'Heavy Snow':
-      case 'Light Snow':
-      case 'Snow Showers':
-      case 'Snow Squalls':
+      case 'snow':
          weatherImage = "../images/snow.png";
+         weather = "Snow";
          break;
 
-      case 'Sleet':
+      case 'sleet':
          weatherImage = "../images/sleet.png";
+         weather = "Sleet";
          break;
    }
 
    $("#srei-weather-icon").css("background-image", "url(" + weatherImage + ")");
-   $("#srei-weather-text").html(weather);                 
+   $("#srei-weather-text").html(weather);
 }
+
+function setWeather(myLatitude, myLongitude) {
+   var position = {
+      coords : {
+         latitude: myLatitude,
+         longitude: myLongitude
+      }
+   };
+   var url = "https://api.forecast.io/forecast/902cf621177904aa535b7ef6ccdb35cf/" + myLatitude +  "," + myLongitude + "?callback=?";
+   $.getJSON(url, setWeatherCallback);
+}
+
 
 function setSummitTemp(temp) {
    $("#srei-summit-temp").html(temp.toString() + "°F");
@@ -527,9 +548,7 @@ function getResortData () {
          $(this).find(".weekendHours").text() 
       );
 
-      //alert($(this).find(".weather").text());
-
-      console.log($(this).find(".resortName").text() + ": " + $(this).find(".email").text());
+      //console.log($(this).find(".resortName").text() + ": " + $(this).find(".email").text());
       
       resorts[resorts.length] = resort;
    });
