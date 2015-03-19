@@ -98,7 +98,7 @@ router.get('/resort_search', function (req, res, next)
             }
 
             dustVars.resortEntries = body.items.map(function (entry) {
-              //console.log('traversign resort: ' + JSON.stringify(entry));
+              console.log('traversign resort: ' + JSON.stringify(entry));
               return {
                 id: entry["id"],
                 name: entry.resortName,
