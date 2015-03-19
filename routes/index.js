@@ -104,7 +104,7 @@ router.get('/resort_search', function (req, res, next)
             dustVars.resortEntries = body.items.map(function (entry) {
               console.log('traversign resort: ' + JSON.stringify(entry));
               var advancedTrailsNum = 0;
-              if (!isNaN(parseInt(entry.numberAdvancedTrails.toString())) ) {
+              if (entry.numberAdvancedTrails && !isNaN(parseInt(entry.numberAdvancedTrails.toString())) ) {
                 advancedTrailsNum += parseInt(entry.numberAdvancedTrails.toString());
               };
               if (!isNaN(parseInt(entry.numberExpertTrails.toString())) ) {
