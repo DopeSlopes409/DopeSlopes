@@ -103,14 +103,18 @@ router.get('/google/callback', passport.authenticate('google-openidconnect', {fa
 // });
 
 router.get('/logout', function(req, res) {
+    console.log('in logout');
     req.logout(function(err) {
         if(err) {
-            return console.error(err);
+            console.error(err);
+            return;
         }
         
         console.log('User logged out');
         res.redirect('/');
     });
+    console.log('User logged out');
+    res.redirect('/');
 });
 
 module.exports = router;

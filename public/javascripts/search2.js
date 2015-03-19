@@ -557,6 +557,7 @@ function initializeMap () {
    var infowindow = new google.maps.InfoWindow();
 
    var latlngbounds = new google.maps.LatLngBounds();
+   
    for (var i = resorts.length - 1; i >= 0; i--) {
       var myLatlng = new google.maps.LatLng(resorts[i].latitude, resorts[i].longitude);
       var marker = new google.maps.Marker({
@@ -567,6 +568,7 @@ function initializeMap () {
       marker.setMap(map);
       markers[markers.length] = marker;
       latlngbounds.extend( marker.getPosition() );
+ 
 
       // On click of marker show infobox and set search result background color
       google.maps.event.addListener(marker, 'click', function() {
@@ -584,7 +586,6 @@ function initializeMap () {
 
    };
 
-
    // Show user location
    var image = "../images/user-location.png";
    var myLatlng = new google.maps.LatLng(origin.latitude, origin.longitude);
@@ -597,7 +598,21 @@ function initializeMap () {
    markers[markers.length] = marker;
    latlngbounds.extend( marker.getPosition() );
 
+   if (resorts.length == 0 ){
+      var tempStr = latlngbounds.toUrlValue();
+      var arrayLatLng = tempStr.split(",",2);
 
+      var noResortLat = parseFloat(arrayLatLng[0]);
+      var noResortLng = parseFloat(arrayLatLng[1]);
+
+      console.log("noResortLat: ", noResortLat);
+      console.log("noResortLng: ", noResortLng);
+
+      var nrSW = new google.maps.LatLng(noResortLat - 0.4, noResortLng - 0.7);
+      var nrNE = new google.maps.LatLng(noResortLat + 0.4, noResortLng + 0.7);
+      latlngbounds.extend( nrSW );
+      latlngbounds.extend( nrNE );
+   }   
 
    map.fitBounds( latlngbounds );
 
@@ -641,7 +656,8 @@ function initializeMouseovers () {
 
 var newAddress;
 var newRange;
-
+var criteria;
+var isOpen;
 
 $('#basic_search_input').change(function() {
       newAddress = $("#basic_search_input").val();
@@ -662,6 +678,23 @@ $('#range').change(function() {
       }
 
       console.log("range selected: ", newRange);
+});
+
+$('#search-by').change(function() {
+      criteria = $( "#search-by option:selected" ).text();
+
+      if (criteria == "Open Runs") {
+         criteria = "runs";
+      } else if (criteria == "Recent Snowfall") {
+         criteria = "snow";
+      }
+
+      console.log("range selected: ", criteria);
+});
+
+$('#open-resorts-checkbox').change(function(){
+    isOpen = this.checked ? true : false;
+    console.log("checkbox: ", isOpen);
 });
 
 
@@ -706,7 +739,8 @@ function advancedResortSearch() {
         }
       }
 
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + newAddress;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + 
+                                          '&address=' + newAddress + '&criteria=' + criteria + '&resStatus=' + isOpen;
       locationRedirect(queryURI);
    }); 
 }

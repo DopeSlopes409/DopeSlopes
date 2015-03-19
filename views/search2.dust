@@ -15,7 +15,7 @@
    <div id="search-by" class="">
       <select>
          <option value="">Search By</option>
-         <option value="Open Lifts">Open Lifts</option>
+         <option value="Open Lifts">Open Runs</option>
          <option value="Recent Snowfall">Recent Snowfall</option>
       </select>
    </div>
@@ -23,7 +23,7 @@
       <input type="checkbox" id="open-resorts-checkbox" name="open-resorts-checkbox" value="yes">
       <span>Open resorts only</span>
    </div>
-   <a id="advanced-search" class="btn">Advanced Search</a>
+   <button id="advanced-search" type="button">Advanced Search</button>
 </div>
 <div id="content">
    <div id="map-canvas">

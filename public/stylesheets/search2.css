@@ -112,19 +112,24 @@ span {
 }
 
 #advanced-search {
+   /*
    height: 100%;
    vertical-align: middle;
    display: inline-block; 
    text-align: left;
    margin-top: -10px;
+   */
    margin-left: 15px;
-   padding-left: 0;
+   padding-left: 2;
+   padding-right: 2;
+   /*
    border: none;
    border-radius: 0;
    background-color: rgba(0, 0, 0, 0.0);
    color: rgb(0,84,166);
    border-color: rgb(0,84,166);
    text-decoration: underline;
+   */
 }
 
 #map-canvas {

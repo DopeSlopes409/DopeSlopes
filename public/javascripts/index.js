@@ -25,10 +25,6 @@ function cycleImages() {
   });
 }
 
-
-
-
-
 // Hide the login prompt
 function hideLoginPopup() {
   $("#popup").hide();
@@ -95,7 +91,7 @@ $("#loc-search-btn").click(function() {
 
 $('#basic_search_input').keypress(function (e) {
     var key = e.which;
-    if(key == 13) {
+    if (key == 13) {
       locateResorts();
     }    
 });
@@ -123,7 +119,7 @@ function locateResorts() {
         }
       }
       
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&address=' + address; 
       locationRedirect(queryURI);
     });
 }
