@@ -78,7 +78,7 @@ router.get('/resort_search', function (req, res, next)
       json: true},
       function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            //console.log("body items: ", body.items[0]);
+            console.log("body items: ", body.items[0]);
           
             numItems = body.totalItems;
             console.log("num resorts found: ", numItems)
@@ -100,7 +100,7 @@ router.get('/resort_search', function (req, res, next)
             }
 
             dustVars.resortEntries = body.items.map(function (entry) {
-              //console.log('traversign resort: ' + JSON.stringify(entry));
+              console.log('traversign resort: ' + JSON.stringify(entry));
               return {
                 id: entry["id"],
                 name: entry.resortName,
