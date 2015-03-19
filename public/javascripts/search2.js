@@ -623,8 +623,9 @@ function initializeMouseovers () {
 }
 
 var newAddress;
-var newRange = 500;
+var newRange;
 var criteria;
+var isOpen;
 
 $('#basic_search_input').change(function() {
       newAddress = $("#basic_search_input").val();
@@ -657,6 +658,11 @@ $('#search-by').change(function() {
       }
 
       console.log("range selected: ", criteria);
+});
+
+$('#open-resorts-checkbox').change(function(){
+    isOpen = this.checked ? true : false;
+    console.log("checkbox: ", isOpen);
 });
 
 
@@ -701,7 +707,8 @@ function advancedResortSearch() {
         }
       }
 
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + newAddress + '&criteria=' + criteria;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + 
+                                          '&address=' + newAddress + '&criteria=' + criteria + '&resStatus=' + isOpen;
       locationRedirect(queryURI);
    }); 
 }

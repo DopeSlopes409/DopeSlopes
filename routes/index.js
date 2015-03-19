@@ -54,10 +54,12 @@ router.get('/resort_search', function (req, res, next)
   var range = req.query.range;
   var address = req.query.address;
   var sortCriteria = req.query.criteria;
+  var isOpen = req.query.resStatus;
 
-  range = !range ? 500 : range;   // if no range selected, use value big enough to include all region results
-  address = !address ? "" : address;
-  sortCriteria = !sortCriteria ? "" : sortCriteria;
+  if (range === null || range === 'undefined') { range = 500; }  // if no range selected, use value big enough to include all region results
+  if (address === null || address === 'undefined') {address = ""; }
+  if (sortCriteria === null || sortCriteria === 'undefined') { sortCriteria = ""; }
+  if (isOpen === null || isOpen === 'undefined') { isOpen = false; }
   
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
@@ -98,7 +100,7 @@ router.get('/resort_search', function (req, res, next)
             }
 
             dustVars.resortEntries = body.items.map(function (entry) {
-              console.log('traversign resort: ' + JSON.stringify(entry));
+              //console.log('traversign resort: ' + JSON.stringify(entry));
               return {
                 id: entry["id"],
                 name: entry.resortName,
@@ -124,6 +126,7 @@ router.get('/resort_search', function (req, res, next)
                 trailMap: entry.trailMap,
                 weekdayHours: entry.weekdayHours,
                 weekendHours: entry.weekendHours,
+                resortStatus: entry.resortStatus,
                 recentSnowfall: (entry.newSnowMax + entry.newSnowMin) / 2};
             });
 
@@ -133,11 +136,21 @@ router.get('/resort_search', function (req, res, next)
 
             //truncate resortEntries length 
             dustVars.resortEntries.splice(numItems);
-            
+            console.log("filterering by open/closed: ", isOpen)
             filteredResorts = [];
             dustVars.resortEntries.forEach(function (elt) {
               var distance = haversine(latitude, longitude, elt.latitude, elt.longitude);
-              if (distance <= range) {
+              if (isOpen) {  // filter by open resorts only
+
+                if ((elt.resortStatus > 0 && elt.resortStatus < 4) || elt.resortStatus == 8) {
+                  // these resorts are open
+                  if (distance <= range) {
+                    filteredResorts.push(elt); 
+                  }
+                } else {
+                  console.log("resort closed: ", elt.name)
+                }
+              } else if (distance <= range) {
                 filteredResorts.push(elt); 
               }
             }); 
