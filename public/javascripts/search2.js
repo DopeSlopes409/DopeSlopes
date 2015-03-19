@@ -103,7 +103,70 @@ $(document).ready(function() {
    initializeMouseovers();
    initializeUserButtons();
    fixClosedResorts();
+   updateSearchResultColors();
 });
+
+function updateSearchResultColors () {
+   $('.runs-open').each(function(){
+       //if statement here 
+       // use $(this) to reference the current div in the loop
+       //you can try something like...
+       var trailNumbers = $(this).html().split("/");
+       var trailFraction = parseInt(trailNumbers[0]) / parseInt(trailNumbers[1]);
+       if (isNaN(trailFraction)) {
+         trailFraction = 0;
+       }
+       console.log("trailFraction = " + trailFraction.toString());
+
+       var color1r = 225;
+       var color1g = 225;
+       var color1b = 225;
+
+       var color2r = 0;
+       var color2g = 225;
+       var color2b = 153;
+
+       var colorR = color1r * (1.0-trailFraction) + color2r * trailFraction;
+       var colorG = color1g * (1.0-trailFraction) + color2g * trailFraction;
+       var colorB = color1b * (1.0-trailFraction) + color2b * trailFraction;
+
+       colorR = Math.round(colorR);
+       colorG = Math.round(colorG);
+       colorB = Math.round(colorB);
+
+       $(this).parent().css("background-color", "rgb(" + colorR + ", " + colorB + ", " + colorG + ")");
+   });
+
+   $('.snowfall').each(function(){
+       //if statement here 
+       // use $(this) to reference the current div in the loop
+       //you can try something like...
+       var trailNumbers = $(this).html().split("/");
+       var trailFraction = parseInt(trailNumbers[0]) / parseInt(trailNumbers[1]);
+       if (isNaN(trailFraction)) {
+         trailFraction = 0;
+       }
+       console.log("trailFraction = " + trailFraction.toString());
+
+       var color1r = 225;
+       var color1g = 225;
+       var color1b = 225;
+
+       var color2r = 0;
+       var color2g = 225;
+       var color2b = 153;
+
+       var colorR = color1r * (1.0-trailFraction) + color2r * trailFraction;
+       var colorG = color1g * (1.0-trailFraction) + color2g * trailFraction;
+       var colorB = color1b * (1.0-trailFraction) + color2b * trailFraction;
+
+       colorR = Math.round(colorR);
+       colorG = Math.round(colorG);
+       colorB = Math.round(colorB);
+
+       $(this).parent().css("background-color", "rgb(" + colorR + ", " + colorB + ", " + colorG + ")");
+   });
+}
 
 function fixClosedResorts () {
    $('.runs-open').each(function() {
@@ -434,7 +497,7 @@ function setWeatherCallback (data) {
    if (isNaN(resort.baseTemp)) {
       var temperatureMax = data["daily"]["data"]['0']['temperatureMax'];
       var temperatureMin = data["daily"]["data"]['0']['temperatureMin'];
-      var baseTemp = (temperatureMax - temperatureMin) / 2.0;;
+      var baseTemp = Math.round((temperatureMax - temperatureMin) / 2.0);
       $("#srei-base-temp").html(baseTemp.toString() + "°F");
    };
    if (isNaN(resort.summitTemp)) {
