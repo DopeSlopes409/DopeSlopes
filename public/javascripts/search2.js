@@ -515,7 +515,6 @@ function getSearchResultDiv(resortName) {
 }
 
 function initializeMap () {
-   console.log("initializeMap()");
    var mapCanvas = document.getElementById('map-canvas');
    var mapOptions = {
       center: new google.maps.LatLng(35.282752, -120.659616),
@@ -526,10 +525,6 @@ function initializeMap () {
    var infowindow = new google.maps.InfoWindow();
 
    var latlngbounds = new google.maps.LatLngBounds();
-
-   console.log("InitMap: latlngbounds1: ", latlngbounds);
-   console.log("InitMap: resorts.length: ", resorts.length);
-   console.log("InitMap: markers.length: ", markers.length);
    
    for (var i = resorts.length - 1; i >= 0; i--) {
       var myLatlng = new google.maps.LatLng(resorts[i].latitude, resorts[i].longitude);
@@ -572,9 +567,6 @@ function initializeMap () {
    latlngbounds.extend( marker.getPosition() );
 
    if (resorts.length == 0 ){
-      console.log("No resorts found in filter, need to zoom out");
-      console.log("InitMap: latlngbounds center: ", latlngbounds.toUrlValue());
-
       var tempStr = latlngbounds.toUrlValue();
       var arrayLatLng = tempStr.split(",",2);
 
@@ -590,10 +582,7 @@ function initializeMap () {
       latlngbounds.extend( nrNE );
    }   
 
-  
    map.fitBounds( latlngbounds );
-
-
 
    google.maps.event.addListener(map, 'click', function() {
       closeResultsSlider();
@@ -634,8 +623,8 @@ function initializeMouseovers () {
 }
 
 var newAddress;
-var newRange;
-
+var newRange = 500;
+var criteria;
 
 $('#basic_search_input').change(function() {
       newAddress = $("#basic_search_input").val();
@@ -656,6 +645,18 @@ $('#range').change(function() {
       }
 
       console.log("range selected: ", newRange);
+});
+
+$('#search-by').change(function() {
+      criteria = $( "#search-by option:selected" ).text();
+
+      if (criteria == "Open Runs") {
+         criteria = "runs";
+      } else if (criteria == "Recent Snowfall") {
+         criteria = "snow";
+      }
+
+      console.log("range selected: ", criteria);
 });
 
 
@@ -700,7 +701,7 @@ function advancedResortSearch() {
         }
       }
 
-      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + newAddress;
+      var queryURI = '/resort_search' + '?latitude=' +  lat + '&longitude=' + lng + '&state=' + state + '&range=' + newRange + '&address=' + newAddress + '&criteria=' + criteria;
       locationRedirect(queryURI);
    }); 
 }

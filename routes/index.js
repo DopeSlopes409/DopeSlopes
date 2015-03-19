@@ -53,9 +53,11 @@ router.get('/resort_search', function (req, res, next)
   var state = req.query.state;
   var range = req.query.range;
   var address = req.query.address;
+  var sortCriteria = req.query.criteria;
 
   range = !range ? 500 : range;   // if no range selected, use value big enough to include all region results
   address = !address ? "" : address;
+  sortCriteria = !sortCriteria ? "" : sortCriteria;
   
   console.log('latitude: ' + latitude + ', longitude: ' + longitude + ', state: ' + state + ', range: ' + range);
 
@@ -74,7 +76,7 @@ router.get('/resort_search', function (req, res, next)
       json: true},
       function (error, response, body) {
           if (!error && response.statusCode == 200) {
-            console.log("body items: ", body.items[0]);
+            //console.log("body items: ", body.items[0]);
           
             numItems = body.totalItems;
             console.log("num resorts found: ", numItems)
@@ -96,7 +98,7 @@ router.get('/resort_search', function (req, res, next)
             }
 
             dustVars.resortEntries = body.items.map(function (entry) {
-              console.log('traversign resort: ' + JSON.stringify(entry));
+              //console.log('traversign resort: ' + JSON.stringify(entry));
               return {
                 id: entry["id"],
                 name: entry.resortName,
@@ -140,13 +142,17 @@ router.get('/resort_search', function (req, res, next)
               }
             }); 
 
-            if (filteredResorts.length > 0) {
-               dustVars.resortEntries = filteredResorts;
-            } else {
-              console.log("no resorts in range: ", range);
-              dustVars.resortEntries = [];
+            if (sortCriteria == "runs") {
+              filteredResorts.sort(function(a, b){
+               return b.openRuns-a.openRuns;
+              });
+            } else if (sortCriteria == "snow") {
+              filteredResorts.sort(function(a, b){
+               return b.recentSnowfall-a.recentSnowfall;
+              });
             }
-         
+
+            dustVars.resortEntries = filteredResorts;
             res.render('search2', dustVars); 
           } else {
             console.log("Unable to access REST API.");
@@ -174,8 +180,6 @@ router.get('/resort_search', function (req, res, next)
 
 // credit to http://rosettacode.org/wiki/Haversine_formula for haversine function
 function haversine(lat1,lon1,lat2,lon2) {
-   console.log("haversine");
-   console.log("lat1: ", lat1, "lon1: ", lon1, "lat2: ", lat2, "lon2: ", lon2);
    lat1 = deg(lat1);
    lon1 = deg(lon1);
    lat2 = deg(lat2);

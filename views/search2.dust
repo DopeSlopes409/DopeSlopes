@@ -15,7 +15,7 @@
    <div id="search-by" class="">
       <select>
          <option value="">Search By</option>
-         <option value="Open Lifts">Open Lifts</option>
+         <option value="Open Lifts">Open Runs</option>
          <option value="Recent Snowfall">Recent Snowfall</option>
       </select>
    </div>
