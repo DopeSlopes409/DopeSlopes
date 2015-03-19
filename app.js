@@ -45,6 +45,7 @@ app.use(passport.session());
 //define routes
 app.use('/', routes);
 app.use('/oauth', oauth);
+app.use('/users', users);
 
 //app.use('/users', users);
 

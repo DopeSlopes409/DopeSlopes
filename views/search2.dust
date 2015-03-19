@@ -29,7 +29,7 @@
    <div id="map-canvas">
    </div>
    <div id="search-info">
-      <div id="search-collumn" data-userid={userId}>
+      <div id="search-collumn" >
          <div id = "search-title-box" class="search-collumn-padding">
             <h1>Find a Resort</h1>
          </div>
@@ -40,7 +40,7 @@
                <div class="resort-title-line">
                   <h2>{name}</h2>
                   <!-- TODO: Link star to js method addFavoriteResort -->
-                  <div data-resortid={id} class={?favorite}"star favorite"{:else}"star"{/favorite}><a href="#"></a></div>
+                  <div data-userid="{userId}" data-resortid={id} class={?favorite}"star favorite"{:else}"star"{/favorite}><a href="#"></a></div>
                </div>
                <div id="runs-open-container-1" class="runs-open-container">
                   <span>Runs Open: </span>

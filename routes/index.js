@@ -13,10 +13,12 @@ router.get('/', function(req, res, next) {
     	javascriptFiles: [{javascript: 'index.js'}],
     };
   if (seshUser && seshUser.profile) {
-    console.log('GET Index session: ', JSON.stringify(seshUser, false, null));
+    console.log('GET Index session: ', JSON.stringify(seshUser));
     dustVars.displayName = seshUser.profile['_json'].displayName;
-    dustVars.userId = req.session.objectId;
+    dustVars.userId = seshUser.objectId;
   }
+  
+    console.log('just sesh: ' + JSON.stringify(req.session));
 	res.render('index', dustVars);
 });
 
@@ -96,7 +98,7 @@ router.get('/resort_search', function (req, res, next)
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
               dustVars.displayName = seshUser.profile['_json'].displayName;
-              dustVars.userId = req.session.objectId;
+              dustVars.userId = seshUser.objectId;
             }
 
             dustVars.resortEntries = body.items.map(function (entry) {
@@ -111,6 +113,7 @@ router.get('/resort_search', function (req, res, next)
 
               return {
                 id: entry["id"],
+                userId: dustVars.userId,
                 name: entry.resortName,
                 latitude: entry.latitude,
                 longitude: entry.longitude,
@@ -188,7 +191,8 @@ router.get('/resort_search', function (req, res, next)
 
             if (seshUser && seshUser.profile) {
               console.log('GET Index session: ', util.inspect(seshUser, false, null));
-              dustVars.displayName = seshUser.profile['_json'].displayName;;
+              dustVars.displayName = seshUser.profile['_json'].displayName;
+              dustVars.userId = seshUser.objectId;
             }
 
             res.render('index', dustVars);

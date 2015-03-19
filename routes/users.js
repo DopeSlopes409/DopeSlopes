@@ -11,29 +11,49 @@ var parseOptions = {
     api_key: process.env.PARSE_API_KEY || 'sGOLcVBuvqL73CEQfTerjkoyY38n6HCPY4d5Qt4A'// api_key:'...' could be used too
 };
 
-
 /* GET favorite resorts */
 router.get('/users/:id/resorts', function(req, res, next) {
   res.send('respond with a resource');
 });
 
 /* POST favorite resort */
-router.post('/users/:id/resorts', function(req, res, next) {
+router.post('/:id/resorts', function(req, res) {
 	var userId = req.params.id;
-	var resId = req.body.resId;
+	var resId = req.query.resId;
+	console.log('adding resort: ' + req.query.resId)
 	var conn = new parse(parseOptions);
 
+	var favData = { 
+		favoriteResorts: {
+		   "__op": "AddUnique",
+		   "objects": [resId]
+		}
+	};
+
 	//update user resorts array
-	conn.update('User', userId, {favoriteResorts: [resId]}, function(err, response) {
+	conn.update('User', userId, favData, function(err, response) {
 		res.send(response);
 	});
 });
 
 /* DELETE favorite resort */
-router.get('/users/:id/resorts/:resortId', function(req, res, next) {
-  var userId = req.params.id;
+router.delete('/:id/resorts', function(req, res) {
+	var userId = req.params.id;
+	var resId = req.query.resId;
+	console.log('removing resort: ' + req.query.resId)
+	var conn = new parse(parseOptions);
 
-  res.send('respond with a resource');
+  var favData = { 
+		favoriteResorts: {
+		   "__op": "Remove",
+		   "objects": [resId]
+		}
+	};
+
+  //update user resorts array
+	conn.update('User', userId, favData, function(err, response) {
+		res.send(response);
+	});
 });
 
 
