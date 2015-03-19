@@ -107,7 +107,7 @@ router.get('/resort_search', function (req, res, next)
               if (entry.numberAdvancedTrails && !isNaN(parseInt(entry.numberAdvancedTrails.toString())) ) {
                 advancedTrailsNum += parseInt(entry.numberAdvancedTrails.toString());
               };
-              if (!isNaN(parseInt(entry.numberExpertTrails.toString())) ) {
+              if (entry.numberExperTrails && !isNaN(parseInt(entry.numberExpertTrails.toString())) ) {
                 advancedTrailsNum += parseInt(entry.numberExpertTrails.toString());
               };
 
