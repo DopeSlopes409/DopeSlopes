@@ -206,6 +206,7 @@ function closeResultsSlider() {
 
 function fillResortExtendedInfo(resortName) {
    var resort = getResort(resortName);
+   currentResortName = resortName;
 
    var mon = resort.weekdayHours;
    var tues = resort.weekdayHours;
@@ -219,9 +220,9 @@ function fillResortExtendedInfo(resortName) {
    setResortTitle(resort.resortName);
    setDrivingTime(resort.durationText);
    setOperatingStatus(resort.operatingStatus);
-   setWeather(resort.latitude, resort.longitude);
    setSummitTemp(resort.summitTemp);
    setBaseTemp(resort.baseTemp);
+   setWeather(resort.latitude, resort.longitude);
    setSnowQuality(resort.snowQuality);
    setSnowfallChart(resort.recentSnowfall);
    setTrailsChart(resort.openRuns, resort.totalRuns);
@@ -386,9 +387,6 @@ function setTrailsBreakdownChart(easyTrails, intermediateTrails, advancedTrails)
 }
 
 function setWeatherCallback (data) {
-   // var weatherIcon = "img/" + data["daily"]["icon"] + ".png";
-   // $("#forecastIcon").attr("src",  weatherIcon);
-
    var weatherImage = "";
    var weather = data["daily"]["icon"];
 
@@ -430,6 +428,19 @@ function setWeatherCallback (data) {
 
    $("#srei-weather-icon").css("background-image", "url(" + weatherImage + ")");
    $("#srei-weather-text").html(weather);
+
+   var resort = getResort(currentResortName);
+   var baseTemp = resort.baseTemp;
+   if (isNaN(resort.baseTemp)) {
+      var temperatureMax = data["daily"]["data"]['0']['temperatureMax'];
+      var temperatureMin = data["daily"]["data"]['0']['temperatureMin'];
+      var baseTemp = (temperatureMax - temperatureMin) / 2.0;;
+      $("#srei-base-temp").html(baseTemp.toString() + "°F");
+   };
+   if (isNaN(resort.summitTemp)) {
+      resort.summitTemp = baseTemp;
+      $("#srei-summit-temp").html(baseTemp.toString() + "°F");
+   };
 }
 
 function setWeather(myLatitude, myLongitude) {
@@ -445,11 +456,19 @@ function setWeather(myLatitude, myLongitude) {
 
 
 function setSummitTemp(temp) {
-   $("#srei-summit-temp").html(temp.toString() + "°F");
+   if (!isNaN(temp)) {
+      $("#srei-summit-temp").html(temp.toString() + "°F");
+   } else {
+      $("#srei-summit-temp").html("°F");
+   }
 }
 
 function setBaseTemp(temp) {
-   $("#srei-base-temp").html(temp.toString() + "°F");
+   if (!isNaN(temp)) {
+      $("#srei-base-temp").html(temp.toString() + "°F");
+   } else {
+      $("#srei-base-temp").html("°F");
+   }
 }
 
 function setSnowQuality(snowQuality) {
